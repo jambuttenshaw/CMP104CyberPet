@@ -15,7 +15,7 @@ void RenderAPI::Init()
 
 }
 
-void RenderAPI::Submit()
+void RenderAPI::Submit(char** imageData)
 {
 	
 }

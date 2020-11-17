@@ -10,7 +10,7 @@ public:
 
 	void Init();
 
-	void Submit();
+	void Submit(char** imageData);
 	void Clear();
 
 	Vector2i GetConsoleDimensions();
