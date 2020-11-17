@@ -1,5 +1,8 @@
 #pragma once
-class CyberPet
+
+#include "Sprite.h"
+
+class CyberPet : public Sprite
 {
 public:
 	CyberPet();

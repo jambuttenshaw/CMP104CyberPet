@@ -1,6 +1,7 @@
 #include "CyberPet.h"
 
 CyberPet::CyberPet()
+	: Sprite()
 {
 
 }
