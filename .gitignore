@@ -1,4 +1,8 @@
 .vs
 *.user
 *.filters
+Debug
 CMP104CyberPet/Debug
+*.exe
+*.ilk
+*.pdb
