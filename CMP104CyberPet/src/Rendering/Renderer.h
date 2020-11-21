@@ -13,8 +13,9 @@ public:
 		delete s_RenderAPI;
 	}
 
-	inline static void Clear(char clearChar = ' ') { s_RenderAPI->Clear(clearChar); }
+	inline static void Clear(Vector2i origin = { 0, 0 }, Vector2i dimensions = s_RenderAPI->GetConsoleDimensions(), char clearChar = ' ') { s_RenderAPI->Clear(origin, dimensions, clearChar); }
 
+	inline static void Submit(Sprite* sprite) { s_RenderAPI->Submit(sprite->GetImage()->GetImageData(), sprite->GetImage()->GetDimensions(), sprite->GetPosition()); }
 	inline static void Submit(Image* image, Vector2i position) { s_RenderAPI->Submit(image->GetImageData(), image->GetDimensions(), position); }
 	inline static void Submit(char** imageData, Vector2i dimensions, Vector2i position) { s_RenderAPI->Submit(imageData, dimensions, position); }
 

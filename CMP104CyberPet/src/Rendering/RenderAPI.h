@@ -13,7 +13,7 @@ public:
 	void Init();
 
 	void Submit(char** imageData, Vector2i dimensions, Vector2i position);
-	void Clear(char clearChar);
+	void Clear(Vector2i origin, Vector2i dimensions, char clearChar);
 	
 	Vector2i GetConsoleDimensions();
 	int GetConsoleWidth();

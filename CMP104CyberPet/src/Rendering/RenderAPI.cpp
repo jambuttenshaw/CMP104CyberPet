@@ -23,7 +23,7 @@ void RenderAPI::Submit(char** imageData, Vector2i dimensions, Vector2i position)
 {
 	// move cursor to coordinates of image
 	// draw each row of the image
-	for (int y = 0; y < dimensions.y; y++)
+	for (int y = 0; y < (dimensions.y > m_MaxConsoleHeight ? m_MaxConsoleHeight : dimensions.y); y++)
 	{
 		SetCursorPosition(position.x, position.y + y);
 		for (int x = 0; x < dimensions.x; x++)
@@ -34,20 +34,16 @@ void RenderAPI::Submit(char** imageData, Vector2i dimensions, Vector2i position)
 
 }
 
-void RenderAPI::Clear(char clearChar)
+void RenderAPI::Clear(Vector2i origin, Vector2i dimensions, char clearChar)
 {
-	// reset cursor position to 0, 0
-	SetCursorPosition();
-
-	// fill the entire console with 0's
-	Vector2i dim = GetConsoleDimensions();
-	for (int y = 0; y < (dim.y > m_MaxConsoleHeight ? m_MaxConsoleHeight : dim.y); y++)
+	
+	for (int y = 0; y < (dimensions.y > m_MaxConsoleHeight ? m_MaxConsoleHeight : dimensions.y); y++)
 	{
-		for (int x = 0; x < dim.x; x++)
+		SetCursorPosition(origin.x, origin.y + y);
+		for (int x = 0; x < dimensions.x; x++)
 		{
 			std::cout << clearChar;
 		}
-		std::cout << std::endl;
 	}
 }
 

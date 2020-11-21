@@ -3,7 +3,7 @@
 CyberPet::CyberPet()
 	: Sprite()
 {
-	SetImage(new Image(5, 5, 'o'));
+	SetImage(new Image(6, 3, '&'));
 }
 
 CyberPet::~CyberPet()

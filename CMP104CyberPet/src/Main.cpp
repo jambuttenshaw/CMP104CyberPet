@@ -19,7 +19,7 @@ int main()
         cyberPet->Update();
 
         // redraw to the display
-        Renderer::Submit(cyberPet->GetImage(), { 5, 4 });
+        Renderer::Submit(cyberPet);
     }
 
     // program shutdown
