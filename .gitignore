@@ -2,7 +2,9 @@
 *.user
 *.filters
 Debug
+x64
 CMP104CyberPet/Debug
+CMP104CyberPet/x64
 *.exe
 *.ilk
 *.pdb

@@ -18,6 +18,22 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Core\MathsUtility.h" />
+    <ClInclude Include="src\Core\Sprite.h" />
+    <ClInclude Include="src\CyberPet.h" />
+    <ClInclude Include="src\Rendering\Image.h" />
+    <ClInclude Include="src\Rendering\RenderAPI.h" />
+    <ClInclude Include="src\Rendering\Renderer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Core\Sprite.cpp" />
+    <ClCompile Include="src\CyberPet.cpp" />
+    <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Rendering\Image.cpp" />
+    <ClCompile Include="src\Rendering\RenderAPI.cpp" />
+    <ClCompile Include="src\Rendering\Renderer.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -88,6 +104,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>
+      </AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -138,22 +156,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="CyberPet.cpp" />
-    <ClCompile Include="Image.cpp" />
-    <ClCompile Include="RenderAPI.cpp" />
-    <ClCompile Include="Renderer.cpp" />
-    <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Sprite.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="CyberPet.h" />
-    <ClInclude Include="Image.h" />
-    <ClInclude Include="MathsUtility.h" />
-    <ClInclude Include="RenderAPI.h" />
-    <ClInclude Include="Renderer.h" />
-    <ClInclude Include="Sprite.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

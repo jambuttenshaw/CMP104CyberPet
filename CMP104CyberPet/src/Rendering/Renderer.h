@@ -2,7 +2,7 @@
 
 #include "RenderAPI.h"
 #include "Image.h"
-#include "Sprite.h"
+#include "../Core/Sprite.h"
 
 class Renderer
 {

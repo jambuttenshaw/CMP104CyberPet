@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Sprite.h"
+#include "Core/Sprite.h"
 
 class CyberPet : public Sprite
 {

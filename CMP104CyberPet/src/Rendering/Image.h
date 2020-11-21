@@ -2,7 +2,7 @@
 
 #include <string>
 
-#include "MathsUtility.h"
+#include "../Core/MathsUtility.h"
 
 class Image
 {
