@@ -1,3 +1,3 @@
-#include "Rendering/Renderer.h"
+#include "Renderer.h"
 
 RenderAPI* Renderer::s_RenderAPI = new RenderAPI();

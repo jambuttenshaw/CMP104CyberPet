@@ -1,7 +1,7 @@
 #pragma once
 
-// define a type for 2-component vector of floats
-typedef struct Vector2f
+// define a 2-component vector of floats
+struct Vector2f
 {
 	float x;
 	float y;
@@ -10,8 +10,8 @@ typedef struct Vector2f
 		: x(_x), y(_y) {}
 };
 
-// define a type for 2-component vector of integers
-typedef struct Vector2i
+// define a 2-component vector of integers
+struct Vector2i
 {
 	int x;
 	int y;
@@ -21,4 +21,4 @@ typedef struct Vector2i
 };
 
 // the default data type for vector components is float
-typedef struct Vector2 Vector2f;
+typedef Vector2f Vector2;

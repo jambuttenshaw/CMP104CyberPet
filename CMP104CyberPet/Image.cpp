@@ -1,4 +1,4 @@
-#include "Rendering/Image.h"
+#include "Image.h"
 
 Image::Image(int width, int height, char defaultFill)
 	: m_Width(width), m_Height(height)

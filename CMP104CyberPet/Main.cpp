@@ -1,4 +1,4 @@
-#include "Rendering/Renderer.h"
+#include "Renderer.h"
 #include "CyberPet.h"
 
 int main()

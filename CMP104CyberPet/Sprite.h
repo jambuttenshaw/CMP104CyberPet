@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Rendering/Image.h"
+#include "Image.h"
 
 class Sprite
 {
