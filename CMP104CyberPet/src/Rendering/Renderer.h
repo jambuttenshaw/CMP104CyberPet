@@ -15,8 +15,8 @@ public:
 
 	inline static void Clear(char clearChar = ' ') { s_RenderAPI->Clear(clearChar); }
 
-	inline static void Submit(Image image) { s_RenderAPI->Submit(image.GetImageData()); }
-	inline static void Submit(char** imageData) { s_RenderAPI->Submit(imageData); }
+	inline static void Submit(Image* image, Vector2i position) { s_RenderAPI->Submit(image->GetImageData(), image->GetDimensions(), position); }
+	inline static void Submit(char** imageData, Vector2i dimensions, Vector2i position) { s_RenderAPI->Submit(imageData, dimensions, position); }
 
 	inline static int GetConsoleWidth() { return s_RenderAPI->GetConsoleWidth(); }
 	inline static int GetConsoleHeight() { return s_RenderAPI->GetConsoleHeight(); }

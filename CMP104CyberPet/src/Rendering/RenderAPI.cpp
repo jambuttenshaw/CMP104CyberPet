@@ -19,10 +19,19 @@ void RenderAPI::Init()
 	SetCursorVisibility(false);
 }
 
-void RenderAPI::Submit(char** imageData)
+void RenderAPI::Submit(char** imageData, Vector2i dimensions, Vector2i position)
 {
 	// move cursor to coordinates of image
 	// draw each row of the image
+	for (int y = 0; y < dimensions.y; y++)
+	{
+		SetCursorPosition(position.x, position.y + y);
+		for (int x = 0; x < dimensions.x; x++)
+		{
+			std::cout << imageData[y][x];
+		}
+	}
+
 }
 
 void RenderAPI::Clear(char clearChar)

@@ -12,7 +12,7 @@ public:
 
 	void Init();
 
-	void Submit(char** imageData);
+	void Submit(char** imageData, Vector2i dimensions, Vector2i position);
 	void Clear(char clearChar);
 	
 	Vector2i GetConsoleDimensions();
@@ -25,10 +25,11 @@ public:
 
 private:
 	void SetCursorPosition(int x = 0, int y = 0);
+	inline void SetCursorPosition(Vector2i pos) { SetCursorPosition(pos.x, pos.y); }
 
 private:
 	HANDLE m_ConsoleHandle = nullptr;
 
-	int m_MaxConsoleHeight = 32;
+	int m_MaxConsoleHeight = 20;
 };
 
