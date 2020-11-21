@@ -1,7 +1,8 @@
 #pragma once
 
-#include "RenderAPI.h"
-#include "Image.h"
+#include "Rendering/RenderAPI.h"
+#include "Rendering/Image.h"
+#include "Sprite.h"
 
 class Renderer
 {
@@ -14,6 +15,7 @@ public:
 
 	inline static void Clear() { s_RenderAPI->Clear(); }
 
+	inline static void Submit(Sprite sprite) { s_RenderAPI->Submit(sprite.GetImage().GetImageData()); }
 	inline static void Submit(Image image) { s_RenderAPI->Submit(image.GetImageData()); }
 	inline static void Submit(char** imageData) { s_RenderAPI->Submit(imageData); }
 

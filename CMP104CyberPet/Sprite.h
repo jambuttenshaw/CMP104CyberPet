@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Image.h"
+#include "Rendering/Image.h"
 
 class Sprite
 {
@@ -9,6 +9,8 @@ public:
 	Sprite(int x, int y);
 	Sprite(Vector2i pos);
 	virtual ~Sprite();
+
+	inline Image* GetImage() { return m_Image; }
 
 private:
 	Vector2i m_Position;
