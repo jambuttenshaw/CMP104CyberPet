@@ -1,7 +1,9 @@
 #include "Rendering/Renderer.h"
 #include "CyberPet.h"
 
+#include <iostream>
 #include <windows.h>
+#include <chrono>
 
 int main()
 {

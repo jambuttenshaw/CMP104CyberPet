@@ -26,24 +26,21 @@ void RenderAPI::Init()
 // from https://docs.microsoft.com/en-us/windows/console/writeconsoleoutputcharacter
 // using cout was much less performant
 
-void RenderAPI::Submit(char** imageData, Vector2i dimensions, Vector2i position)
+void RenderAPI::Submit(wchar_t** imageData, Vector2i dimensions, Vector2i position)
 {
-
 	for (int y = 0; y < (dimensions.y > m_MaxConsoleHeight ? m_MaxConsoleHeight : dimensions.y); y++)
 	{
 		for (int x = 0; x < dimensions.x; x++)
 		{
-			wchar_t c = (wchar_t)imageData[y][x];
 			DWORD dw;
-			WriteConsoleOutputCharacter(m_ConsoleHandle, &c, 1, { (short)(position.x + x), (short)(position.y + y) }, &dw);
+			WriteConsoleOutputCharacter(m_ConsoleHandle, &imageData[y][x], 1, { (short)(position.x + x), (short)(position.y + y) }, &dw);
 		}
 	}
-
 }
 
-void RenderAPI::Clear(Vector2i origin, Vector2i dimensions, char clearChar)
+void RenderAPI::Clear(Vector2i origin, Vector2i dimensions, wchar_t clearChar)
 {
-	std::vector<wchar_t> line(dimensions.x, (wchar_t)clearChar);
+	std::vector<wchar_t> line(dimensions.x, clearChar);
 	for (int y = 0; y < (dimensions.y > m_MaxConsoleHeight ? m_MaxConsoleHeight : dimensions.y); y++)
 	{
 		DWORD dw;

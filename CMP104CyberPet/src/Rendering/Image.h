@@ -8,7 +8,7 @@ class Image
 {
 public:
 	// constructors
-	Image(int width, int height, char defaultFill = ' ');
+	Image(int width, int height, wchar_t defaultFill = ' ');
 	Image(int width, int height, const std::string& imageContent);
 	~Image();
 
@@ -16,17 +16,17 @@ public:
 	inline int GetHeight() { return m_Height; }
 	inline Vector2i GetDimensions() { return Vector2i(m_Width, m_Height); }
 
-	inline char** GetImageData() { return m_ImageData; }
+	inline wchar_t** GetImageData() { return m_ImageData; }
 
-	void SetCharacter(int x, int y, char character);
+	void SetCharacter(int x, int y, wchar_t character);
 
 private:
-	void CreateImage(char defaultFill);
+	void CreateImage(wchar_t defaultFill);
 	void CreateImage(const std::string& imageContent);
 
 private:
 	int m_Width, m_Height;
 
-	char** m_ImageData;
+	wchar_t** m_ImageData;
 
 };

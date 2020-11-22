@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-Image::Image(int width, int height, char defaultFill)
+Image::Image(int width, int height, wchar_t defaultFill)
 	: m_Width(width), m_Height(height)
 {
 	CreateImage(defaultFill);
@@ -22,7 +22,7 @@ Image::~Image()
 	delete[] m_ImageData;
 }
 
-void Image::CreateImage(char defaultFill)
+void Image::CreateImage(wchar_t defaultFill)
 {
 	// an image is just a 2d array of chars
 	// a 2d array is just an array of arrays
@@ -31,11 +31,11 @@ void Image::CreateImage(char defaultFill)
 	// so here ill create a an array of pointers, where each pointer points to another array
 	// and voila; a 2d array
 
-	m_ImageData = new char* [m_Height];
+	m_ImageData = new wchar_t* [m_Height];
 	for (int i = 0; i < m_Height; i++)
 	{
 		// set the pointer at this height in the image array to a pointer to a new array
-		m_ImageData[i] = new char[m_Width];
+		m_ImageData[i] = new wchar_t[m_Width];
 
 		// fill the array with the default fill character
 		for (int j = 0; j < m_Width; j++)
@@ -48,11 +48,11 @@ void Image::CreateImage(char defaultFill)
 void Image::CreateImage(const std::string& imageContent)
 {
 	// initialize the image data array with empty arrays
-	m_ImageData = new char* [m_Height];
+	m_ImageData = new wchar_t* [m_Height];
 	for (int i = 0; i < m_Height; i++)
 	{
 		// set the pointer at this height in the image array to a pointer to a new array
-		m_ImageData[i] = new char[m_Width];
+		m_ImageData[i] = new wchar_t[m_Width];
 	}
 
 
@@ -88,7 +88,7 @@ void Image::CreateImage(const std::string& imageContent)
 }
 
 
-void Image::SetCharacter(int x, int y, char character)
+void Image::SetCharacter(int x, int y, wchar_t character)
 {
 	m_ImageData[y][x] = character;
 }
