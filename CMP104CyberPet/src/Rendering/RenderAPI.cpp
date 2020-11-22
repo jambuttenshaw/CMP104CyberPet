@@ -1,5 +1,8 @@
 #include "RenderAPI.h"
 
+#include <vector>
+
+#include <chrono>
 #include <iostream>
 
 RenderAPI::RenderAPI()
@@ -21,14 +24,14 @@ void RenderAPI::Init()
 
 void RenderAPI::Submit(char** imageData, Vector2i dimensions, Vector2i position)
 {
-	// move cursor to coordinates of image
-	// draw each row of the image
+
 	for (int y = 0; y < (dimensions.y > m_MaxConsoleHeight ? m_MaxConsoleHeight : dimensions.y); y++)
 	{
-		SetCursorPosition(position.x, position.y + y);
 		for (int x = 0; x < dimensions.x; x++)
 		{
-			std::cout << imageData[y][x];
+			wchar_t c = (wchar_t)imageData[y][x];
+			DWORD dw;
+			WriteConsoleOutputCharacter(m_ConsoleHandle, &c, 1, { (short)(position.x + x), (short)(position.y + y) }, &dw);
 		}
 	}
 
@@ -36,14 +39,13 @@ void RenderAPI::Submit(char** imageData, Vector2i dimensions, Vector2i position)
 
 void RenderAPI::Clear(Vector2i origin, Vector2i dimensions, char clearChar)
 {
-	
+	// from https://docs.microsoft.com/en-us/windows/console/writeconsoleoutputcharacter
+
+	std::vector<wchar_t> line(dimensions.x, (wchar_t)clearChar);
 	for (int y = 0; y < (dimensions.y > m_MaxConsoleHeight ? m_MaxConsoleHeight : dimensions.y); y++)
 	{
-		SetCursorPosition(origin.x, origin.y + y);
-		for (int x = 0; x < dimensions.x; x++)
-		{
-			std::cout << clearChar;
-		}
+		DWORD dw;
+		WriteConsoleOutputCharacter(m_ConsoleHandle, &line[0], dimensions.x, { (short)origin.x, (short)(origin.y + y) }, &dw);
 	}
 }
 

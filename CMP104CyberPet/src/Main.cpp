@@ -1,7 +1,7 @@
 #include "Rendering/Renderer.h"
 #include "CyberPet.h"
 
-#include <iostream>
+#include <windows.h>
 
 int main()
 {
@@ -19,7 +19,11 @@ int main()
         cyberPet->Update();
 
         // redraw to the display
+        
+        Renderer::Clear();
         Renderer::Submit(cyberPet);
+
+        Sleep(30);
     }
 
     // program shutdown

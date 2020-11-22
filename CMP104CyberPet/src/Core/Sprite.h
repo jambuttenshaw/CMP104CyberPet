@@ -19,6 +19,6 @@ public:
 private:
 	Vector2i m_Position;
 
-	Image* m_Image;
+	Image* m_Image = nullptr;
 };
 
