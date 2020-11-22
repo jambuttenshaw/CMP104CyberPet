@@ -19,5 +19,9 @@ CyberPet::~CyberPet()
 
 void CyberPet::Update()
 {
-
+    Vector2i pos = GetPosition();
+    pos.x++;
+    if (pos.x > 30)
+        pos.x = 0;
+    SetPosition(pos);
 }

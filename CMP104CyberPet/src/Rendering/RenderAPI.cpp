@@ -22,6 +22,10 @@ void RenderAPI::Init()
 	SetCursorVisibility(false);
 }
 
+// displaying characters on the console is done using
+// from https://docs.microsoft.com/en-us/windows/console/writeconsoleoutputcharacter
+// using cout was much less performant
+
 void RenderAPI::Submit(char** imageData, Vector2i dimensions, Vector2i position)
 {
 
@@ -39,8 +43,6 @@ void RenderAPI::Submit(char** imageData, Vector2i dimensions, Vector2i position)
 
 void RenderAPI::Clear(Vector2i origin, Vector2i dimensions, char clearChar)
 {
-	// from https://docs.microsoft.com/en-us/windows/console/writeconsoleoutputcharacter
-
 	std::vector<wchar_t> line(dimensions.x, (wchar_t)clearChar);
 	for (int y = 0; y < (dimensions.y > m_MaxConsoleHeight ? m_MaxConsoleHeight : dimensions.y); y++)
 	{
