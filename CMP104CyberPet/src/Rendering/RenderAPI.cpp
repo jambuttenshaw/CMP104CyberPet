@@ -48,6 +48,14 @@ void RenderAPI::Clear(Vector2i origin, Vector2i dimensions, wchar_t clearChar)
 	}
 }
 
+void RenderAPI::ClearAll()
+{
+	Vector2i dim = GetConsoleDimensions();
+	int size = dim.x * dim.y;
+	DWORD dw;
+	FillConsoleOutputCharacter(m_ConsoleHandle, ' ', size, { 0, 0 }, &dw);
+}
+
 Vector2i RenderAPI::GetConsoleDimensions()
 {
 	// from https://docs.microsoft.com/en-us/windows/console/getconsolescreenbufferinfo

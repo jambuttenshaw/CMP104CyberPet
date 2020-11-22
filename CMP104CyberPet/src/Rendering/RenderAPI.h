@@ -14,6 +14,7 @@ public:
 
 	void Submit(wchar_t** imageData, Vector2i dimensions, Vector2i position);
 	void Clear(Vector2i origin, Vector2i dimensions, wchar_t clearChar);
+	void ClearAll();
 	
 	Vector2i GetConsoleDimensions();
 	int GetConsoleWidth();
