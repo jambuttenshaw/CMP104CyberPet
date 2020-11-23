@@ -1,10 +1,19 @@
 #include "Rendering/Renderer.h"
 #include "Input/Input.h"
+#include "Input/Events.h"
 #include "CyberPet.h"
 
 #include <windows.h>
 #include <iostream>
 #include <vector>
+
+void OnKeyboardEvent(INPUT_RECORD e)
+{
+    KEY_EVENT_RECORD keyEvent = e.Event.KeyEvent;
+    bool pressEvent = keyEvent.bKeyDown;
+    char key = keyEvent.uChar.AsciiChar;
+
+}
 
 int main()
 {

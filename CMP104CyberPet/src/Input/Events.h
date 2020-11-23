@@ -10,7 +10,7 @@ public:
 	{
 	}
 
-	bool Dispatch(int eventType, void func(INPUT_RECORD))
+	void Dispatch(int eventType, void func(INPUT_RECORD))
 	{
 		if ((int)m_Event.EventType == eventType)
 		{
