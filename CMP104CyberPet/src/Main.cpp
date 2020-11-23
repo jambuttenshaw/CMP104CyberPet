@@ -1,9 +1,8 @@
 #include "Rendering/Renderer.h"
 #include "CyberPet.h"
 
-#include <iostream>
 #include <windows.h>
-#include <chrono>
+#include <vector>
 
 int main()
 {
@@ -12,6 +11,10 @@ int main()
 
     // create a new cyber pet object
     CyberPet* cyberPet = new CyberPet;
+
+    // ABSTRACT THE DRAW QUEUE
+    std::vector<Sprite*> sprites;
+    sprites.push_back(cyberPet);
 
     // main loop
     bool exitLoop = false;
@@ -23,7 +26,14 @@ int main()
         // redraw to the display
         
         Renderer::Clear();
-        Renderer::Submit(cyberPet);
+        for (Sprite* s : sprites)
+        {
+            if (s->IsDirty())
+            {
+                Renderer::Submit(s);
+                s->Clean();
+            }
+        }
 
         Sleep(30);
     }
