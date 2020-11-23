@@ -29,13 +29,8 @@ int main()
         int queueEnd = (int)input->GetEventQueueStart() + input->PollEvents();
         for (INPUT_RECORD* e = input->GetEventQueueStart(); (int)e < queueEnd; e++)
         {
-            // handle the event e
-            switch (e->EventType)
-            {
-            case KEY_EVENT:
-                std::cout << "Key event" << std::endl;
-                break;
-            }
+            EventDispatcher dispatcher(*e);
+            dispatcher.Dispatch(KEY_EVENT, OnKeyboardEvent);
         }
 
         // update
