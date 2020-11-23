@@ -9,7 +9,7 @@ Input::Input()
 
 	// set the console mode to receive input from keyboard and mouse
 	GetConsoleMode(m_ConsoleHandle, &m_OldConsoleMode); // save the old mode
-	DWORD consoleMode = m_OldConsoleMode | ENABLE_WINDOW_INPUT | ENABLE_MOUSE_INPUT;
+	DWORD consoleMode = ENABLE_WINDOW_INPUT | ENABLE_MOUSE_INPUT;
 	SetConsoleMode(m_ConsoleHandle, consoleMode);
 }
 

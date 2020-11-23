@@ -46,8 +46,6 @@ int main()
         cyberPet->Update();
 
         // redraw to the display
-        
-        /*
         Renderer::Clear();
         for (Sprite* s : sprites)
         {
@@ -57,7 +55,6 @@ int main()
                 s->Clean();
             }
         }
-        */
 
         Sleep(30);
     }
