@@ -46,6 +46,7 @@ void RenderAPI::Clear(Vector2i origin, Vector2i dimensions, wchar_t clearChar)
 		DWORD dw;
 		WriteConsoleOutputCharacter(m_ConsoleHandle, &line[0], dimensions.x, { (short)origin.x, (short)(origin.y + y) }, &dw);
 	}
+	
 }
 
 void RenderAPI::ClearAll()
