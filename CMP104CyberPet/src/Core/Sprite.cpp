@@ -20,5 +20,8 @@ Sprite::Sprite(Vector2i pos)
 
 Sprite::~Sprite()
 {
-
+	if (m_Image != nullptr)
+	{
+		delete m_Image;
+	}
 }
