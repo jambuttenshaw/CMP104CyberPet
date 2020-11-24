@@ -13,7 +13,7 @@ public:
 
 private:
 	void ConstructImages();
-	inline void UpdateImage() { SetImage(m_Active ? m_ActiveImage : m_InactiveImage); }
+	inline void UpdateImage() { SetImage(m_Active ? m_ActiveImage : m_InactiveImage); SetDirty(); }
 
 private:
 	std::string m_Text;

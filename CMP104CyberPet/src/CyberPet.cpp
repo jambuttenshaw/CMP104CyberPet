@@ -17,11 +17,7 @@ CyberPet::~CyberPet()
 
 }
 
-void CyberPet::Update()
+void CyberPet::Update(float deltaTime)
 {
-    Vector2i pos = GetPosition();
-    pos.x++;
-    if (pos.x > 30)
-        pos.x = 0;
-    SetPosition(pos);
+
 }

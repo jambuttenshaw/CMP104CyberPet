@@ -8,6 +8,6 @@ public:
 	CyberPet();
 	~CyberPet();
 
-	void Update();
+	void Update(float deltaTime) override;
 };
 

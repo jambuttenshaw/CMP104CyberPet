@@ -56,7 +56,7 @@ int main()
         input->HandleEvents();
         
         // update
-        cyberPet->Update();
+        cyberPet->Update(deltaTime);
         
         // clear everything from the screen
         Renderer::Clear();

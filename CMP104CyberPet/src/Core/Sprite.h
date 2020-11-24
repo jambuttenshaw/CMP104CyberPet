@@ -11,6 +11,9 @@ public:
 	Sprite(Vector2i pos);
 	virtual ~Sprite();
 
+	// to be overridden in a child class
+	virtual void Update(float deltaTime) = 0;
+
 	inline Vector2i GetPosition() { return m_Position; }
 	inline void SetPosition(Vector2i pos) { m_Position = pos; SetDirty(); }
 
