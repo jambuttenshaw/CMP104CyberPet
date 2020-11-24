@@ -6,6 +6,16 @@
 #include "Image.h"
 #include "../Core/Sprite.h"
 
+/*
+The reason I have used a class consisting of only static members
+instead of just directly creating an instance of the renderer in main
+is that I want other objects in the game to be able to access
+features of the renderer, such as retrieving the console dimensions
+
+Therefore making this static 'interface' to the renderer means that the renderer isn't owned
+by any specific object in the game, so any sprite can get access to the renderer easily
+*/
+
 class Renderer
 {
 public:

@@ -3,10 +3,8 @@
 #include "Input/Events.h"
 #include "CyberPet.h"
 
-#include <windows.h>
-#include <iostream>
-#include <vector>
 #include <chrono>
+#include <iostream>
 
 void KeyboardCallback(KEY_EVENT_RECORD e)
 {
@@ -14,6 +12,8 @@ void KeyboardCallback(KEY_EVENT_RECORD e)
 }
 
 
+// when the console window gets resized we want to update the renderer
+// to store the new dimensions of the console
 void WindowResizeCallback(WINDOW_BUFFER_SIZE_RECORD e)
 {
     Renderer::UpdateConsoleDimensions(e.dwSize.X, e.dwSize.Y);
@@ -34,6 +34,8 @@ int main()
     // create a new cyber pet object
     CyberPet* cyberPet = new CyberPet;
 
+    // used to calculate the difference in time between this frame and the previous one: the delta time
+    // this is used to make sure that everything that happens in-game is frame-rate independent
     std::chrono::high_resolution_clock::time_point lastFrameTime = std::chrono::high_resolution_clock::now();
 
     // main loop
@@ -42,7 +44,7 @@ int main()
     {
         // get the time elapsed between this frame and the previous one
         std::chrono::high_resolution_clock::time_point t = std::chrono::high_resolution_clock::now();
-        float deltaTime = std::chrono::duration_cast<std::chrono::seconds>(t - lastFrameTime).count();
+        float deltaTime = std::chrono::duration_cast<std::chrono::milliseconds>(t - lastFrameTime).count() * 0.001;
         lastFrameTime = t;
 
         // send the events in the event queue to their callback functions
