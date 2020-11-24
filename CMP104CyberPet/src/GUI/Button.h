@@ -8,6 +8,8 @@ public:
 	Button(const std::string& text);
 	~Button();
 
+	void Update(float deltaTime) override {};
+
 	inline void SetActive(bool active) { m_Active = active; UpdateImage(); }
 	inline bool GetActive() { return m_Active; }
 
