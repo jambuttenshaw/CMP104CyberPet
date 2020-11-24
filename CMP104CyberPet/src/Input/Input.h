@@ -13,6 +13,7 @@ public:
 
 	// returns the number of events read from the queue
 	int PollEvents();
+	void HandleEvents();
 
 	inline INPUT_RECORD* GetEventQueueStart() { return &m_InputRecordBuffer[0]; }
 

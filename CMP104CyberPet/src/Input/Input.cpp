@@ -33,6 +33,25 @@ int Input::PollEvents()
 	}
 }
 
+void Input::HandleEvents()
+{
+	// retrieve events from the buffer
+	PollEvents();
+
+	// iterate through each event
+	for (int i = 0; i < m_NumInputRecords; i++)
+	{
+		switch (m_InputRecordBuffer[i].EventType)
+		{
+		case KEY_EVENT:						if (m_KeyEventFunc != nullptr) m_KeyEventFunc(m_InputRecordBuffer[i].Event.KeyEvent); break;
+		case MOUSE_EVENT:					if (m_MouseEventFunc != nullptr) m_MouseEventFunc(m_InputRecordBuffer[i].Event.MouseEvent); break;
+		case WINDOW_BUFFER_SIZE_EVENT:		if (m_WindowResizeFunc != nullptr) m_WindowResizeFunc(m_InputRecordBuffer[i].Event.WindowBufferSizeEvent); break;
+		case MENU_EVENT:					if (m_MenuEventFunc != nullptr) m_MenuEventFunc(m_InputRecordBuffer[i].Event.MenuEvent); break;
+		case FOCUS_EVENT:					if (m_FocusEventFunc != nullptr) m_FocusEventFunc(m_InputRecordBuffer[i].Event.FocusEvent); break;
+		}
+	}
+}
+
 int Input::GetEventQueueLength()
 {
 	GetNumberOfConsoleInputEvents(m_ConsoleHandle, &m_NumInputRecords);

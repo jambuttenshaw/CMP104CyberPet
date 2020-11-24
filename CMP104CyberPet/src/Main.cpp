@@ -7,13 +7,11 @@
 #include <iostream>
 #include <vector>
 
-void OnKeyboardEvent(INPUT_RECORD e)
+void KeyboardCallback(KEY_EVENT_RECORD e)
 {
-    KEY_EVENT_RECORD keyEvent = e.Event.KeyEvent;
-    bool pressEvent = keyEvent.bKeyDown;
-    char key = keyEvent.uChar.AsciiChar;
-
+    
 }
+
 
 int main()
 {
@@ -22,6 +20,9 @@ int main()
     // create an input handling object
     Input* input = new Input;
 
+    // set the event callback functions
+    input->SetKeyEventCallback(KeyboardCallback);
+
     // create a new cyber pet object
     CyberPet* cyberPet = new CyberPet;
 
@@ -29,17 +30,12 @@ int main()
     bool exitLoop = false;
     while (!exitLoop)
     {
-        // poll the event queue
-        intptr_t queueEnd = (intptr_t)input->GetEventQueueStart() + input->PollEvents();
-        for (INPUT_RECORD* e = input->GetEventQueueStart(); (intptr_t)e < queueEnd; e++)
-        {
-            EventDispatcher dispatcher(*e);
-            dispatcher.Dispatch(KEY_EVENT, OnKeyboardEvent);
-        }
+        // send the events in the event queue to their callback functions
+        input->HandleEvents();
         
         // update
         cyberPet->Update();
-
+        /*
         // clear everything from the screen
         Renderer::Clear();
         
@@ -48,7 +44,7 @@ int main()
 
         // draw everything in the queue
         Renderer::DrawAll();
-
+        */
 
         Sleep(30);
     }
