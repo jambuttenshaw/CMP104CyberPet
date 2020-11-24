@@ -2,6 +2,9 @@
 
 GameManager::GameManager()
 {
+	// create a new cyber pet object
+	m_CyberPet = new CyberPet;
+
 	// create a test screen
 	auto testScreen = new GUIScreen();
 
@@ -13,7 +16,10 @@ GameManager::GameManager()
 	testButton2->SetPosition({ 20, 20 });
 	testScreen->AddButon(testButton2);
 
-	AddScreen(testScreen);
+	AddGUIScreen(testScreen);
+
+
+	LoadGUIScreen(0);
 }
 
 GameManager::~GameManager()
@@ -23,19 +29,23 @@ GameManager::~GameManager()
 		delete s;
 	}
 	m_Screens.clear();
+
+	delete m_CyberPet;
 }
 
-void GameManager::Init()
+
+void GameManager::Update(float deltaTime)
 {
-	LoadScreen(0);
+
 }
 
-void GameManager::AddScreen(GUIScreen* screen)
+
+void GameManager::AddGUIScreen(GUIScreen* screen)
 {
 	m_Screens.push_back(screen);
 }
 
-void GameManager::LoadScreen(int screenNum)
+void GameManager::LoadGUIScreen(int screenNum)
 {
 	m_CurrentScreen = screenNum;
 	m_Screens[screenNum]->Load();
@@ -43,5 +53,8 @@ void GameManager::LoadScreen(int screenNum)
 
 std::vector<Sprite*> GameManager::GetSprites()
 {
-	return m_Screens[m_CurrentScreen]->GetButtonSprites();
+	std::vector<Sprite*> sprites = m_Screens[m_CurrentScreen]->GetButtonSprites();
+	sprites.push_back(m_CyberPet);
+
+	return sprites;
 }

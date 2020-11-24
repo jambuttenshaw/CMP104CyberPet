@@ -2,7 +2,6 @@
 #include "Input/Input.h"
 #include "Input/Events.h"
 #include "GameManager.h"
-#include "CyberPet.h"
 
 #include <chrono>
 #include <iostream>
@@ -36,9 +35,6 @@ int main()
     GameManager* gameManager = new GameManager;
     gameManager->Init();
 
-    // create a new cyber pet object
-    CyberPet* cyberPet = new CyberPet;
-
     // used to calculate the difference in time between this frame and the previous one: the delta time
     // this is used to make sure that everything that happens in-game is frame-rate independent
     std::chrono::high_resolution_clock::time_point lastFrameTime = std::chrono::high_resolution_clock::now();
@@ -55,14 +51,10 @@ int main()
         // send the events in the event queue to their callback functions
         input->HandleEvents();
         
-        // update
-        cyberPet->Update(deltaTime);
-        
         // clear everything from the screen
         Renderer::Clear();
         
         // add our pet to the render queue
-        Renderer::Queue(cyberPet);
         for (Sprite* s : gameManager->GetSprites())
         {
             Renderer::Queue(s);
@@ -74,8 +66,6 @@ int main()
 
         Sleep(30);
     }
-    // program shutdown
-    delete cyberPet;
 
     delete gameManager;
 
