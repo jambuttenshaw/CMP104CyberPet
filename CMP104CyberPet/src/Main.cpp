@@ -6,11 +6,14 @@
 #include <chrono>
 #include <iostream>
 
-void KeyboardCallback(KEY_EVENT_RECORD e)
+// game manager needs to be global scope so we can create wrapper functions for event handling
+GameManager* gameManager;
+
+
+void KeyEventCallback(KEY_EVENT_RECORD e)
 {
-
+    gameManager->OnKeyEvent(e);
 }
-
 
 // when the console window gets resized we want to update the renderer
 // to store the new dimensions of the console
@@ -27,13 +30,13 @@ int main()
     // create an input handling object
     Input* input = new Input;
 
-    // set the event callback functions
-    input->SetKeyEventCallback(KeyboardCallback);
-    input->SetWindowResizeCallback(WindowResizeCallback);
-
     // create a guimanager
     GameManager* gameManager = new GameManager;
-    gameManager->Init();
+
+    // set the event callback functions
+    input->SetKeyEventCallback(KeyEventCallback);
+    input->SetWindowResizeCallback(WindowResizeCallback);
+
 
     // used to calculate the difference in time between this frame and the previous one: the delta time
     // this is used to make sure that everything that happens in-game is frame-rate independent

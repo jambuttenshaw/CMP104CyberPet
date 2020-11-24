@@ -3,6 +3,8 @@
 #include "GUI/GUIScreen.h"
 #include "CyberPet.h"
 
+#include "windows.h"
+
 class GameManager
 {
 public:
@@ -10,6 +12,8 @@ public:
 	~GameManager();
 
 	void Update(float deltaTime);
+
+	void OnKeyEvent(KEY_EVENT_RECORD e);
 
 	void AddGUIScreen(GUIScreen* screen);
 	void LoadGUIScreen(int screenNum);

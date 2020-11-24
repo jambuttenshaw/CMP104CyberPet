@@ -39,6 +39,10 @@ void GameManager::Update(float deltaTime)
 
 }
 
+void GameManager::OnKeyEvent(KEY_EVENT_RECORD e)
+{
+
+}
 
 void GameManager::AddGUIScreen(GUIScreen* screen)
 {
