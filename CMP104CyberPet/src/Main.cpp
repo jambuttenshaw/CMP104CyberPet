@@ -1,6 +1,7 @@
 #include "Rendering/Renderer.h"
 #include "Input/Input.h"
 #include "Input/Events.h"
+#include "GUI/GUIManager.h"
 #include "CyberPet.h"
 
 #include <chrono>
@@ -31,6 +32,9 @@ int main()
     input->SetKeyEventCallback(KeyboardCallback);
     input->SetWindowResizeCallback(WindowResizeCallback);
 
+    // create a guimanager
+    GUIManager* guiManager = new GUIManager;
+
     // create a new cyber pet object
     CyberPet* cyberPet = new CyberPet;
 
@@ -57,7 +61,11 @@ int main()
         Renderer::Clear();
         
         // add our pet to the render queue
-        Renderer::Queue(cyberPet);
+        // Renderer::Queue(cyberPet);
+        for (auto s : guiManager->GetSprites())
+        {
+            Renderer::Queue(s);
+        }
 
         // draw everything in the queue
         Renderer::DrawAll();
@@ -68,6 +76,8 @@ int main()
 
     // program shutdown
     delete cyberPet;
+
+    delete guiManager;
 
     Renderer::Shutdown();
     delete input;

@@ -6,6 +6,7 @@ Button::Button(const std::string& text)
 	: Sprite(), m_Text(text)
 {
 	ConstructImages();
+	SetImage(m_InactiveImage)
 }
 
 Button::~Button()
@@ -34,18 +35,18 @@ void Button::ConstructImages()
 	*/
 	std::string content = "";
 	for (int i = 0; i < width; i++)
-		content += '#';
+		content += "#";
 	content += "\n# " + m_Text + " #\n";
 	for (int i = 0; i < width; i++)
-		content += '#';
+		content += "#";
 
 	// create the image
 	m_ActiveImage = new Image(width, height, content);
 
 
 	// repeat the same process for the inactive image
-	int height = 3;
-	int width = m_Text.length() + 4;
+	height = 3;
+	width = m_Text.length() + 4;
 
 	// create the content so the active button looks like this:
 	/*
@@ -55,12 +56,12 @@ void Button::ConstructImages()
 	---------------
 
 	*/
-	std::string content = "";
+	content = "";
 	for (int i = 0; i < width; i++)
-		content += '-';
+		content += "-";
 	content += "\n| " + m_Text + " |\n";
 	for (int i = 0; i < width; i++)
-		content += '-';
+		content += "-";
 
 	// create the image
 	m_InactiveImage = new Image(width, height, content);

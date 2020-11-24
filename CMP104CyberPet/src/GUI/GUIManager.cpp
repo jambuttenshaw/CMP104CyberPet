@@ -2,7 +2,12 @@
 
 GUIManager::GUIManager()
 {
-
+	// create a test screen
+	auto testScreen = new GUIScreen();
+	auto testButton = new Button("Test Button");
+	testButton->SetPosition({ 0, 20 });
+	testScreen->AddButon(testButton);
+	AddScreen(testScreen);
 }
 
 GUIManager::~GUIManager()
@@ -12,6 +17,16 @@ GUIManager::~GUIManager()
 		delete s;
 	}
 	m_Screens.clear();
+}
+
+void GUIManager::Init()
+{
+	LoadScreen(0);
+}
+
+void GUIManager::AddScreen(GUIScreen* screen)
+{
+	m_Screens.push_back(screen);
 }
 
 void GUIManager::LoadScreen(int screenNum)
