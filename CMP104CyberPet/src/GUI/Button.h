@@ -8,8 +8,12 @@ public:
 	Button(const std::string& text);
 	~Button();
 
+	inline void SetActive(bool active) { m_Active = active; UpdateImage(); }
+	inline bool GetActive() { return m_Active; }
+
 private:
 	void ConstructImages();
+	inline void UpdateImage() { SetImage(m_Active ? m_ActiveImage : m_InactiveImage); }
 
 private:
 	std::string m_Text;

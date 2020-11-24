@@ -15,7 +15,11 @@ GUIScreen::~GUIScreen()
 	m_Buttons.clear();
 }
 
-std::vector<Sprite*> GUIScreen::GetButtonSprites()
+void GUIScreen::Load()
 {
-
+	m_Buttons[0]->SetActive(true);
+	for (int i = 1; i < m_Buttons.size(); i++)
+	{
+		m_Buttons[i]->SetActive(false);
+	}
 }

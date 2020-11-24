@@ -8,6 +8,8 @@ public:
 	GUIManager();
 	~GUIManager();
 
+	void LoadScreen(int screenNum);
+
 	std::vector<Sprite*> GetSprites();
 
 private:

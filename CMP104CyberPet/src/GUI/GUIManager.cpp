@@ -14,6 +14,12 @@ GUIManager::~GUIManager()
 	m_Screens.clear();
 }
 
+void GUIManager::LoadScreen(int screenNum)
+{
+	m_CurrentScreen = screenNum;
+	m_Screens[screenNum]->Load();
+}
+
 std::vector<Sprite*> GUIManager::GetSprites()
 {
 	return m_Screens[m_CurrentScreen]->GetButtonSprites();
