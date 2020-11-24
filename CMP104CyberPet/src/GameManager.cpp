@@ -1,5 +1,7 @@
 #include "GameManager.h"
 
+#include <iostream>
+
 GameManager::GameManager()
 {
 	// create a new cyber pet object
@@ -41,7 +43,22 @@ void GameManager::Update(float deltaTime)
 
 void GameManager::OnKeyEvent(KEY_EVENT_RECORD e)
 {
-
+	// if the key event is a keydown event pressing one of the arrow keys or enter key,
+	// we want to send an arrow press event or enter event onto the current gui scene
+	if (e.bKeyDown)
+	{
+		// event is keydown event
+		switch (e.uChar.AsciiChar)
+		{
+		// right arrow
+		case 26:	m_Screens[m_CurrentScreen]->OnArrowKey(GUIScreen::ArrowDirection::Right); break;
+		// left arrow
+		case 27:	m_Screens[m_CurrentScreen]->OnArrowKey(GUIScreen::ArrowDirection::Left); break;
+		// enter key
+		case 13:	break;
+		default:	break;
+		}
+	}
 }
 
 void GameManager::AddGUIScreen(GUIScreen* screen)
