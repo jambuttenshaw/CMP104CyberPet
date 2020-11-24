@@ -30,13 +30,13 @@ int main()
     while (!exitLoop)
     {
         // poll the event queue
-        /* int queueEnd = (int)input->GetEventQueueStart() + input->PollEvents();
+        int queueEnd = (int)input->GetEventQueueStart() + input->PollEvents();
         for (INPUT_RECORD* e = input->GetEventQueueStart(); (int)e < queueEnd; e++)
         {
             EventDispatcher dispatcher(*e);
             dispatcher.Dispatch(KEY_EVENT, OnKeyboardEvent);
         }
-        */
+        
         // update
         cyberPet->Update();
 
