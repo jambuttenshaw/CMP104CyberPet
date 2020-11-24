@@ -1,6 +1,6 @@
-#include "GUIManager.h"
+#include "GameManager.h"
 
-GUIManager::GUIManager()
+GameManager::GameManager()
 {
 	// create a test screen
 	auto testScreen = new GUIScreen();
@@ -16,7 +16,7 @@ GUIManager::GUIManager()
 	AddScreen(testScreen);
 }
 
-GUIManager::~GUIManager()
+GameManager::~GameManager()
 {
 	for (GUIScreen* s : m_Screens)
 	{
@@ -25,23 +25,23 @@ GUIManager::~GUIManager()
 	m_Screens.clear();
 }
 
-void GUIManager::Init()
+void GameManager::Init()
 {
 	LoadScreen(0);
 }
 
-void GUIManager::AddScreen(GUIScreen* screen)
+void GameManager::AddScreen(GUIScreen* screen)
 {
 	m_Screens.push_back(screen);
 }
 
-void GUIManager::LoadScreen(int screenNum)
+void GameManager::LoadScreen(int screenNum)
 {
 	m_CurrentScreen = screenNum;
 	m_Screens[screenNum]->Load();
 }
 
-std::vector<Sprite*> GUIManager::GetSprites()
+std::vector<Sprite*> GameManager::GetSprites()
 {
 	return m_Screens[m_CurrentScreen]->GetButtonSprites();
 }

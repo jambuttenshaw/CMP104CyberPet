@@ -1,12 +1,12 @@
 #pragma once
 
-#include "GUIScreen.h"
+#include "GUI/GUIScreen.h"
 
-class GUIManager
+class GameManager
 {
 public:
-	GUIManager();
-	~GUIManager();
+	GameManager();
+	~GameManager();
 
 	void Init();
 
