@@ -2,11 +2,6 @@
 
 #include "GUIScreen.h"
 
-#include "../Core/Sprite.h"
-
-#include <vector>
-
-
 class GUIManager
 {
 public:
@@ -17,5 +12,6 @@ public:
 
 private:
 	std::vector<GUIScreen*> m_Screens;
+	int m_CurrentScreen = 0;
 
 };

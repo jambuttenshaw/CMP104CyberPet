@@ -9,3 +9,8 @@ GUIScreen::~GUIScreen()
 {
 
 }
+
+std::vector<Sprite*> GUIScreen::GetButtonSprites()
+{
+
+}
