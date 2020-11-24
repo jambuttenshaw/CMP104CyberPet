@@ -21,9 +21,16 @@ Input::~Input()
 
 int Input::PollEvents()
 {
-	// get all events from the event queue and mark them as read
-	ReadConsoleInput(m_ConsoleHandle, m_InputRecordBuffer, 128, &m_NumInputRecords);
-	return m_NumInputRecords;
+	if (GetEventQueueLength())
+	{
+		// get all events from the event queue and mark them as read
+		ReadConsoleInput(m_ConsoleHandle, m_InputRecordBuffer, 128, &m_NumInputRecords);
+		return m_NumInputRecords;
+	} 
+	else
+	{
+		return 0;
+	}
 }
 
 int Input::GetEventQueueLength()
