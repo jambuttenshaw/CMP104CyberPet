@@ -35,6 +35,6 @@ private:
 
 	Vector2i m_ConsoleDimensions;
 
-	int m_MaxConsoleHeight = 32;
+	int m_MaxConsoleHeight = 24;
 };
 
