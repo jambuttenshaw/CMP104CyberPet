@@ -5,7 +5,7 @@ GUIManager::GUIManager()
 	// create a test screen
 	auto testScreen = new GUIScreen();
 	auto testButton = new Button("Test Button");
-	testButton->SetPosition({ 0, 20 });
+	testButton->SetPosition({ 0, 0 });
 	testScreen->AddButon(testButton);
 	AddScreen(testScreen);
 }

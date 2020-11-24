@@ -6,7 +6,7 @@ Button::Button(const std::string& text)
 	: Sprite(), m_Text(text)
 {
 	ConstructImages();
-	SetImage(m_InactiveImage)
+	SetImage(m_InactiveImage);
 }
 
 Button::~Button()
