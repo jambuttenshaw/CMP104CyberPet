@@ -16,7 +16,9 @@ public:
 	void Clear(Vector2i origin, Vector2i dimensions, wchar_t clearChar);
 	void ClearAll();
 	
-	Vector2i GetConsoleDimensions();
+	void UpdateConsoleDimensions();
+	void UpdateConsoleDimensions(int x, int y);
+	inline Vector2i GetConsoleDimensions() { return m_ConsoleDimensions; }
 	int GetConsoleWidth();
 	int GetConsoleHeight();
 
@@ -31,6 +33,8 @@ private:
 private:
 	HANDLE m_ConsoleHandle = nullptr;
 
-	int m_MaxConsoleHeight = 20;
+	Vector2i m_ConsoleDimensions;
+
+	int m_MaxConsoleHeight = 32;
 };
 

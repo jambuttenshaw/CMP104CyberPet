@@ -6,8 +6,9 @@
 #include <iostream>
 
 RenderAPI::RenderAPI()
+	: m_ConsoleDimensions(Vector2i({ 0, 0 }))
 {
-
+	
 }
 
 RenderAPI::~RenderAPI()
@@ -19,6 +20,8 @@ void RenderAPI::Init()
 {
 	m_ConsoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
 
+	UpdateConsoleDimensions();
+
 	SetCursorVisibility(false);
 }
 
@@ -28,11 +31,11 @@ void RenderAPI::Init()
 
 void RenderAPI::Submit(wchar_t** imageData, Vector2i dimensions, Vector2i position)
 {
+	DWORD dw;
 	for (int y = 0; y < (dimensions.y > m_MaxConsoleHeight ? m_MaxConsoleHeight : dimensions.y); y++)
 	{
 		for (int x = 0; x < dimensions.x; x++)
 		{
-			DWORD dw;
 			WriteConsoleOutputCharacter(m_ConsoleHandle, &imageData[y][x], 1, { (short)(position.x + x), (short)(position.y + y) }, &dw);
 		}
 	}
@@ -40,10 +43,10 @@ void RenderAPI::Submit(wchar_t** imageData, Vector2i dimensions, Vector2i positi
 
 void RenderAPI::Clear(Vector2i origin, Vector2i dimensions, wchar_t clearChar)
 {
+	DWORD dw;
 	std::vector<wchar_t> line(dimensions.x, clearChar);
 	for (int y = 0; y < (dimensions.y > m_MaxConsoleHeight ? m_MaxConsoleHeight : dimensions.y); y++)
 	{
-		DWORD dw;
 		WriteConsoleOutputCharacter(m_ConsoleHandle, &line[0], dimensions.x, { (short)origin.x, (short)(origin.y + y) }, &dw);
 	}
 	
@@ -51,30 +54,33 @@ void RenderAPI::Clear(Vector2i origin, Vector2i dimensions, wchar_t clearChar)
 
 void RenderAPI::ClearAll()
 {
-	Vector2i dim = GetConsoleDimensions();
-	int size = dim.x * dim.y;
 	DWORD dw;
-	FillConsoleOutputCharacter(m_ConsoleHandle, ' ', size, { 0, 0 }, &dw);
+	FillConsoleOutputCharacter(m_ConsoleHandle, ' ', m_ConsoleDimensions.x * m_ConsoleDimensions.y, { 0, 0 }, &dw);
 }
 
-Vector2i RenderAPI::GetConsoleDimensions()
+void RenderAPI::UpdateConsoleDimensions()
 {
 	// from https://docs.microsoft.com/en-us/windows/console/getconsolescreenbufferinfo
 	// and https://docs.microsoft.com/en-us/windows/console/console-screen-buffer-info-str
 	CONSOLE_SCREEN_BUFFER_INFO consoleInfo;
 	GetConsoleScreenBufferInfo(m_ConsoleHandle, &consoleInfo);
 
-	return Vector2i(consoleInfo.dwSize.X, consoleInfo.dwSize.Y);
+	m_ConsoleDimensions = { consoleInfo.dwSize.X, consoleInfo.dwSize.Y };
+}
+
+void RenderAPI::UpdateConsoleDimensions(int x, int y)
+{
+	m_ConsoleDimensions = { x, y };
 }
 
 int RenderAPI::GetConsoleWidth()
 {
-	return GetConsoleDimensions().x;
+	return m_ConsoleDimensions.x;
 }
 
 int RenderAPI::GetConsoleHeight()
 {
-	return GetConsoleDimensions().y;
+	return m_ConsoleDimensions.y;
 }
 
 

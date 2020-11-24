@@ -40,6 +40,10 @@ public:
 	inline static int GetConsoleWidth() { return s_RenderAPI->GetConsoleWidth(); }
 	inline static int GetConsoleHeight() { return s_RenderAPI->GetConsoleHeight(); }
 
+	inline static int SetMaxConsoleHeight(int height) { s_RenderAPI->FixMaxConsoleHeight(height); }
+	inline static void UpdateConsoleDimensions() { s_RenderAPI->UpdateConsoleDimensions(); }
+	inline static void UpdateConsoleDimensions(int x, int y) { s_RenderAPI->UpdateConsoleDimensions(x, y); }
+
 private:
 	static RenderAPI* s_RenderAPI;
 

@@ -14,6 +14,12 @@ void KeyboardCallback(KEY_EVENT_RECORD e)
 }
 
 
+void WindowResizeCallback(WINDOW_BUFFER_SIZE_RECORD e)
+{
+    Renderer::UpdateConsoleDimensions(e.dwSize.X, e.dwSize.Y);
+}
+
+
 int main()
 {
     // initialize the renderer
@@ -23,6 +29,7 @@ int main()
 
     // set the event callback functions
     input->SetKeyEventCallback(KeyboardCallback);
+    input->SetWindowResizeCallback(WindowResizeCallback);
 
     // create a new cyber pet object
     CyberPet* cyberPet = new CyberPet;
