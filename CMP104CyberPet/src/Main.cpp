@@ -35,7 +35,6 @@ int main()
     // create a guimanager
     GUIManager* guiManager = new GUIManager;
     guiManager->Init();
-    Sprite* button = guiManager->GetSprites()[0];
 
     // create a new cyber pet object
     CyberPet* cyberPet = new CyberPet;
@@ -63,8 +62,12 @@ int main()
         Renderer::Clear();
         
         // add our pet to the render queue
-        // Renderer::Queue(cyberPet);
-        Renderer::Queue(button);
+        Renderer::Queue(cyberPet);
+        for (Sprite* s : guiManager->GetSprites())
+        {
+            s->SetDirty();
+            Renderer::Queue(s);
+        }
 
         // draw everything in the queue
         Renderer::DrawAll();
@@ -72,6 +75,7 @@ int main()
 
         Sleep(30);
     }
+    std::cout << "program end" << std::endl;
 
     // program shutdown
     delete cyberPet;

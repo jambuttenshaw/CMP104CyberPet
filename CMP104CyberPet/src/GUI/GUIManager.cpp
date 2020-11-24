@@ -4,9 +4,15 @@ GUIManager::GUIManager()
 {
 	// create a test screen
 	auto testScreen = new GUIScreen();
-	auto testButton = new Button("Test Button");
-	testButton->SetPosition({ 0, 0 });
-	testScreen->AddButon(testButton);
+
+	auto testButton1 = new Button("Rest the pet");
+	testButton1->SetPosition({ 0, 20 });
+	testScreen->AddButon(testButton1);
+
+	auto testButton2 = new Button("Feed the pet");
+	testButton2->SetPosition({ 20, 20 });
+	testScreen->AddButon(testButton2);
+
 	AddScreen(testScreen);
 }
 
