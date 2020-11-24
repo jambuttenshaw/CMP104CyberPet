@@ -1,5 +1,7 @@
 #include "GUIScreen.h"
 
+#include <iostream>
+
 GUIScreen::GUIScreen()
 	: m_Buttons(0)
 {

@@ -4,8 +4,17 @@
 
 GameManager::GameManager()
 {
+	// initialize members
+	std::vector<GUIScreen*> m_Screens(0);
+	std::cout << m_Screens.size() << std::endl;
+
+
+
 	// create a new cyber pet object
 	m_CyberPet = new CyberPet;
+
+
+
 
 	// create a test screen
 	auto testScreen = new GUIScreen();
@@ -21,6 +30,7 @@ GameManager::GameManager()
 	AddGUIScreen(testScreen);
 
 
+	// load the first screen
 	LoadGUIScreen(0);
 }
 
@@ -43,17 +53,18 @@ void GameManager::Update(float deltaTime)
 
 void GameManager::OnKeyEvent(KEY_EVENT_RECORD e)
 {
-	// if the key event is a keydown event pressing one of the arrow keys or enter key,
+	// if the key event is a keydown event pressing A/D or enter key,
 	// we want to send an arrow press event or enter event onto the current gui scene
+	
 	if (e.bKeyDown)
 	{
 		// event is keydown event
 		switch (e.uChar.AsciiChar)
 		{
-		// right arrow
-		case 26:	m_Screens[m_CurrentScreen]->OnArrowKey(GUIScreen::ArrowDirection::Right); break;
-		// left arrow
-		case 27:	m_Screens[m_CurrentScreen]->OnArrowKey(GUIScreen::ArrowDirection::Left); break;
+		// D key
+		case 100:	m_Screens[m_CurrentScreen]->OnArrowKey(GUIScreen::ArrowDirection::Right); break;
+		// A key
+		case 97:	m_Screens[m_CurrentScreen]->OnArrowKey(GUIScreen::ArrowDirection::Left); break;
 		// enter key
 		case 13:	break;
 		default:	break;

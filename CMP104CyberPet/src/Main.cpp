@@ -53,7 +53,7 @@ int main()
 
         // send the events in the event queue to their callback functions
         input->HandleEvents();
-        
+        /*
         // clear everything from the screen
         Renderer::Clear();
         
@@ -66,6 +66,7 @@ int main()
         // draw everything in the queue
         Renderer::DrawAll();
         
+        */
 
         Sleep(30);
     }
