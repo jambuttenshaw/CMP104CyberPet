@@ -30,8 +30,8 @@ int main()
     while (!exitLoop)
     {
         // poll the event queue
-        int queueEnd = (int)input->GetEventQueueStart() + input->PollEvents();
-        for (INPUT_RECORD* e = input->GetEventQueueStart(); (int)e < queueEnd; e++)
+        intptr_t queueEnd = (intptr_t)input->GetEventQueueStart() + input->PollEvents();
+        for (INPUT_RECORD* e = input->GetEventQueueStart(); (intptr_t)e < queueEnd; e++)
         {
             EventDispatcher dispatcher(*e);
             dispatcher.Dispatch(KEY_EVENT, OnKeyboardEvent);
@@ -40,11 +40,13 @@ int main()
         // update
         cyberPet->Update();
 
-        // redraw to the display
+        // clear everything from the screen
         Renderer::Clear();
         
+        // add our pet to the render queue
         Renderer::Queue(cyberPet);
 
+        // draw everything in the queue
         Renderer::DrawAll();
 
 
