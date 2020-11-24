@@ -25,36 +25,28 @@ int main()
     // create a new cyber pet object
     CyberPet* cyberPet = new CyberPet;
 
-    // ABSTRACT THE DRAW QUEUE
-    std::vector<Sprite*> sprites;
-    sprites.push_back(cyberPet);
-       
-
     // main loop
     bool exitLoop = false;
     while (!exitLoop)
     {
         // poll the event queue
-        int queueEnd = (int)input->GetEventQueueStart() + input->PollEvents();
+        /* int queueEnd = (int)input->GetEventQueueStart() + input->PollEvents();
         for (INPUT_RECORD* e = input->GetEventQueueStart(); (int)e < queueEnd; e++)
         {
             EventDispatcher dispatcher(*e);
             dispatcher.Dispatch(KEY_EVENT, OnKeyboardEvent);
         }
-
+        */
         // update
         cyberPet->Update();
 
         // redraw to the display
         Renderer::Clear();
-        for (Sprite* s : sprites)
-        {
-            if (s->IsDirty())
-            {
-                Renderer::Submit(s);
-                s->Clean();
-            }
-        }
+        
+        Renderer::Queue(cyberPet);
+
+        Renderer::DrawAll();
+
 
         Sleep(30);
     }
