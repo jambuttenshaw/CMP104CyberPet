@@ -58,7 +58,7 @@ int main()
         Renderer::DrawAll();
         
 
-        Sleep(30);
+        Sleep(100);
     }
 
     delete gameManager;

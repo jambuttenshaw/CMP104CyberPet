@@ -5,6 +5,14 @@
 class CyberPet : public Sprite
 {
 public:
+	enum State {
+		Neutral,
+		Sleeping,
+		Eating,
+		Playing
+	};
+
+public:
 	CyberPet();
 	~CyberPet();
 
@@ -20,6 +28,8 @@ public:
 private:
 
 	std::string m_Name;
+
+	State m_State = State::Neutral;
 
 	float m_Hunger = 0;
 	float m_Sleepiness = 0;

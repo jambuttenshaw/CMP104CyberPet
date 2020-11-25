@@ -94,14 +94,14 @@ GameManager::GameManager()
 	m_TextSprites.push_back(new GUIText("Use A/D to scroll through buttons.", { 12, 22 }));
 	m_TextSprites.push_back(new GUIText("Use Enter to select button.", { 12, 23 }));
 
-	m_HappinessBar = new GUIText(" Happiness: |----------|", { 50, 1 });
-	m_TextSprites.push_back(m_HappinessBar);
+	m_HungerBar = new GUIText("    Hunger: |----------|", { 64, 1 });
+	m_TextSprites.push_back(m_HungerBar);
 
-	m_SleepinessBar = new GUIText("Sleepiness: |----------|", { 50, 3 });
+	m_SleepinessBar = new GUIText("Sleepiness: |----------|", { 64, 3 });
 	m_TextSprites.push_back(m_SleepinessBar);
 
-	m_HungerBar = new GUIText("    Hunger: |----------|", { 50, 5 });
-	m_TextSprites.push_back(m_HungerBar);
+	m_HappinessBar = new GUIText(" Happiness: |----------|", { 64, 5 });
+	m_TextSprites.push_back(m_HappinessBar);
 
 
 	// load the first screen
@@ -145,6 +145,10 @@ void GameManager::Update(float deltaTime)
 	// update the pet
 	m_CyberPet->Update(deltaTime);
 
+	// update the progress bars
+	m_HungerBar->SetString("    Hunger: " + CreateProgressBar(m_CyberPet->GetNormalizedHunger()));
+	m_SleepinessBar->SetString("Sleepiness: " + CreateProgressBar(m_CyberPet->GetNormalizedSleepiness()));
+	m_HappinessBar->SetString(" Happiness: " + CreateProgressBar(m_CyberPet->GetNormalizedHappiness()));
 
 }
 
@@ -200,4 +204,16 @@ std::vector<Sprite*> GameManager::GetSprites()
 	sprites.push_back(m_CyberPet);
 
 	return sprites;
+}
+
+
+std::string GameManager::CreateProgressBar(float normalizedValue)
+{
+	int n = ceil(10.0f * normalizedValue);
+	std::string s = "|";
+	for (int i = 0; i < n; i++) s.append("#");
+	for (int i = 0; i < 10 - n; i++) s.append("-");
+	s.append("|");
+
+	return s;
 }

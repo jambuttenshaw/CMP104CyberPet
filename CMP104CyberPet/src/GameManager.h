@@ -23,6 +23,9 @@ public:
 	std::vector<Sprite*> GetSprites();
 
 private:
+	std::string CreateProgressBar(float normalizedValue);
+
+private:
 	CyberPet* m_CyberPet;
 
 	std::vector<GUIScreen*> m_Screens;
