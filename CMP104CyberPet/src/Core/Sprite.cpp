@@ -1,18 +1,18 @@
 #include "Sprite.h"
 
 Sprite::Sprite()
-	: m_Position(Vector2i(0, 0))
+	: m_Position(Vector2f(0, 0))
 {
 
 }
 
-Sprite::Sprite(int x, int y)
-	: m_Position(Vector2i(x, y))
+Sprite::Sprite(float x, float y)
+	: m_Position(Vector2f(x, y))
 {
 
 }
 
-Sprite::Sprite(Vector2i pos)
+Sprite::Sprite(Vector2f pos)
 	: m_Position(pos)
 {
 

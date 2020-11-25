@@ -44,7 +44,7 @@ public:
 		s_RenderQueue.clear();
 	}
 
-	inline static void SubmitImageData(Sprite* sprite) { s_RenderAPI->SubmitImageData(sprite->GetImage()->GetImageData(), sprite->GetImage()->GetDimensions(), sprite->GetPosition()); }
+	inline static void SubmitImageData(Sprite* sprite) { s_RenderAPI->SubmitImageData(sprite->GetImage()->GetImageData(), sprite->GetImage()->GetDimensions(), sprite->GetIntPosition()); }
 	inline static void SubmitImageData(Image* image, Vector2i position) { s_RenderAPI->SubmitImageData(image->GetImageData(), image->GetDimensions(), position); }
 	inline static void SubmitImageData(wchar_t** imageData, Vector2i dimensions, Vector2i position) { s_RenderAPI->SubmitImageData(imageData, dimensions, position); }
 
