@@ -45,6 +45,10 @@ GameManager::GameManager()
 	testButton2->SetPosition({ 20, 20 });
 	testScreen->AddButon(testButton2);
 
+	auto testButton3 = new Button("Name the pet");
+	testButton3->SetPosition({ 40, 20 });
+	testScreen->AddButon(testButton3);
+
 	AddGUIScreen(testScreen);
 
 
