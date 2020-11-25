@@ -8,9 +8,9 @@
 
 // when the console window gets resized we want to update the renderer
 // to store the new dimensions of the console
-void WindowResizeCallback(WINDOW_BUFFER_SIZE_RECORD e)
+void WindowResizeCallback(WINDOW_BUFFER_SIZE_RECORD* e)
 {
-    Renderer::UpdateConsoleDimensions(e.dwSize.X, e.dwSize.Y);
+    Renderer::UpdateConsoleDimensions(e->dwSize.X, e->dwSize.Y);
 }
 
 
@@ -20,6 +20,9 @@ int main()
     Renderer::Init();
     // initialize the input handler
     Input::Init();
+
+    Input::SetEventCallback(WindowResizeCallback);
+
 
     // create a guimanager
     GameManager* gameManager = new GameManager;

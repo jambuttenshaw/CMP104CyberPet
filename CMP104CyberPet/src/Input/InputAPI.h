@@ -20,7 +20,11 @@ public:
 
 	int GetEventQueueLength();
 
-	inline void SetEventCallback(const std::function<void(INPUT_RECORD*)>& callback) { m_EventCallback = callback; }
+	inline void SetEventCallback(const std::function<void(KEY_EVENT_RECORD*)>& callback) { m_KeyEventCallback = callback; }
+	inline void SetEventCallback(const std::function<void(MOUSE_EVENT_RECORD*)>& callback) { m_MouseEventCallback = callback; }
+	inline void SetEventCallback(const std::function<void(WINDOW_BUFFER_SIZE_RECORD*)>& callback) { m_WindowResizeEventCallback = callback; }
+	inline void SetEventCallback(const std::function<void(MENU_EVENT_RECORD*)>& callback) { m_MenuEventCallback = callback; }
+	inline void SetEventCallback(const std::function<void(FOCUS_EVENT_RECORD*)>& callback) { m_FocusEventCallback = callback; }
 
 private:
 	// handle to the console
@@ -34,6 +38,10 @@ private:
 
 private:
 	// EVENT CALLBACK FUNCTION
-	std::function<void(INPUT_RECORD*)> m_EventCallback;
+	std::function<void(KEY_EVENT_RECORD*)> m_KeyEventCallback;
+	std::function<void(MOUSE_EVENT_RECORD*)> m_MouseEventCallback;
+	std::function<void(WINDOW_BUFFER_SIZE_RECORD*)> m_WindowResizeEventCallback;
+	std::function<void(MENU_EVENT_RECORD*)> m_MenuEventCallback;
+	std::function<void(FOCUS_EVENT_RECORD*)> m_FocusEventCallback;
 };
 

@@ -21,10 +21,10 @@ GameManager::GameManager()
 		// the event callback will always be passed a pointer to an input record
 		// so we need to specify this as a parameter in the lambda
 		// the lambda will return void, so we don't need to specify return type
-		[this](INPUT_RECORD* e)
+		[this](KEY_EVENT_RECORD* e)
 		{
 			// now specify the actual on event function we want to call; GameManager::OnEvent();
-			return this->OnEvent(e); 
+			return this->OnKeyEvent(e); 
 		}
 	);
 
@@ -69,15 +69,6 @@ void GameManager::Update(float deltaTime)
 
 }
 
-
-void GameManager::OnEvent(INPUT_RECORD* e)
-{
-	// all events go through this event callback function
-	switch (e->EventType)
-	{
-	case KEY_EVENT:		OnKeyEvent(&e->Event.KeyEvent);
-	}
-}
 
 void GameManager::OnKeyEvent(KEY_EVENT_RECORD* e)
 {

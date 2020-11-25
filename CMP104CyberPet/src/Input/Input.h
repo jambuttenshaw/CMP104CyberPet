@@ -18,7 +18,11 @@ public:
 
 	inline static int GetEventQueueLength() { return s_InputAPI->GetEventQueueLength(); }
 
-	inline static void SetEventCallback(const std::function<void(INPUT_RECORD*)>& func) { s_InputAPI->SetEventCallback(func); }
+	inline static void SetEventCallback(const std::function<void(KEY_EVENT_RECORD*)>& func) { s_InputAPI->SetEventCallback(func); }
+	inline static void SetEventCallback(const std::function<void(MOUSE_EVENT_RECORD*)>& func) { s_InputAPI->SetEventCallback(func); }
+	inline static void SetEventCallback(const std::function<void(WINDOW_BUFFER_SIZE_RECORD*)>& func) { s_InputAPI->SetEventCallback(func); }
+	inline static void SetEventCallback(const std::function<void(MENU_EVENT_RECORD*)>& func) { s_InputAPI->SetEventCallback(func); }
+	inline static void SetEventCallback(const std::function<void(FOCUS_EVENT_RECORD*)>& func) { s_InputAPI->SetEventCallback(func); }
 
 private:
 	static InputAPI* s_InputAPI;

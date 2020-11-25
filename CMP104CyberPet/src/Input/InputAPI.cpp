@@ -41,7 +41,14 @@ void InputAPI::HandleEvents()
 	// iterate through each event
 	for (int i = 0; i < m_NumInputRecords; i++)
 	{
-		m_EventCallback(&m_InputRecordBuffer[i]);
+		switch (m_InputRecordBuffer[i].EventType)
+		{
+		case KEY_EVENT:					m_KeyEventCallback(&m_InputRecordBuffer[i].Event.KeyEvent); break;
+		case MOUSE_EVENT:				m_MouseEventCallback(&m_InputRecordBuffer[i].Event.MouseEvent); break;
+		case WINDOW_BUFFER_SIZE_EVENT:	m_WindowResizeEventCallback(&m_InputRecordBuffer[i].Event.WindowBufferSizeEvent); break;
+		case MENU_EVENT:				m_MenuEventCallback(&m_InputRecordBuffer[i].Event.MenuEvent); break;
+		case FOCUS_EVENT:				m_FocusEventCallback(&m_InputRecordBuffer[i].Event.FocusEvent); break;
+		}
 	}
 }
 
