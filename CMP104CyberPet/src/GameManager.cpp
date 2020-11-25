@@ -94,6 +94,15 @@ GameManager::GameManager()
 	m_TextSprites.push_back(new GUIText("Use A/D to scroll through buttons.", { 12, 22 }));
 	m_TextSprites.push_back(new GUIText("Use Enter to select button.", { 12, 23 }));
 
+	m_HappinessBar = new GUIText(" Happiness: |----------|", { 50, 1 });
+	m_TextSprites.push_back(m_HappinessBar);
+
+	m_SleepinessBar = new GUIText("Sleepiness: |----------|", { 50, 3 });
+	m_TextSprites.push_back(m_SleepinessBar);
+
+	m_HungerBar = new GUIText("    Hunger: |----------|", { 50, 5 });
+	m_TextSprites.push_back(m_HungerBar);
+
 
 	// load the first screen
 	LoadGUIScreen(2);
@@ -116,6 +125,8 @@ GameManager::~GameManager()
 	}
 	m_Screens.clear();
 
+	// happiness bar etc are contained in text sprites,
+	// so they get deleted along with everything else in the array
 	for (GUIText* t : m_TextSprites)
 	{
 		delete t;
@@ -128,6 +139,12 @@ GameManager::~GameManager()
 
 void GameManager::Update(float deltaTime)
 {
+
+	// THIS CODE GETS RUN EACH FRAME
+
+	// update the pet
+	m_CyberPet->Update(deltaTime);
+
 
 }
 

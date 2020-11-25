@@ -20,4 +20,9 @@ public:
 	}
 
 	void Update(float deltaTime) override {};
+
+	void SetString(const std::string& content)
+	{
+		SetImage(new Image((int)content.length(), 1, content));
+	}
 };

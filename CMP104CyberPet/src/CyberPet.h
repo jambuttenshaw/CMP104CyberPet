@@ -10,6 +10,13 @@ public:
 
 	void Update(float deltaTime) override;
 
+	// functions for retrieving the stats of the pet
+	inline float GetNormalizedHunger() { return m_Hunger / m_MaxHunger; }
+	inline float GetNormalizedSleepiness() { return m_Sleepiness / m_MaxSleepiness; }
+	inline float GetNormalizedHappiness() { return m_Happiness / m_MaxHappiness; }
+
+	inline const std::string& GetName() { return m_Name; }
+
 private:
 
 	std::string m_Name;
