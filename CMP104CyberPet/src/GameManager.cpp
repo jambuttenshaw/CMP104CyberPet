@@ -5,18 +5,28 @@
 #include <iostream>
 
 
-
-#define BIND_EVENT_FN(fn) [this](auto&&... args) -> decltype(auto) { return this->fn(std::forward<decltype(args)>(args)...); }
-
-
-
 GameManager::GameManager()
 {
 	// initialize members
 	std::vector<GUIScreen*> m_Screens(0);
 
 	// set the event callback
-	Input::SetEventCallback(BIND_EVENT_FN(GameManager::OnEvent));
+	
+	// the event callback function won't be executed within the game manager's scope,
+	// it will be executed from inside the InputAPI
+
+	// therefore, we need to use a lambda to capture the scope of the game manager so that members
+	// of this class can be referenced inside the event callback function
+	Input::SetEventCallback(
+		// the event callback will always be passed a pointer to an input record
+		// so we need to specify this as a parameter in the lambda
+		// the lambda will return void, so we don't need to specify return type
+		[this](INPUT_RECORD* e)
+		{
+			// now specify the actual on event function we want to call; GameManager::OnEvent();
+			return this->OnEvent(e); 
+		}
+	);
 
 	// create a new cyber pet object
 	m_CyberPet = new CyberPet;
