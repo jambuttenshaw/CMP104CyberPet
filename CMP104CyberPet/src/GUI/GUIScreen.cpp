@@ -31,8 +31,16 @@ void GUIScreen::OnArrowKey(GUIScreen::ArrowDirection dir)
 {
 	switch (dir)
 	{
-	case GUIScreen::ArrowDirection::Left:	m_SelectedButton = (m_SelectedButton - 1) % m_Buttons.size();
-	case GUIScreen::ArrowDirection::Right:	m_SelectedButton = (m_SelectedButton + 1) % m_Buttons.size();
+	case GUIScreen::ArrowDirection::Left:	
+	{
+		m_SelectedButton--;
+		if (m_SelectedButton == -1) m_SelectedButton = m_Buttons.size() - 1;
+	}; break;
+	case GUIScreen::ArrowDirection::Right:
+	{
+		m_SelectedButton++;
+		if (m_SelectedButton == m_Buttons.size()) m_SelectedButton = 0;
+	}; break;
 	}
 
 	RefreshButtons();

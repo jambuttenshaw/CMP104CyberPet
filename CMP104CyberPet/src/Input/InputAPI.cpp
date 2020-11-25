@@ -43,11 +43,16 @@ void InputAPI::HandleEvents()
 	{
 		switch (m_InputRecordBuffer[i].EventType)
 		{
-		case KEY_EVENT:					m_KeyEventCallback(&m_InputRecordBuffer[i].Event.KeyEvent); break;
-		case MOUSE_EVENT:				m_MouseEventCallback(&m_InputRecordBuffer[i].Event.MouseEvent); break;
-		case WINDOW_BUFFER_SIZE_EVENT:	m_WindowResizeEventCallback(&m_InputRecordBuffer[i].Event.WindowBufferSizeEvent); break;
-		case MENU_EVENT:				m_MenuEventCallback(&m_InputRecordBuffer[i].Event.MenuEvent); break;
-		case FOCUS_EVENT:				m_FocusEventCallback(&m_InputRecordBuffer[i].Event.FocusEvent); break;
+		case KEY_EVENT:					
+			if (m_KeyEventCallback != nullptr) m_KeyEventCallback(&m_InputRecordBuffer[i].Event.KeyEvent); break;
+		case MOUSE_EVENT:				
+			if (m_MouseEventCallback != nullptr) m_MouseEventCallback(&m_InputRecordBuffer[i].Event.MouseEvent); break;
+		case WINDOW_BUFFER_SIZE_EVENT:	
+			if (m_WindowResizeEventCallback != nullptr) m_WindowResizeEventCallback(&m_InputRecordBuffer[i].Event.WindowBufferSizeEvent); break;
+		case MENU_EVENT:				
+			if (m_MenuEventCallback != nullptr) m_MenuEventCallback(&m_InputRecordBuffer[i].Event.MenuEvent); break;
+		case FOCUS_EVENT:				
+			if (m_FocusEventCallback != nullptr) m_FocusEventCallback(&m_InputRecordBuffer[i].Event.FocusEvent); break;
 		}
 	}
 }

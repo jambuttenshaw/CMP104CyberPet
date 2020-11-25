@@ -24,8 +24,9 @@ int main()
     Input::SetEventCallback(WindowResizeCallback);
 
 
-    // create a guimanager
+    // create a game manager
     GameManager* gameManager = new GameManager;
+
 
     // used to calculate the difference in time between this frame and the previous one: the delta time
     // this is used to make sure that everything that happens in-game is frame-rate independent
