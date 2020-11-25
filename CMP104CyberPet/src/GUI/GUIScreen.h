@@ -19,6 +19,7 @@ public:
 	void Load();
 
 	void OnArrowKey(ArrowDirection dir);
+	void OnEnter();
 
 	inline std::vector<Sprite*> GetButtonSprites() { return std::vector<Sprite*>(m_Buttons.begin(), m_Buttons.end()); }
 

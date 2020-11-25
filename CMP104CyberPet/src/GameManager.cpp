@@ -43,8 +43,14 @@ GameManager::GameManager()
 		changePetButton->SetPosition({ 8, 18 });
 		screen->AddButon(changePetButton);
 
+		auto selectPetButton = new Button("Select Pet");
+		selectPetButton->SetPosition({ 26, 18 });
+		selectPetButton->SetPressFunction([this]() { this->NextScreen(); });
+		screen->AddButon(selectPetButton);
+
 		auto quitButton = new Button("Quit");
-		quitButton->SetPosition({ 26, 18 });
+		quitButton->SetPosition({ 44, 18 });
+		quitButton->SetPressFunction([this]() { this->Quit(); });
 		screen->AddButon(quitButton);
 
 		AddGUIScreen(screen);
@@ -59,8 +65,14 @@ GameManager::GameManager()
 		namePetButton->SetPosition({ 8, 18 });
 		screen->AddButon(namePetButton);
 
+		auto confirmNameButton = new Button("Confirm Name");
+		confirmNameButton->SetPosition({ 24, 18 });
+		confirmNameButton->SetPressFunction([this]() { this->NextScreen(); });
+		screen->AddButon(confirmNameButton);
+
 		auto quitButton = new Button("Quit");
-		quitButton->SetPosition({ 24, 18 });
+		quitButton->SetPosition({ 44, 18 });
+		quitButton->SetPressFunction([this]() { this->Quit(); });
 		screen->AddButon(quitButton);
 
 		AddGUIScreen(screen);
@@ -85,15 +97,20 @@ GameManager::GameManager()
 
 		auto quitButton = new Button("Quit");
 		quitButton->SetPosition({ 43, 18 });
+		quitButton->SetPressFunction([this]() { this->Quit(); });
 		screen->AddButon(quitButton);
 
 		AddGUIScreen(screen);
 	}
 
+
 	// add instructions text
 	m_TextSprites.push_back(new GUIText("Use A/D to scroll through buttons.", { 12, 22 }));
 	m_TextSprites.push_back(new GUIText("Use Enter to select button.", { 12, 23 }));
 
+	
+
+	// add progress bars
 	m_HungerBar = new GUIText("    Hunger: |----------|", { 64, 1 });
 	m_TextSprites.push_back(m_HungerBar);
 
@@ -104,8 +121,9 @@ GameManager::GameManager()
 	m_TextSprites.push_back(m_HappinessBar);
 
 
+
 	// load the first screen
-	LoadGUIScreen(2);
+	LoadGUIScreen(0);
 
 
 
@@ -177,7 +195,7 @@ void GameManager::OnKeyEvent(KEY_EVENT_RECORD* e)
 		// A key
 		case 97:	m_Screens[m_CurrentScreen]->OnArrowKey(GUIScreen::ArrowDirection::Left); break;
 		// enter key
-		case 13:	break;
+		case 13:	m_Screens[m_CurrentScreen]->OnEnter(); break;
 		default:	break;
 		}
 	}
@@ -209,7 +227,7 @@ std::vector<Sprite*> GameManager::GetSprites()
 
 std::string GameManager::CreateProgressBar(float normalizedValue)
 {
-	int n = ceil(10.0f * normalizedValue);
+	int n = (int)ceil(10.0f * normalizedValue);
 	std::string s = "|";
 	for (int i = 0; i < n; i++) s.append("#");
 	for (int i = 0; i < 10 - n; i++) s.append("-");

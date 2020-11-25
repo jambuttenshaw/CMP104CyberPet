@@ -38,6 +38,8 @@ private:
 
 private:
 	// EVENT CALLBACK FUNCTION
+	// std::function holds a reference to a function, so we can assign a function to
+	// these members of the inputapi and then execute them later
 	std::function<void(KEY_EVENT_RECORD*)> m_KeyEventCallback;
 	std::function<void(MOUSE_EVENT_RECORD*)> m_MouseEventCallback;
 	std::function<void(WINDOW_BUFFER_SIZE_RECORD*)> m_WindowResizeEventCallback;

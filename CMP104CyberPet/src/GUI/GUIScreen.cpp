@@ -46,6 +46,11 @@ void GUIScreen::OnArrowKey(GUIScreen::ArrowDirection dir)
 	RefreshButtons();
 }
 
+void GUIScreen::OnEnter()
+{
+	m_Buttons[m_SelectedButton]->Press();
+}
+
 void GUIScreen::RefreshButtons()
 {
 	for (int i = 0; i < m_Buttons.size(); i++)

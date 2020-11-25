@@ -19,6 +19,10 @@ public:
 
 	void AddGUIScreen(GUIScreen* screen);
 	void LoadGUIScreen(int screenNum);
+	inline void NextScreen() { if (m_CurrentScreen < m_Screens.size() - 1) LoadGUIScreen(m_CurrentScreen + 1); }
+
+	inline bool TestQuitGame() { return m_Quit; }
+	inline void Quit() { m_Quit = true; }
 
 	std::vector<Sprite*> GetSprites();
 
@@ -35,5 +39,7 @@ private:
 	GUIText* m_HungerBar;
 	GUIText* m_SleepinessBar;
 	GUIText* m_HappinessBar;
+
+	bool m_Quit = false;
 
 };

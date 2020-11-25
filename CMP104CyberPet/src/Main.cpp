@@ -58,8 +58,15 @@ int main()
         Renderer::DrawAll();
         
 
+        // check to see if we need to quit the game
+        exitLoop = gameManager->TestQuitGame();
+
+
         Sleep(100);
     }
+
+    // clear the screen one last time before quitting
+    Renderer::Clear();
 
     delete gameManager;
 

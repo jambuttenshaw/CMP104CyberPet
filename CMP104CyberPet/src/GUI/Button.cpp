@@ -11,8 +11,12 @@ Button::Button(const std::string& text)
 
 Button::~Button()
 {
-	delete m_ActiveImage;
-	delete m_InactiveImage;
+	// whatever image is currently active will be deleted when the base class destructor is called
+	// so we only need to delete which ever image is currently not being used
+	if (m_Active)
+		delete m_InactiveImage;
+	else
+		delete m_ActiveImage;
 }
 
 void Button::ConstructImages()
