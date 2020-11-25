@@ -27,15 +27,15 @@ int main()
 {
     // initialize the renderer
     Renderer::Init();
-    // create an input handling object
-    Input* input = new Input;
+    // initialize the input handler
+    Input::Init();
 
     // create a guimanager
     GameManager* gameManager = new GameManager;
 
     // set the event callback functions
-    input->SetKeyEventCallback(KeyEventCallback);
-    input->SetWindowResizeCallback(WindowResizeCallback);
+    Input::SetKeyEventCallback(KeyEventCallback);
+    Input::SetWindowResizeCallback(WindowResizeCallback);
 
 
     // used to calculate the difference in time between this frame and the previous one: the delta time
@@ -52,7 +52,7 @@ int main()
         lastFrameTime = t;
 
         // send the events in the event queue to their callback functions
-        input->HandleEvents();
+        Input::HandleEvents();
         /*
         // clear everything from the screen
         Renderer::Clear();
@@ -74,7 +74,7 @@ int main()
     delete gameManager;
 
     Renderer::Shutdown();
-    delete input;
+    Input::Shutdown();
 
 	return 0;
 }

@@ -1,46 +1,29 @@
 #pragma once
 
-#include "Events.h"
-
-#include <vector>
-#include <windows.h>
+#include "InputAPI.h"
 
 class Input
 {
 public:
-	Input();
-	~Input();
+	inline static void Init() {}
+	inline static void Shutdown()
+	{
+		delete s_InputAPI;
+	}
 
-	// returns the number of events read from the queue
-	int PollEvents();
-	void HandleEvents();
+	inline static int PollEvents() { return s_InputAPI->PollEvents(); }
+	inline static void HandleEvents() { s_InputAPI->HandleEvents(); }
 
-	inline INPUT_RECORD* GetEventQueueStart() { return &m_InputRecordBuffer[0]; }
+	inline static INPUT_RECORD* GetEventQueueStart() { return s_InputAPI->GetEventQueueStart(); }
 
-	int GetEventQueueLength();
+	inline static int GetEventQueueLength() { return s_InputAPI->GetEventQueueLength(); }
 
-	inline void SetKeyEventCallback(void (*callback)(KEY_EVENT_RECORD)) { m_KeyEventFunc = callback; }
-	inline void SetMouseEventCallback(void (*callback)(MOUSE_EVENT_RECORD)) { m_MouseEventFunc = callback; }
-	inline void SetWindowResizeCallback(void (*callback)(WINDOW_BUFFER_SIZE_RECORD)) { m_WindowResizeFunc = callback; }
-	inline void SetMenuEventCallback(void (*callback)(MENU_EVENT_RECORD)) { m_MenuEventFunc = callback; }
-	inline void SetFocusEventCallback(void (*callback)(FOCUS_EVENT_RECORD)) { m_FocusEventFunc = callback; }
-
-private:
-	// handle to the console
-	HANDLE m_ConsoleHandle = nullptr;
-	// save the old console mode so we can revert back upon program end
-	DWORD m_OldConsoleMode = 0;
-
-	// a buffer to hold input records that have not yet been handled
-	INPUT_RECORD m_InputRecordBuffer[128]; // more than large enough to hold all the inputs that will need processed in a single frame
-	DWORD m_NumInputRecords = 0; // the number of input records to be processed this frame
+	inline static void SetKeyEventCallback(void (*callback)(KEY_EVENT_RECORD)) { s_InputAPI->SetKeyEventCallback(callback); }
+	inline static void SetMouseEventCallback(void (*callback)(MOUSE_EVENT_RECORD)) { s_InputAPI->SetMouseEventCallback(callback); }
+	inline static void SetWindowResizeCallback(void (*callback)(WINDOW_BUFFER_SIZE_RECORD)) { s_InputAPI->SetWindowResizeCallback(callback); }
+	inline static void SetMenuEventCallback(void (*callback)(MENU_EVENT_RECORD)) { s_InputAPI->SetMenuEventCallback(callback); }
+	inline static void SetFocusEventCallback(void (*callback)(FOCUS_EVENT_RECORD)) { s_InputAPI->SetFocusEventCallback(callback); }
 
 private:
-	// EVENT CALLBACK FUNCTIONS
-	void (*m_KeyEventFunc)(KEY_EVENT_RECORD) = nullptr;
-	void (*m_MouseEventFunc)(MOUSE_EVENT_RECORD) = nullptr;
-	void (*m_WindowResizeFunc)(WINDOW_BUFFER_SIZE_RECORD) = nullptr;
-	void (*m_MenuEventFunc)(MENU_EVENT_RECORD) = nullptr;
-	void (*m_FocusEventFunc)(FOCUS_EVENT_RECORD) = nullptr;
+	static InputAPI* s_InputAPI;
 };
-
