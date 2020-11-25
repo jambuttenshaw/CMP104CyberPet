@@ -1,6 +1,7 @@
 #pragma once
 
 #include "GUI/GUIScreen.h"
+#include "GUI/GUIText.h"
 #include "CyberPet.h"
 
 #include "windows.h"
@@ -26,5 +27,7 @@ private:
 
 	std::vector<GUIScreen*> m_Screens;
 	int m_CurrentScreen = 0;
+
+	std::vector<GUIText*> m_TextSprites;
 
 };

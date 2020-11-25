@@ -90,6 +90,10 @@ GameManager::GameManager()
 		AddGUIScreen(screen);
 	}
 
+	// add instructions text
+	m_TextSprites.push_back(new GUIText("Use A/D to scroll through buttons.", { 12, 22 }));
+	m_TextSprites.push_back(new GUIText("Use Enter to select button.", { 12, 23 }));
+
 
 	// load the first screen
 	LoadGUIScreen(2);
@@ -112,6 +116,12 @@ GameManager::~GameManager()
 	}
 	m_Screens.clear();
 
+	for (GUIText* t : m_TextSprites)
+	{
+		delete t;
+	}
+	m_TextSprites.clear();
+
 	delete m_CyberPet;
 }
 
@@ -128,8 +138,6 @@ void GameManager::Draw()
 	{
 		Renderer::Queue(s);
 	}
-
-	Renderer::SubmitTextData(L"Use A/D Keys to scroll through buttons. Press Enter to select.", 62, { 6, 24 });
 }
 
 
@@ -168,6 +176,10 @@ void GameManager::LoadGUIScreen(int screenNum)
 std::vector<Sprite*> GameManager::GetSprites()
 {
 	std::vector<Sprite*> sprites = m_Screens[m_CurrentScreen]->GetButtonSprites();
+	for (Sprite* s : m_TextSprites)
+	{
+		sprites.push_back(s);
+	}
 	sprites.push_back(m_CyberPet);
 
 	return sprites;
