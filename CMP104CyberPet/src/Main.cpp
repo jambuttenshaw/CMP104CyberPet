@@ -38,20 +38,21 @@ int main()
     {
         // get the time elapsed between this frame and the previous one
         std::chrono::high_resolution_clock::time_point t = std::chrono::high_resolution_clock::now();
-        float deltaTime = std::chrono::duration_cast<std::chrono::milliseconds>(t - lastFrameTime).count() * 0.001;
+        float deltaTime = std::chrono::duration_cast<std::chrono::milliseconds>(t - lastFrameTime).count() * 0.001f;
         lastFrameTime = t;
 
         // send the events in the event queue to their callback functions
         Input::HandleEvents();
+
+        // update everything in the game
+        gameManager->Update(deltaTime);
+
         
         // clear everything from the screen
         Renderer::Clear();
-        
-        // add our pet to the render queue
-        for (Sprite* s : gameManager->GetSprites())
-        {
-            Renderer::Queue(s);
-        }
+
+        // game manager draw to display
+        gameManager->Draw();
 
         // draw everything in the queue
         Renderer::DrawAll();

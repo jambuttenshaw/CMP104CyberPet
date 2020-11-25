@@ -12,9 +12,11 @@ public:
 
 	void Init();
 
-	void Submit(wchar_t** imageData, Vector2i dimensions, Vector2i position);
+	void SubmitImageData(wchar_t** imageData, Vector2i dimensions, Vector2i position);
+	void SubmitTextData(const wchar_t* text, int length, Vector2i position);
 	void Clear(Vector2i origin, Vector2i dimensions, wchar_t clearChar);
 	void ClearAll();
+
 	
 	void UpdateConsoleDimensions();
 	void UpdateConsoleDimensions(int x, int y);

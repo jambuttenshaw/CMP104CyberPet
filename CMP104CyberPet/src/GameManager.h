@@ -12,8 +12,8 @@ public:
 	~GameManager();
 
 	void Update(float deltaTime);
+	void Draw();
 
-	void OnEvent(INPUT_RECORD* e);
 	void OnKeyEvent(KEY_EVENT_RECORD* e);
 
 	void AddGUIScreen(GUIScreen* screen);

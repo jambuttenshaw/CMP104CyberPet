@@ -1,6 +1,7 @@
 #include "GameManager.h"
 
 #include "Input/Input.h"
+#include "Rendering/Renderer.h"
 
 #include <iostream>
 
@@ -28,32 +29,79 @@ GameManager::GameManager()
 		}
 	);
 
-	// create a new cyber pet object
-	m_CyberPet = new CyberPet;
+	/*
+	------------------------------
+	CREATING THE GAME SCREENS HERE
+	------------------------------
+	*/
+
+	// SCREEN 1 - CHOOSING YOUR PET
+	{
+		auto screen = new GUIScreen();
+
+		auto changePetButton = new Button("Change Pet");
+		changePetButton->SetPosition({ 8, 18 });
+		screen->AddButon(changePetButton);
+
+		auto quitButton = new Button("Quit");
+		quitButton->SetPosition({ 26, 18 });
+		screen->AddButon(quitButton);
+
+		AddGUIScreen(screen);
+	}
 
 
+	// SCREEN 2 - NAMING YOUR PET
+	{
+		auto screen = new GUIScreen();
+
+		auto namePetButton = new Button("Name Pet");
+		namePetButton->SetPosition({ 8, 18 });
+		screen->AddButon(namePetButton);
+
+		auto quitButton = new Button("Quit");
+		quitButton->SetPosition({ 24, 18 });
+		screen->AddButon(quitButton);
+
+		AddGUIScreen(screen);
+	}
 
 
-	// create a test screen
-	auto testScreen = new GUIScreen();
+	// SCREEN 3 - ACTIVITIES WITH YOUR PET
+	{
+		auto screen = new GUIScreen();
 
-	auto testButton1 = new Button("Rest the pet");
-	testButton1->SetPosition({ 0, 20 });
-	testScreen->AddButon(testButton1);
+		auto feedButton = new Button("Feed");
+		feedButton->SetPosition({ 8, 18 });
+		screen->AddButon(feedButton);
 
-	auto testButton2 = new Button("Feed the pet");
-	testButton2->SetPosition({ 20, 20 });
-	testScreen->AddButon(testButton2);
+		auto napButton = new Button("Nap");
+		napButton->SetPosition({ 20, 18 });
+		screen->AddButon(napButton);
 
-	auto testButton3 = new Button("Name the pet");
-	testButton3->SetPosition({ 40, 20 });
-	testScreen->AddButon(testButton3);
+		auto playButton = new Button("Play");
+		playButton->SetPosition({31, 18 });
+		screen->AddButon(playButton);
 
-	AddGUIScreen(testScreen);
+		auto quitButton = new Button("Quit");
+		quitButton->SetPosition({ 43, 18 });
+		screen->AddButon(quitButton);
+
+		AddGUIScreen(screen);
+	}
 
 
 	// load the first screen
-	LoadGUIScreen(0);
+	LoadGUIScreen(2);
+
+
+
+	// SET UP THE CYBER PET SPRITE
+	
+	// create a new cyber pet object
+	m_CyberPet = new CyberPet;
+	m_CyberPet->SetPosition({ 15, 2 });
+
 }
 
 GameManager::~GameManager()
@@ -71,6 +119,17 @@ GameManager::~GameManager()
 void GameManager::Update(float deltaTime)
 {
 
+}
+
+void GameManager::Draw()
+{
+	// add our pet to the render queue
+	for (Sprite* s : GetSprites())
+	{
+		Renderer::Queue(s);
+	}
+
+	Renderer::SubmitTextData(L"Use A/D Keys to scroll through buttons. Press Enter to select.", 62, { 6, 24 });
 }
 
 

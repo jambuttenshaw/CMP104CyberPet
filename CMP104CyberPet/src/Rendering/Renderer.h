@@ -37,16 +37,19 @@ public:
 		{
 			if (s->IsDirty())
 			{
-				Submit(s);
+				SubmitImageData(s);
 				s->Clean();
 			}
 		}
 		s_RenderQueue.clear();
 	}
 
-	inline static void Submit(Sprite* sprite) { s_RenderAPI->Submit(sprite->GetImage()->GetImageData(), sprite->GetImage()->GetDimensions(), sprite->GetPosition()); }
-	inline static void Submit(Image* image, Vector2i position) { s_RenderAPI->Submit(image->GetImageData(), image->GetDimensions(), position); }
-	inline static void Submit(wchar_t** imageData, Vector2i dimensions, Vector2i position) { s_RenderAPI->Submit(imageData, dimensions, position); }
+	inline static void SubmitImageData(Sprite* sprite) { s_RenderAPI->SubmitImageData(sprite->GetImage()->GetImageData(), sprite->GetImage()->GetDimensions(), sprite->GetPosition()); }
+	inline static void SubmitImageData(Image* image, Vector2i position) { s_RenderAPI->SubmitImageData(image->GetImageData(), image->GetDimensions(), position); }
+	inline static void SubmitImageData(wchar_t** imageData, Vector2i dimensions, Vector2i position) { s_RenderAPI->SubmitImageData(imageData, dimensions, position); }
+
+	inline static void SubmitTextData(wchar_t* text, int length, Vector2i position) { s_RenderAPI->SubmitTextData(text, length, position); }
+	inline static void SubmitTextData(const std::wstring& text, int length, Vector2i position) { s_RenderAPI->SubmitTextData(text.c_str(), length, position); }
 
 	inline static int GetConsoleWidth() { return s_RenderAPI->GetConsoleWidth(); }
 	inline static int GetConsoleHeight() { return s_RenderAPI->GetConsoleHeight(); }

@@ -29,10 +29,10 @@ void RenderAPI::Init()
 // from https://docs.microsoft.com/en-us/windows/console/writeconsoleoutputcharacter
 // using cout was much less performant
 
-void RenderAPI::Submit(wchar_t** imageData, Vector2i dimensions, Vector2i position)
+void RenderAPI::SubmitImageData(wchar_t** imageData, Vector2i dimensions, Vector2i position)
 {
 	DWORD dw;
-	for (int y = 0; y < (dimensions.y > m_MaxConsoleHeight ? m_MaxConsoleHeight : dimensions.y); y++)
+	for (int y = 0; y < ((dimensions.y + position.y) > m_MaxConsoleHeight ? m_MaxConsoleHeight - position.y : dimensions.y); y++)
 	{
 		for (int x = 0; x < dimensions.x; x++)
 		{
@@ -41,11 +41,17 @@ void RenderAPI::Submit(wchar_t** imageData, Vector2i dimensions, Vector2i positi
 	}
 }
 
+void RenderAPI::SubmitTextData(const wchar_t* text, int length, Vector2i position)
+{
+	DWORD dw;
+	WriteConsoleOutputCharacter(m_ConsoleHandle, text, length, { (short)position.x, (position.y > m_MaxConsoleHeight ? (short)m_MaxConsoleHeight : (short)position.y) }, &dw);
+}
+
 void RenderAPI::Clear(Vector2i origin, Vector2i dimensions, wchar_t clearChar)
 {
 	DWORD dw;
 	std::vector<wchar_t> line(dimensions.x, clearChar);
-	for (int y = 0; y < (dimensions.y > m_MaxConsoleHeight ? m_MaxConsoleHeight : dimensions.y); y++)
+	for (int y = 0; y < ((dimensions.y + origin.y) > m_MaxConsoleHeight ? m_MaxConsoleHeight - origin.y : dimensions.y); y++)
 	{
 		WriteConsoleOutputCharacter(m_ConsoleHandle, &line[0], dimensions.x, { (short)origin.x, (short)(origin.y + y) }, &dw);
 	}

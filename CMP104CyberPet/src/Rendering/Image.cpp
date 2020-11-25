@@ -71,7 +71,7 @@ void Image::CreateImage(const std::string& imageContent)
 			continue;
 
 		// place the current character in the array
-		m_ImageData[y][x] = cString[i];
+		m_ImageData[y][x] = (wchar_t)cString[i];
 
 		// increase x
 		x++;
