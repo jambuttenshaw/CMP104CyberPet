@@ -13,7 +13,8 @@ public:
 
 	void Update(float deltaTime);
 
-	void OnKeyEvent(KEY_EVENT_RECORD e);
+	void OnEvent(INPUT_RECORD* e);
+	void OnKeyEvent(KEY_EVENT_RECORD* e);
 
 	void AddGUIScreen(GUIScreen* screen);
 	void LoadGUIScreen(int screenNum);

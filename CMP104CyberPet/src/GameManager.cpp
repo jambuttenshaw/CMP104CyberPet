@@ -1,14 +1,22 @@
 #include "GameManager.h"
 
+#include "Input/Input.h"
+
 #include <iostream>
+
+
+
+#define BIND_EVENT_FN(fn) [this](auto&&... args) -> decltype(auto) { return this->fn(std::forward<decltype(args)>(args)...); }
+
+
 
 GameManager::GameManager()
 {
 	// initialize members
 	std::vector<GUIScreen*> m_Screens(0);
-	std::cout << m_Screens.size() << std::endl;
 
-
+	// set the event callback
+	Input::SetEventCallback(BIND_EVENT_FN(GameManager::OnEvent));
 
 	// create a new cyber pet object
 	m_CyberPet = new CyberPet;
@@ -51,15 +59,25 @@ void GameManager::Update(float deltaTime)
 
 }
 
-void GameManager::OnKeyEvent(KEY_EVENT_RECORD e)
+
+void GameManager::OnEvent(INPUT_RECORD* e)
+{
+	// all events go through this event callback function
+	switch (e->EventType)
+	{
+	case KEY_EVENT:		OnKeyEvent(&e->Event.KeyEvent);
+	}
+}
+
+void GameManager::OnKeyEvent(KEY_EVENT_RECORD* e)
 {
 	// if the key event is a keydown event pressing A/D or enter key,
 	// we want to send an arrow press event or enter event onto the current gui scene
 	
-	if (e.bKeyDown)
+	if (e->bKeyDown)
 	{
 		// event is keydown event
-		switch (e.uChar.AsciiChar)
+		switch (e->uChar.AsciiChar)
 		{
 		// D key
 		case 100:	m_Screens[m_CurrentScreen]->OnArrowKey(GUIScreen::ArrowDirection::Right); break;

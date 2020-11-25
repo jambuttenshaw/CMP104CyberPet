@@ -3,6 +3,7 @@
 #include "Events.h"
 
 #include <vector>
+#include <functional>
 #include <windows.h>
 
 class InputAPI
@@ -19,11 +20,7 @@ public:
 
 	int GetEventQueueLength();
 
-	inline void SetKeyEventCallback(void (*callback)(KEY_EVENT_RECORD)) { m_KeyEventFunc = callback; }
-	inline void SetMouseEventCallback(void (*callback)(MOUSE_EVENT_RECORD)) { m_MouseEventFunc = callback; }
-	inline void SetWindowResizeCallback(void (*callback)(WINDOW_BUFFER_SIZE_RECORD)) { m_WindowResizeFunc = callback; }
-	inline void SetMenuEventCallback(void (*callback)(MENU_EVENT_RECORD)) { m_MenuEventFunc = callback; }
-	inline void SetFocusEventCallback(void (*callback)(FOCUS_EVENT_RECORD)) { m_FocusEventFunc = callback; }
+	inline void SetEventCallback(const std::function<void(INPUT_RECORD*)>& callback) { m_EventCallback = callback; }
 
 private:
 	// handle to the console
@@ -36,11 +33,7 @@ private:
 	DWORD m_NumInputRecords = 0; // the number of input records to be processed this frame
 
 private:
-	// EVENT CALLBACK FUNCTIONS
-	void (*m_KeyEventFunc)(KEY_EVENT_RECORD) = nullptr;
-	void (*m_MouseEventFunc)(MOUSE_EVENT_RECORD) = nullptr;
-	void (*m_WindowResizeFunc)(WINDOW_BUFFER_SIZE_RECORD) = nullptr;
-	void (*m_MenuEventFunc)(MENU_EVENT_RECORD) = nullptr;
-	void (*m_FocusEventFunc)(FOCUS_EVENT_RECORD) = nullptr;
+	// EVENT CALLBACK FUNCTION
+	std::function<void(INPUT_RECORD*)> m_EventCallback;
 };
 

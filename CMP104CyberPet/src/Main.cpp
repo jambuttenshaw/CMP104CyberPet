@@ -6,15 +6,6 @@
 #include <chrono>
 #include <iostream>
 
-// game manager needs to be global scope so we can create wrapper functions for event handling
-GameManager* gameManager;
-
-
-void KeyEventCallback(KEY_EVENT_RECORD e)
-{
-    gameManager->OnKeyEvent(e);
-}
-
 // when the console window gets resized we want to update the renderer
 // to store the new dimensions of the console
 void WindowResizeCallback(WINDOW_BUFFER_SIZE_RECORD e)
@@ -33,11 +24,6 @@ int main()
     // create a guimanager
     GameManager* gameManager = new GameManager;
 
-    // set the event callback functions
-    Input::SetKeyEventCallback(KeyEventCallback);
-    Input::SetWindowResizeCallback(WindowResizeCallback);
-
-
     // used to calculate the difference in time between this frame and the previous one: the delta time
     // this is used to make sure that everything that happens in-game is frame-rate independent
     std::chrono::high_resolution_clock::time_point lastFrameTime = std::chrono::high_resolution_clock::now();
@@ -53,7 +39,7 @@ int main()
 
         // send the events in the event queue to their callback functions
         Input::HandleEvents();
-        /*
+        
         // clear everything from the screen
         Renderer::Clear();
         
@@ -66,7 +52,6 @@ int main()
         // draw everything in the queue
         Renderer::DrawAll();
         
-        */
 
         Sleep(30);
     }
