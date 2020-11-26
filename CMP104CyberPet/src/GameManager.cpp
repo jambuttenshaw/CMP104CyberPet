@@ -217,7 +217,7 @@ void GameManager::OnKeyEvent(KEY_EVENT_RECORD* e)
 		{ 
 			// the pets name can only contain letters
 			// key codes referenced from https://docs.microsoft.com/en-gb/windows/win32/inputdev/virtual-key-codes
-			if (c >= 0x41 && c <= 0x5A)
+			if ((c >= 0x41 && c <= 0x5A) || c == VK_SPACE)
 				if (m_CyberPet->GetNameLength() < m_CyberPet->GetMaxNameLength())  m_CyberPet->AppendName(std::string(1, e->uChar.AsciiChar));
 
 			// we also want backspace to delete the last letter
