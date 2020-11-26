@@ -63,7 +63,14 @@ GameManager::GameManager()
 
 		auto confirmNameButton = new Button("Confirm Name");
 		confirmNameButton->SetPosition({ 8, 18 });
-		confirmNameButton->SetPressFunction([this]() { if (this->m_CyberPet->ValidName()) this->NextScreen(); });
+		confirmNameButton->SetPressFunction([this]()
+			{
+				if (this->m_CyberPet->ValidName())
+				{
+					this->m_PetName->SetString(m_CyberPet->GetName());
+					this->NextScreen();
+				}
+			});
 		screen->AddButon(confirmNameButton);
 
 		auto quitButton = new Button("Quit");
@@ -71,7 +78,7 @@ GameManager::GameManager()
 		quitButton->SetPressFunction([this]() { this->Quit(); });
 		screen->AddButon(quitButton);
 
-		auto instructionText = new GUIText("Type to enter your pets name (Max length 20).", { 8, 14 });
+		auto instructionText = new GUIText("Type to enter your pets name (Max length 24).", { 8, 14 });
 		screen->AddText(instructionText);
 
 		auto nameText = new GUIText("Pet name: ", {14, 16});
@@ -111,17 +118,24 @@ GameManager::GameManager()
 	m_TextSprites.push_back(new GUIText("Use enter to select button.", { 12, 23 }));
 
 	
+	// a title for the pets name
+	m_PetName = new GUIText("Your Pet", { 64, 3 });
+	m_TextSprites.push_back(m_PetName);
 
 	// add progress bars
-	m_HungerBar = new GUIText("    Hunger: |----------|", { 64, 1 });
+	m_HungerBar = new GUIText("Hunger    : |----------|", { 64, 5 });
 	m_TextSprites.push_back(m_HungerBar);
 
-	m_SleepinessBar = new GUIText("Sleepiness: |----------|", { 64, 3 });
+	m_SleepinessBar = new GUIText("Sleepiness: |----------|", { 64, 7 });
 	m_TextSprites.push_back(m_SleepinessBar);
 
-	m_HappinessBar = new GUIText(" Happiness: |----------|", { 64, 5 });
+	m_HappinessBar = new GUIText("Happiness : |----------|", { 64, 9 });
 	m_TextSprites.push_back(m_HappinessBar);
 
+	// a wee seperator for visuals
+	m_TextSprites.push_back(new GUIText("------------------------", { 64, 2 }));
+	m_TextSprites.push_back(new GUIText("------------------------", { 64, 4 }));
+	m_TextSprites.push_back(new GUIText("------------------------", { 64, 10 }));
 
 
 	// load the first screen
@@ -166,9 +180,9 @@ void GameManager::Update(float deltaTime)
 	m_CyberPet->Update(deltaTime);
 
 	// update the progress bars
-	m_HungerBar->SetString("    Hunger: " + CreateProgressBar(m_CyberPet->GetNormalizedHunger()));
+	m_HungerBar->SetString("Hunger    : " + CreateProgressBar(m_CyberPet->GetNormalizedHunger()));
 	m_SleepinessBar->SetString("Sleepiness: " + CreateProgressBar(m_CyberPet->GetNormalizedSleepiness()));
-	m_HappinessBar->SetString(" Happiness: " + CreateProgressBar(m_CyberPet->GetNormalizedHappiness()));
+	m_HappinessBar->SetString("Happiness : " + CreateProgressBar(m_CyberPet->GetNormalizedHappiness()));
 
 
 	if (m_CurrentScreen == 1)

@@ -36,6 +36,8 @@ private:
 	int m_CurrentScreen = 0;
 
 	std::vector<GUIText*> m_TextSprites;
+
+	GUIText* m_PetName;
 	GUIText* m_HungerBar;
 	GUIText* m_SleepinessBar;
 	GUIText* m_HappinessBar;

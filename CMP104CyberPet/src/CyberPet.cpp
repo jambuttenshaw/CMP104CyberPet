@@ -27,7 +27,7 @@ void CyberPet::Update(float deltaTime)
     {
         // only get hungrier if the pet isnt eating
         // increase the hunger by the increase rate
-        m_Hunger += m_HungerPerSecond * deltaTime;
+        // m_Hunger += m_HungerPerSecond * deltaTime;
         if (m_Hunger > m_MaxHunger) m_Hunger = m_MaxHunger;
     }
     
@@ -39,7 +39,7 @@ void CyberPet::Update(float deltaTime)
     {
         // only get sleepier if the pet isnt sleeping
         // increase the hunger by the increase rate
-        m_Sleepiness += m_SleepinessPerSecond * deltaTime;
+        // m_Sleepiness += m_SleepinessPerSecond * deltaTime;
         if (m_Sleepiness > m_MaxSleepiness) m_Sleepiness = m_MaxSleepiness;
     }
 
