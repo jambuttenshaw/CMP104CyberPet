@@ -15,6 +15,12 @@ GUIScreen::~GUIScreen()
 		delete b;
 	}
 	m_Buttons.clear();
+
+	for (GUIText* t : m_Text)
+	{
+		delete t;
+	}
+	m_Text.clear();
 }
 
 void GUIScreen::Load()
@@ -55,4 +61,13 @@ void GUIScreen::RefreshButtons()
 {
 	for (int i = 0; i < m_Buttons.size(); i++)
 		m_Buttons[i]->SetActive(i == m_SelectedButton);
+}
+
+std::vector<Sprite*> GUIScreen::GetSprites() 
+{
+	std::vector<Sprite*> sprites(0);
+	for (Sprite* b : m_Buttons) sprites.push_back(b);
+	for (Sprite* t : m_Text) sprites.push_back(t);
+
+	return sprites;
 }

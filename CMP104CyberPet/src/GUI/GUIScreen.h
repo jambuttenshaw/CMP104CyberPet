@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Button.h"
+#include "GUIText.h"
 
 #include <vector>
 
@@ -21,9 +22,10 @@ public:
 	void OnArrowKey(ArrowDirection dir);
 	void OnEnter();
 
-	inline std::vector<Sprite*> GetButtonSprites() { return std::vector<Sprite*>(m_Buttons.begin(), m_Buttons.end()); }
+	std::vector<Sprite*> GetSprites();
 
 	inline void AddButon(Button* button) { m_Buttons.push_back(button); }
+	inline void AddText(GUIText* text) { m_Text.push_back(text); }
 
 private:
 
@@ -32,4 +34,6 @@ private:
 private:
 	std::vector<Button*> m_Buttons;
 	int m_SelectedButton = 0;
+
+	std::vector<GUIText*> m_Text;
 };

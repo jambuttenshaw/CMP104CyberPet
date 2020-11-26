@@ -61,19 +61,21 @@ GameManager::GameManager()
 	{
 		auto screen = new GUIScreen();
 
-		auto namePetButton = new Button("Name Pet");
-		namePetButton->SetPosition({ 8, 18 });
-		screen->AddButon(namePetButton);
-
 		auto confirmNameButton = new Button("Confirm Name");
-		confirmNameButton->SetPosition({ 24, 18 });
+		confirmNameButton->SetPosition({ 8, 18 });
 		confirmNameButton->SetPressFunction([this]() { this->NextScreen(); });
 		screen->AddButon(confirmNameButton);
 
 		auto quitButton = new Button("Quit");
-		quitButton->SetPosition({ 44, 18 });
+		quitButton->SetPosition({ 28, 18 });
 		quitButton->SetPressFunction([this]() { this->Quit(); });
 		screen->AddButon(quitButton);
+
+		auto instructionText = new GUIText("Type to enter your pets name.", { 8, 14 });
+		screen->AddText(instructionText);
+
+		auto nameText = new GUIText("Pet name: ", {14, 16});
+		screen->AddText(nameText);
 
 		AddGUIScreen(screen);
 	}
@@ -214,7 +216,7 @@ void GameManager::LoadGUIScreen(int screenNum)
 
 std::vector<Sprite*> GameManager::GetSprites()
 {
-	std::vector<Sprite*> sprites = m_Screens[m_CurrentScreen]->GetButtonSprites();
+	std::vector<Sprite*> sprites = m_Screens[m_CurrentScreen]->GetSprites();
 	for (Sprite* s : m_TextSprites)
 	{
 		sprites.push_back(s);
