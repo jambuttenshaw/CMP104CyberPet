@@ -63,7 +63,7 @@ GameManager::GameManager()
 
 		auto confirmNameButton = new Button("Confirm Name");
 		confirmNameButton->SetPosition({ 8, 18 });
-		confirmNameButton->SetPressFunction([this]() { this->NextScreen(); });
+		confirmNameButton->SetPressFunction([this]() { if (this->m_CyberPet->ValidName()) this->NextScreen(); });
 		screen->AddButon(confirmNameButton);
 
 		auto quitButton = new Button("Quit");
@@ -169,6 +169,14 @@ void GameManager::Update(float deltaTime)
 	m_HungerBar->SetString("    Hunger: " + CreateProgressBar(m_CyberPet->GetNormalizedHunger()));
 	m_SleepinessBar->SetString("Sleepiness: " + CreateProgressBar(m_CyberPet->GetNormalizedSleepiness()));
 	m_HappinessBar->SetString(" Happiness: " + CreateProgressBar(m_CyberPet->GetNormalizedHappiness()));
+
+
+	if (m_CurrentScreen == 1)
+	{
+		m_Screens[1]->GetText(1)->SetString("Pet name: " + m_CyberPet->GetName());
+	}
+
+
 }
 
 void GameManager::Draw()

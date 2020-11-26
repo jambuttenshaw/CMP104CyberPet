@@ -27,6 +27,9 @@ public:
 	inline void AddButon(Button* button) { m_Buttons.push_back(button); }
 	inline void AddText(GUIText* text) { m_Text.push_back(text); }
 
+	inline Button* GetButton(int index) { return m_Buttons[index]; }
+	inline GUIText* GetText(int index) { return m_Text[index]; }
+
 private:
 
 	void RefreshButtons();

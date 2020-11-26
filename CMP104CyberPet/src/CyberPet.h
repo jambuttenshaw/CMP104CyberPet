@@ -28,6 +28,8 @@ public:
 	inline void AppendName(const std::string& c) { m_Name.append(c); }
 	inline void DeleteLastCharacter() { m_Name = m_Name.substr(0, m_Name.size() - 1); }
 
+	inline bool ValidName() { return m_Name.length(); }
+
 private:
 
 	std::string m_Name;

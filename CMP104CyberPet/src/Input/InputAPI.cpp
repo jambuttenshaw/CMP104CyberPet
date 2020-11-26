@@ -39,7 +39,7 @@ void InputAPI::HandleEvents()
 	PollEvents();
 
 	// iterate through each event
-	for (int i = 0; i < m_NumInputRecords; i++)
+	for (unsigned int i = 0; i < m_NumInputRecords; i++)
 	{
 		switch (m_InputRecordBuffer[i].EventType)
 		{

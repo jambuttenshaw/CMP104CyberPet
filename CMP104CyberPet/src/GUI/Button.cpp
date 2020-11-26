@@ -27,7 +27,7 @@ void Button::ConstructImages()
 	// the height will always be 3
 	int height = 3;
 	// the width is the length of the text + 4 (two characters each side of the text on the button)
-	int width = m_Text.length() + 4;
+	int width = (int)m_Text.length() + 4;
 
 	// create the content so the active button looks like this:
 	/*
@@ -50,7 +50,7 @@ void Button::ConstructImages()
 
 	// repeat the same process for the inactive image
 	height = 3;
-	width = m_Text.length() + 4;
+	width = (int)m_Text.length() + 4;
 
 	// create the content so the active button looks like this:
 	/*
