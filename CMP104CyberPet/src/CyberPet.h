@@ -24,6 +24,9 @@ public:
 	inline float GetNormalizedHappiness() { return m_Happiness / m_MaxHappiness; }
 
 	inline const std::string& GetName() { return m_Name; }
+	inline void SetName(const std::string& name) { m_Name = name; }
+	inline void AppendName(const std::string& c) { m_Name.append(c); }
+	inline void DeleteLastCharacter() { m_Name = m_Name.substr(0, m_Name.size() - 1); }
 
 private:
 

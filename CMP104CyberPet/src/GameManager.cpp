@@ -169,7 +169,6 @@ void GameManager::Update(float deltaTime)
 	m_HungerBar->SetString("    Hunger: " + CreateProgressBar(m_CyberPet->GetNormalizedHunger()));
 	m_SleepinessBar->SetString("Sleepiness: " + CreateProgressBar(m_CyberPet->GetNormalizedSleepiness()));
 	m_HappinessBar->SetString(" Happiness: " + CreateProgressBar(m_CyberPet->GetNormalizedHappiness()));
-
 }
 
 void GameManager::Draw()
@@ -206,7 +205,17 @@ void GameManager::OnKeyEvent(KEY_EVENT_RECORD* e)
 		// when a key is pressed
 		// we want to check if were on the pet naming screen
 		// because we want to take key inputs and add them onto the pets name
-		
+		if (m_CurrentScreen == 1)
+		{ 
+			// the pets name can only contain letters
+			// key codes referenced from https://docs.microsoft.com/en-gb/windows/win32/inputdev/virtual-key-codes
+			if (c >= 0x41 && c <= 0x5A)
+				m_CyberPet->AppendName(std::string(1, e->uChar.AsciiChar));
+
+			// we also want backspace to delete the last letter
+			if (c == VK_BACK)
+				m_CyberPet->DeleteLastCharacter();
+		}
 	}
 }
 
