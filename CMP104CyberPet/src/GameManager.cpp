@@ -71,7 +71,7 @@ GameManager::GameManager()
 		quitButton->SetPressFunction([this]() { this->Quit(); });
 		screen->AddButon(quitButton);
 
-		auto instructionText = new GUIText("Type to enter your pets name.", { 8, 14 });
+		auto instructionText = new GUIText("Type to enter your pets name (Max length 20).", { 8, 14 });
 		screen->AddText(instructionText);
 
 		auto nameText = new GUIText("Pet name: ", {14, 16});
@@ -218,7 +218,7 @@ void GameManager::OnKeyEvent(KEY_EVENT_RECORD* e)
 			// the pets name can only contain letters
 			// key codes referenced from https://docs.microsoft.com/en-gb/windows/win32/inputdev/virtual-key-codes
 			if (c >= 0x41 && c <= 0x5A)
-				m_CyberPet->AppendName(std::string(1, e->uChar.AsciiChar));
+				if (m_CyberPet->GetNameLength() < m_CyberPet->GetMaxNameLength())  m_CyberPet->AppendName(std::string(1, e->uChar.AsciiChar));
 
 			// we also want backspace to delete the last letter
 			if (c == VK_BACK)

@@ -28,11 +28,15 @@ public:
 	inline void AppendName(const std::string& c) { m_Name.append(c); }
 	inline void DeleteLastCharacter() { m_Name = m_Name.substr(0, m_Name.size() - 1); }
 
+	inline int GetNameLength() { return m_Name.length(); }
+	inline int GetMaxNameLength() { return m_MaxNameLength; }
+
 	inline bool ValidName() { return m_Name.length(); }
 
 private:
 
 	std::string m_Name;
+	int m_MaxNameLength = 20;
 
 	State m_State = State::Neutral;
 
