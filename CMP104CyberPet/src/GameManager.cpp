@@ -107,8 +107,8 @@ GameManager::GameManager()
 
 
 	// add instructions text
-	m_TextSprites.push_back(new GUIText("Use A/D to scroll through buttons.", { 12, 22 }));
-	m_TextSprites.push_back(new GUIText("Use Enter to select button.", { 12, 23 }));
+	m_TextSprites.push_back(new GUIText("Use arrow keys to scroll through buttons.", { 12, 22 }));
+	m_TextSprites.push_back(new GUIText("Use enter to select button.", { 12, 23 }));
 
 	
 
@@ -190,16 +190,23 @@ void GameManager::OnKeyEvent(KEY_EVENT_RECORD* e)
 	if (e->bKeyDown)
 	{
 		// event is keydown event
-		switch (e->uChar.AsciiChar)
+		unsigned short c = e->wVirtualKeyCode;
+
+		switch (c)
 		{
-		// D key
-		case 100:	m_Screens[m_CurrentScreen]->OnArrowKey(GUIScreen::ArrowDirection::Right); break;
-		// A key
-		case 97:	m_Screens[m_CurrentScreen]->OnArrowKey(GUIScreen::ArrowDirection::Left); break;
+		// right arrow
+		case VK_RIGHT:	m_Screens[m_CurrentScreen]->OnArrowKey(GUIScreen::ArrowDirection::Right); break;
+		// left arrow
+		case VK_LEFT:	m_Screens[m_CurrentScreen]->OnArrowKey(GUIScreen::ArrowDirection::Left); break;
 		// enter key
-		case 13:	m_Screens[m_CurrentScreen]->OnEnter(); break;
+		case VK_RETURN:	m_Screens[m_CurrentScreen]->OnEnter(); break;
 		default:	break;
 		}
+
+		// when a key is pressed
+		// we want to check if were on the pet naming screen
+		// because we want to take key inputs and add them onto the pets name
+		
 	}
 }
 
