@@ -104,6 +104,7 @@ GameManager::GameManager()
 
 		auto playButton = new Button("Play");
 		playButton->SetPosition({31, 18 });
+		playButton->SetPressFunction([this]() { this->m_CyberPet->SetState(CyberPet::State::Playing); });
 		screen->AddButon(playButton);
 
 		auto quitButton = new Button("Quit");

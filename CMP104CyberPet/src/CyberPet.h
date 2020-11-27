@@ -66,7 +66,7 @@ private:
 	// using 0.017f will take 1 minute to each max hunger and sleepiness, and happiness to reach a minimum
 	float m_HungerPerSecond = 0.017f;
 	float m_SleepinessPerSecond = 0.017f;
-	float m_FunPerSecond = 0.008;
+	float m_FunPerSecond = 0.008f;
 
 
 	float m_EatingSpeed = 0.05f;
