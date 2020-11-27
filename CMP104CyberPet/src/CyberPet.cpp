@@ -64,3 +64,17 @@ void CyberPet::SetState(State state)
     m_State = state;
     m_ReturnToNeutralTimer = m_TimeUntilNeutral;
 }
+
+std::string CyberPet::GetActivityString()
+{
+    switch (m_State)
+    {
+    case State::Neutral:        return "doing nothing"; break;
+    case State::Eating:         return "eating"; break;
+    case State::Sleeping:       return "sleeping"; break;
+    case State::Playing:        return "playing"; break;
+    }
+
+    return "something unknown";
+
+}

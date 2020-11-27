@@ -8,7 +8,7 @@
 class GUIScreen
 {
 public:
-	enum ArrowDirection
+	enum class ArrowDirection
 	{
 		Left, Right
 	};

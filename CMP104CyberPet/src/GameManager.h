@@ -38,6 +38,7 @@ private:
 	std::vector<GUIText*> m_TextSprites;
 
 	GUIText* m_PetName;
+	GUIText* m_PetActivityText;
 	GUIText* m_HungerBar;
 	GUIText* m_SleepinessBar;
 	GUIText* m_HappinessBar;
