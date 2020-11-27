@@ -149,7 +149,7 @@ GameManager::GameManager()
 	
 	// create a new cyber pet object
 	m_CyberPet = new CyberPet;
-	m_CyberPet->SetPosition({ 15, 2 });
+	m_CyberPet->SetPosition({ 18, 6 });
 
 }
 
@@ -188,6 +188,7 @@ void GameManager::Update(float deltaTime)
 		m_CyberPet->Update(deltaTime);
 
 		// update the progress bars
+		
 		m_HungerBar->SetString("Hunger    : " + CreateProgressBar(m_CyberPet->GetNormalizedHunger()));
 		m_SleepinessBar->SetString("Sleepiness: " + CreateProgressBar(m_CyberPet->GetNormalizedSleepiness()));
 		m_HappinessBar->SetString("Happiness : " + CreateProgressBar(m_CyberPet->GetNormalizedHappiness()));

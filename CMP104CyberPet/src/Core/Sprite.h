@@ -25,6 +25,9 @@ public:
 	inline void SetDirty() { m_Dirty = true; }
 	inline bool IsDirty() { return m_Dirty; }
 
+protected:
+	inline void DeleteImage() { delete m_Image; }
+
 private:
 	Vector2f m_Position;
 

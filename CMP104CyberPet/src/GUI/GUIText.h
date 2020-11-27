@@ -23,6 +23,7 @@ public:
 
 	void SetString(const std::string& content)
 	{
+		DeleteImage();
 		SetImage(new Image((int)content.length(), 1, content));
 	}
 };
