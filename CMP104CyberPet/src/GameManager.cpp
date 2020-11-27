@@ -94,10 +94,12 @@ GameManager::GameManager()
 
 		auto feedButton = new Button("Feed");
 		feedButton->SetPosition({ 8, 18 });
+		feedButton->SetPressFunction([this]() { this->m_CyberPet->SetState(CyberPet::State::Eating); });
 		screen->AddButon(feedButton);
 
 		auto napButton = new Button("Nap");
 		napButton->SetPosition({ 20, 18 });
+		napButton->SetPressFunction([this]() { this->m_CyberPet->SetState(CyberPet::State::Sleeping); });
 		screen->AddButon(napButton);
 
 		auto playButton = new Button("Play");
@@ -129,7 +131,7 @@ GameManager::GameManager()
 	m_SleepinessBar = new GUIText("Sleepiness: |----------|", { 64, 7 });
 	m_TextSprites.push_back(m_SleepinessBar);
 
-	m_HappinessBar = new GUIText("Happiness : |----------|", { 64, 9 });
+	m_HappinessBar = new GUIText("Happiness : |##########|", { 64, 9 });
 	m_TextSprites.push_back(m_HappinessBar);
 
 	// a wee seperator for visuals
@@ -176,20 +178,24 @@ void GameManager::Update(float deltaTime)
 
 	// THIS CODE GETS RUN EACH FRAME
 
-	// update the pet
-	m_CyberPet->Update(deltaTime);
+	
+	if (m_CurrentScreen == 2)
+	{
+		// this is the screen that we actually interact with the pet
+		// so we only want to update the pet when were viewing this screen
 
-	// update the progress bars
-	m_HungerBar->SetString("Hunger    : " + CreateProgressBar(m_CyberPet->GetNormalizedHunger()));
-	m_SleepinessBar->SetString("Sleepiness: " + CreateProgressBar(m_CyberPet->GetNormalizedSleepiness()));
-	m_HappinessBar->SetString("Happiness : " + CreateProgressBar(m_CyberPet->GetNormalizedHappiness()));
+		// update the pet
+		m_CyberPet->Update(deltaTime);
 
+		// update the progress bars
+		m_HungerBar->SetString("Hunger    : " + CreateProgressBar(m_CyberPet->GetNormalizedHunger()));
+		m_SleepinessBar->SetString("Sleepiness: " + CreateProgressBar(m_CyberPet->GetNormalizedSleepiness()));
+		m_HappinessBar->SetString("Happiness : " + CreateProgressBar(m_CyberPet->GetNormalizedHappiness()));
 
-	if (m_CurrentScreen == 1)
+	} else if (m_CurrentScreen == 1)
 	{
 		m_Screens[1]->GetText(1)->SetString("Pet name: " + m_CyberPet->GetName());
 	}
-
 
 }
 
