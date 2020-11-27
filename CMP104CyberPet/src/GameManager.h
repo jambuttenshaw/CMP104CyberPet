@@ -41,6 +41,7 @@ private:
 	GUIText* m_PetActivityText;
 	GUIText* m_HungerBar;
 	GUIText* m_SleepinessBar;
+	GUIText* m_FunBar;
 	GUIText* m_HappinessBar;
 
 	bool m_Quit = false;

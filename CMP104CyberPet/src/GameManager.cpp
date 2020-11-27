@@ -134,13 +134,16 @@ GameManager::GameManager()
 	m_SleepinessBar = new GUIText("Sleepiness: |----------|", { 64, 7 });
 	m_TextSprites.push_back(m_SleepinessBar);
 
-	m_HappinessBar = new GUIText("Happiness : |##########|", { 64, 9 });
+	m_FunBar = new GUIText("Fun       : |##########|", { 64, 9 });
+	m_TextSprites.push_back(m_FunBar);
+
+	m_HappinessBar = new GUIText("Happiness : |##########|", { 64, 11 });
 	m_TextSprites.push_back(m_HappinessBar);
 
 	// a wee seperator for visuals
 	m_TextSprites.push_back(new GUIText("------------------------", { 64, 2 }));
 	m_TextSprites.push_back(new GUIText("------------------------", { 64, 4 }));
-	m_TextSprites.push_back(new GUIText("------------------------", { 64, 10 }));
+	m_TextSprites.push_back(new GUIText("------------------------", { 64, 12 }));
 
 
 	// load the first screen
@@ -194,6 +197,7 @@ void GameManager::Update(float deltaTime)
 		
 		m_HungerBar->ReplaceString("Hunger    : " + CreateProgressBar(m_CyberPet->GetNormalizedHunger()));
 		m_SleepinessBar->ReplaceString("Sleepiness: " + CreateProgressBar(m_CyberPet->GetNormalizedSleepiness()));
+		m_FunBar->ReplaceString("Fun       : " + CreateProgressBar(m_CyberPet->GetNormalizedFun()));
 		m_HappinessBar->ReplaceString("Happiness : " + CreateProgressBar(m_CyberPet->GetNormalizedHappiness()));
 
 		m_PetActivityText->ReplaceString(m_CyberPet->GetName() + " is currently " + m_CyberPet->GetActivityString() + ".");
