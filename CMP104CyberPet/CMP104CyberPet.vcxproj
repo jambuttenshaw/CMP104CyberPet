@@ -22,6 +22,13 @@
     <ClInclude Include="src\Core\MathsUtility.h" />
     <ClInclude Include="src\Core\Sprite.h" />
     <ClInclude Include="src\CyberPet.h" />
+    <ClInclude Include="src\GameManager.h" />
+    <ClInclude Include="src\GUI\Button.h" />
+    <ClInclude Include="src\GUI\GUIScreen.h" />
+    <ClInclude Include="src\GUI\GUIText.h" />
+    <ClInclude Include="src\Input\Events.h" />
+    <ClInclude Include="src\Input\Input.h" />
+    <ClInclude Include="src\Input\InputAPI.h" />
     <ClInclude Include="src\Rendering\Image.h" />
     <ClInclude Include="src\Rendering\RenderAPI.h" />
     <ClInclude Include="src\Rendering\Renderer.h" />
@@ -29,6 +36,11 @@
   <ItemGroup>
     <ClCompile Include="src\Core\Sprite.cpp" />
     <ClCompile Include="src\CyberPet.cpp" />
+    <ClCompile Include="src\GameManager.cpp" />
+    <ClCompile Include="src\GUI\Button.cpp" />
+    <ClCompile Include="src\GUI\GUIScreen.cpp" />
+    <ClCompile Include="src\Input\Input.cpp" />
+    <ClCompile Include="src\Input\InputAPI.cpp" />
     <ClCompile Include="src\Main.cpp" />
     <ClCompile Include="src\Rendering\Image.cpp" />
     <ClCompile Include="src\Rendering\RenderAPI.cpp" />
