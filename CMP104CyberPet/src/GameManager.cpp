@@ -67,7 +67,7 @@ GameManager::GameManager()
 			{
 				if (this->m_CyberPet->ValidName())
 				{
-					this->m_PetName->SetString(m_CyberPet->GetName());
+					this->m_PetName->ReplaceString(m_CyberPet->GetName());
 					this->NextScreen();
 				}
 			});
@@ -189,13 +189,13 @@ void GameManager::Update(float deltaTime)
 
 		// update the progress bars
 		
-		m_HungerBar->SetString("Hunger    : " + CreateProgressBar(m_CyberPet->GetNormalizedHunger()));
-		m_SleepinessBar->SetString("Sleepiness: " + CreateProgressBar(m_CyberPet->GetNormalizedSleepiness()));
-		m_HappinessBar->SetString("Happiness : " + CreateProgressBar(m_CyberPet->GetNormalizedHappiness()));
+		m_HungerBar->ReplaceString("Hunger    : " + CreateProgressBar(m_CyberPet->GetNormalizedHunger()));
+		m_SleepinessBar->ReplaceString("Sleepiness: " + CreateProgressBar(m_CyberPet->GetNormalizedSleepiness()));
+		m_HappinessBar->ReplaceString("Happiness : " + CreateProgressBar(m_CyberPet->GetNormalizedHappiness()));
 
 	} else if (m_CurrentScreen == 1)
 	{
-		m_Screens[1]->GetText(1)->SetString("Pet name: " + m_CyberPet->GetName());
+		m_Screens[1]->GetText(1)->ReplaceString("Pet name: " + m_CyberPet->GetName());
 	}
 
 }
