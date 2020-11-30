@@ -29,6 +29,8 @@ public:
 private:
 	std::string CreateProgressBar(float normalizedValue);
 
+	void SelectPet();
+
 private:
 	CyberPet* m_CyberPet;
 

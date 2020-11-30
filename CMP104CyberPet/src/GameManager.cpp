@@ -45,7 +45,7 @@ GameManager::GameManager()
 
 		auto selectPetButton = new Button("Select Pet");
 		selectPetButton->SetPosition({ 26, 18 });
-		selectPetButton->SetPressFunction([this]() { this->NextScreen(); });
+		selectPetButton->SetPressFunction([this]() { this->SelectPet(); });
 		screen->AddButon(selectPetButton);
 
 		auto quitButton = new Button("Quit");
@@ -267,6 +267,11 @@ void GameManager::OnKeyEvent(KEY_EVENT_RECORD* e)
 				m_CyberPet->DeleteLastCharacter();
 		}
 	}
+}
+
+void GameManager::SelectPet()
+{
+	NextScreen();
 }
 
 void GameManager::AddGUIScreen(GUIScreen* screen)
