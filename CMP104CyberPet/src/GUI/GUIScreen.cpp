@@ -35,6 +35,8 @@ void GUIScreen::Load()
 
 void GUIScreen::OnArrowKey(GUIScreen::ArrowDirection dir)
 {
+	if (m_Disabled) return;
+
 	switch (dir)
 	{
 	case GUIScreen::ArrowDirection::Left:	
@@ -54,13 +56,15 @@ void GUIScreen::OnArrowKey(GUIScreen::ArrowDirection dir)
 
 void GUIScreen::OnEnter()
 {
+	if (m_Disabled) return;
+
 	m_Buttons[m_SelectedButton]->Press();
 }
 
 void GUIScreen::RefreshButtons()
 {
 	for (int i = 0; i < m_Buttons.size(); i++)
-		m_Buttons[i]->SetActive(i == m_SelectedButton);
+		m_Buttons[i]->SetActive((i == m_SelectedButton) && (!m_Disabled));
 }
 
 std::vector<Sprite*> GUIScreen::GetSprites() 

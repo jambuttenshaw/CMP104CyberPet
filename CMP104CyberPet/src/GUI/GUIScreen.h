@@ -30,6 +30,9 @@ public:
 	inline Button* GetButton(int index) { return m_Buttons[index]; }
 	inline GUIText* GetText(int index) { return m_Text[index]; }
 
+	inline void Enable() { m_Disabled = false; }
+	inline void Disable() { m_Disabled = true; }
+
 private:
 
 	void RefreshButtons();
@@ -37,6 +40,8 @@ private:
 private:
 	std::vector<Button*> m_Buttons;
 	int m_SelectedButton = 0;
+
+	bool m_Disabled = false;
 
 	std::vector<GUIText*> m_Text;
 };
