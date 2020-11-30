@@ -151,6 +151,11 @@ GameManager::GameManager()
 	// create the library of pets that the user can choose from
 	m_Pets[0] = new Frog;
 	m_Pets[1] = new Aardvark;
+	m_Pets[2] = new Camel;
+	m_Pets[3] = new Shark;
+	m_Pets[4] = new Cat;
+	m_Pets[5] = new Dog;
+	m_Pets[6] = new Dolphin;
 	
 
 	// load the first screen

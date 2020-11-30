@@ -39,7 +39,7 @@ private:
 	CyberPet* m_CyberPet = nullptr;
 
 	// for selecing the pet
-	Sprite* m_Pets[2];
+	Sprite* m_Pets[7];
 	int m_CurrentPet = 0;
 
 	std::vector<GUIScreen*> m_Screens;
