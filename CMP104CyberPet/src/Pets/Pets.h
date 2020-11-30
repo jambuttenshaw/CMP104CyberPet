@@ -27,7 +27,7 @@ public:
 ___\\ \\     // //___
 >____)/_\---/_\(____<)"));
 
-		SetPosition({ 18, 6 });
+		SetCentrePosition({ 32, 8 });
 	}
 };
 
@@ -46,7 +46,7 @@ public:
    / /  \ \  | |\ \  \7
     "     "    "  "    )"));
 
-		SetPosition({ 18, 6 });
+		SetCentrePosition({ 32, 8 });
 	}
 };
 
@@ -66,7 +66,7 @@ public:
      [[] [[]    
      [[] [[]    )"));
 
-		SetPosition({ 18, 6 });
+		SetCentrePosition({ 32, 8 });
 	}
 };
 
@@ -88,7 +88,7 @@ public:
       |/   \_  \|      / 
              \________/  )"));
 		
-		SetPosition({ 18, 6 });
+		SetCentrePosition({ 32, 8 });
 	}
 };
 
@@ -110,7 +110,7 @@ public:
   || |-_\__   /  
  ((_/`(____,-'   )"));
 
-		SetPosition({ 18, 6 });
+		SetCentrePosition({ 32, 8 });
 	}
 };
 
@@ -131,7 +131,7 @@ public:
  /  /__________\  \   
  L_JJ           \__JJ )"));
 
-		SetPosition({ 18, 6 });
+		SetCentrePosition({ 32, 8 });
 	}
 };
 
@@ -155,6 +155,6 @@ public:
                        | /  
                        '    )"));
 
-		SetPosition({ 18, 6 });
+		SetCentrePosition({ 32, 8 });
 	}
 };

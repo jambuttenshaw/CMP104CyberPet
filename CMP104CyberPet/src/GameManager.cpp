@@ -121,8 +121,8 @@ GameManager::GameManager()
 
 
 	// add instructions text
-	m_TextSprites.push_back(new GUIText("Use arrow keys to scroll through buttons.", { 12, 22 }));
-	m_TextSprites.push_back(new GUIText("Use enter to select button.", { 12, 23 }));
+	m_TextSprites.push_back(new GUIText("Use arrow keys to scroll through buttons.", { 32, 23 }, true));
+	m_TextSprites.push_back(new GUIText("Use enter to select button.", { 32, 24 }, true));
 
 	
 	// a title for the pets name
@@ -277,7 +277,7 @@ void GameManager::SelectPet()
 {
 	// create a new cyber pet object
 	m_CyberPet = new CyberPet(m_Pets[m_CurrentPet]);
-	m_CyberPet->SetPosition({ 18, 6 });
+	m_CyberPet->SetCentrePosition({ 32, 8 });
 
 	NextScreen();
 

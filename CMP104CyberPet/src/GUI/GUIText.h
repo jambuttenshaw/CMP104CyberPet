@@ -12,11 +12,14 @@ public:
 		SetPosition({ 0, 0 });
 	}
 
-	GUIText(const std::string& content, Vector2f position)
+	GUIText(const std::string& content, Vector2f position, bool positionAtCentre = false)
 		: Sprite()
 	{
 		SetImage(new Image((int)content.length(), 1, content));
-		SetPosition(position);
+		if (positionAtCentre)
+			SetCentrePosition(position);
+		else
+			SetPosition(position);
 	}
 
 	void Update(float deltaTime) override {};

@@ -16,7 +16,15 @@ public:
 
 	inline Vector2f GetPosition() { return m_Position; }
 	inline Vector2i GetIntPosition() { return { (int)m_Position.x, (int)m_Position.y }; }
+
 	inline void SetPosition(Vector2f pos) { m_Position = pos; SetDirty(); }
+	inline void SetCentrePosition(Vector2f pos) 
+	{
+		m_Position = {
+			pos.x - ((float)m_Image->GetWidth() * 0.5f),
+			pos.y -((float)m_Image->GetHeight() * 0.5f)
+		};
+	}
 
 	inline void SetImage(Image* image) { m_Image = image; SetDirty(); }
 	inline Image* GetImage() { return m_Image; }
