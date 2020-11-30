@@ -2,6 +2,7 @@
 
 #include "GUI/GUIScreen.h"
 #include "GUI/GUIText.h"
+#include "Pets/Pets.h"
 #include "CyberPet.h"
 
 #include "windows.h"

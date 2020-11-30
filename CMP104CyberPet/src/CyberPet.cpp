@@ -3,6 +3,7 @@
 CyberPet::CyberPet()
 	: Sprite()
 {
+    // this is a default constructor that defaults to a frog
 	SetImage(new Image(21, 6, R"(       _     _       
       (')-=-(')      
     __(   "   )__    
@@ -10,6 +11,12 @@ CyberPet::CyberPet()
 ___\\ \\     // //___
 >____)/_\---/_\(____<)"));
 
+}
+
+CyberPet::CyberPet(Sprite* pet)
+{
+    // copy the image from the pet
+    SetImage(new Image(*pet->GetImage()));
 }
 
 CyberPet::~CyberPet()

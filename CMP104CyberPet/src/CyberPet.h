@@ -14,6 +14,7 @@ public:
 
 public:
 	CyberPet();
+	CyberPet(Sprite* pet);
 	~CyberPet();
 
 	void Update(float deltaTime) override;
