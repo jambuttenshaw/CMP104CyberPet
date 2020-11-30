@@ -14,6 +14,12 @@ Image::Image(int width, int height, const std::string& imageContent)
 	CreateImage(imageContent);
 }
 
+Image::Image(const Image& oldImage)
+	: m_Width(oldImage.m_Width), m_Height(oldImage.m_Height)
+{
+	CopyImage(oldImage.m_ImageData);
+}
+
 Image::~Image()
 {
 	// free each sub-array in the 2d array of image data
@@ -81,10 +87,27 @@ void Image::CreateImage(const std::string& imageContent)
 			x = 0;
 			y++;
 		}
+	}
+}
 
+
+void Image::CopyImage(wchar_t** imageData)
+{
+	// initialize the image data array with empty arrays
+	m_ImageData = new wchar_t* [m_Height];
+	for (int i = 0; i < m_Height; i++)
+	{
+		// set the pointer at this height in the image array to a pointer to a new array
+		m_ImageData[i] = new wchar_t[m_Width];
 	}
 
-	
+	for (int i = 0; i < m_Height; i++)
+	{
+		for (int j = 0; j < m_Width; j++)
+		{
+			m_ImageData[i][j] = imageData[i][j];
+		}
+	}
 }
 
 

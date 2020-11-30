@@ -10,6 +10,7 @@ public:
 	// constructors
 	Image(int width, int height, wchar_t defaultFill = ' ');
 	Image(int width, int height, const std::string& imageContent);
+	Image(const Image& oldImage);
 	~Image();
 
 	inline int GetWidth() { return m_Width; }
@@ -23,6 +24,7 @@ public:
 private:
 	void CreateImage(wchar_t defaultFill);
 	void CreateImage(const std::string& imageContent);
+	void CopyImage(wchar_t** imageData);
 
 private:
 	int m_Width, m_Height;

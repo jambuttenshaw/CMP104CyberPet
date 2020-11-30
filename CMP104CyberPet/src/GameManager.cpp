@@ -155,7 +155,7 @@ GameManager::GameManager()
 	// SET UP THE CYBER PET SPRITE
 	
 	// create a new cyber pet object
-	auto petSprite = new Aardvark;
+	auto petSprite = new Frog;
 
 	m_CyberPet = new CyberPet(petSprite);
 	m_CyberPet->SetPosition({ 18, 6 });
