@@ -194,6 +194,17 @@ void GameManager::Update(float deltaTime)
 		// update the pet
 		m_CyberPet->Update(deltaTime);
 
+		// if the pet is not in its neutral state,
+		// then we want the buttons to be disabled
+		if (m_CyberPet->GetState() == CyberPet::State::Neutral)
+		{
+			if (m_Screens[m_CurrentScreen]->GetDisabled()) m_Screens[m_CurrentScreen]->Enable();
+		}
+		else
+		{
+			if (!m_Screens[m_CurrentScreen]->GetDisabled()) m_Screens[m_CurrentScreen]->Disable();
+		}
+
 		// update the progress bars
 		
 		m_HungerBar->ReplaceString("Hunger    : " + CreateProgressBar(m_CyberPet->GetNormalizedHunger()));
