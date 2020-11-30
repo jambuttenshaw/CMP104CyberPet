@@ -275,6 +275,11 @@ void GameManager::SelectPet()
 	m_CyberPet->SetPosition({ 18, 6 });
 
 	NextScreen();
+
+	for (Sprite* p : m_Pets)
+	{
+		delete p;
+	}
 }
 
 void GameManager::NextPet()
