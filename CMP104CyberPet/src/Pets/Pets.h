@@ -14,6 +14,8 @@ public:
    / _/'-----'\_ \   
 ___\\ \\     // //___
 >____)/_\---/_\(____<)"));
+
+		SetPosition({ 18, 6 });
 	}
 
 	void Update(float deltaTime) override {}
@@ -33,6 +35,8 @@ public:
 ./  / /\ \   | \ \  \ \
    / /  \ \  | |\ \  \7
     "     "    "  "    )"));
+
+		SetPosition({ 18, 6 });
 	}
 
 	void Update(float deltaTime) override {}

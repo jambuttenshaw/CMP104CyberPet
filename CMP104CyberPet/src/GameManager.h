@@ -31,11 +31,16 @@ private:
 	std::string CreateProgressBar(float normalizedValue);
 
 	void SelectPet();
+	void NextPet();
 
 private:
 	// cyber pet is only defined once we have chosen a pet
 	// so we need to be careful not to reference it if is still nullptr
 	CyberPet* m_CyberPet = nullptr;
+
+	// for selecing the pet
+	Sprite* m_Pets[2];
+	int m_CurrentPet = 0;
 
 	std::vector<GUIScreen*> m_Screens;
 	int m_CurrentScreen = 0;

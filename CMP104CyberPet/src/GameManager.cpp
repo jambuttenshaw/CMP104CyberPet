@@ -41,6 +41,7 @@ GameManager::GameManager()
 
 		auto changePetButton = new Button("Change Pet");
 		changePetButton->SetPosition({ 8, 18 });
+		changePetButton->SetPressFunction([this]() { this->NextPet(); });
 		screen->AddButon(changePetButton);
 
 		auto selectPetButton = new Button("Select Pet");
@@ -147,6 +148,11 @@ GameManager::GameManager()
 	m_TextSprites.push_back(new GUIText("------------------------", { 64, 12 }));
 
 
+	// create the library of pets that the user can choose from
+	m_Pets[0] = new Frog;
+	m_Pets[1] = new Aardvark;
+	
+
 	// load the first screen
 	LoadGUIScreen(0);
 }
@@ -168,6 +174,8 @@ GameManager::~GameManager()
 	m_TextSprites.clear();
 
 	delete m_CyberPet;
+
+	// delete[] m_Pets;
 }
 
 
@@ -262,17 +270,17 @@ void GameManager::OnKeyEvent(KEY_EVENT_RECORD* e)
 
 void GameManager::SelectPet()
 {
-	// SET UP THE CYBER PET SPRITE
-
 	// create a new cyber pet object
-	auto petSprite = new Frog;
-
-	m_CyberPet = new CyberPet(petSprite);
+	m_CyberPet = new CyberPet(m_Pets[m_CurrentPet]);
 	m_CyberPet->SetPosition({ 18, 6 });
 
-	delete petSprite;
-
 	NextScreen();
+}
+
+void GameManager::NextPet()
+{
+	m_CurrentPet++;
+	if (m_CurrentPet == sizeof(m_Pets) / sizeof(m_Pets[0])) m_CurrentPet = 0;
 }
 
 void GameManager::AddGUIScreen(GUIScreen* screen)
@@ -291,7 +299,10 @@ std::vector<Sprite*> GameManager::GetSprites()
 	std::vector<Sprite*> sprites = m_Screens[m_CurrentScreen]->GetSprites();
 	for (Sprite* s : m_TextSprites) sprites.push_back(s);
 	
-	if (m_CyberPet != nullptr) sprites.push_back(m_CyberPet);
+	if (m_CurrentScreen == 0)
+		sprites.push_back(m_Pets[m_CurrentPet]);
+	else 
+		sprites.push_back(m_CyberPet);
 
 	return sprites;
 }
