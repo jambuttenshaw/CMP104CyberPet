@@ -33,7 +33,9 @@ private:
 	void SelectPet();
 
 private:
-	CyberPet* m_CyberPet;
+	// cyber pet is only defined once we have chosen a pet
+	// so we need to be careful not to reference it if is still nullptr
+	CyberPet* m_CyberPet = nullptr;
 
 	std::vector<GUIScreen*> m_Screens;
 	int m_CurrentScreen = 0;

@@ -149,18 +149,6 @@ GameManager::GameManager()
 
 	// load the first screen
 	LoadGUIScreen(0);
-
-
-
-	// SET UP THE CYBER PET SPRITE
-	
-	// create a new cyber pet object
-	auto petSprite = new Frog;
-
-	m_CyberPet = new CyberPet(petSprite);
-	m_CyberPet->SetPosition({ 18, 6 });
-
-	delete petSprite;
 }
 
 GameManager::~GameManager()
@@ -274,6 +262,16 @@ void GameManager::OnKeyEvent(KEY_EVENT_RECORD* e)
 
 void GameManager::SelectPet()
 {
+	// SET UP THE CYBER PET SPRITE
+
+	// create a new cyber pet object
+	auto petSprite = new Frog;
+
+	m_CyberPet = new CyberPet(petSprite);
+	m_CyberPet->SetPosition({ 18, 6 });
+
+	delete petSprite;
+
 	NextScreen();
 }
 
@@ -291,11 +289,9 @@ void GameManager::LoadGUIScreen(int screenNum)
 std::vector<Sprite*> GameManager::GetSprites()
 {
 	std::vector<Sprite*> sprites = m_Screens[m_CurrentScreen]->GetSprites();
-	for (Sprite* s : m_TextSprites)
-	{
-		sprites.push_back(s);
-	}
-	sprites.push_back(m_CyberPet);
+	for (Sprite* s : m_TextSprites) sprites.push_back(s);
+	
+	if (m_CyberPet != nullptr) sprites.push_back(m_CyberPet);
 
 	return sprites;
 }
