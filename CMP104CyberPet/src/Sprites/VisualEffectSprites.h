@@ -5,13 +5,18 @@
 class Carrot : public Sprite
 {
 public:
-	Carrot()
+	Carrot(Vector2f startPos, Vector2f endPos)
 		: Sprite()
 	{
 		SetImage(new Image(4, 3, R"(_\/_
 \  /
  \/ )"));
-		SetPosition({ 0, 0 });
+		SetCentrePosition(startPos);
+		LerpToPosition(endPos);
+	}
+
+	~Carrot()
+	{
 	}
 
 	inline void Update(float deltaTime) override { Sprite::Update(deltaTime); };

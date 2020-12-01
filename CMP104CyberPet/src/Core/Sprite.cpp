@@ -1,5 +1,7 @@
 #include "Sprite.h"
 
+#include <iostream>
+
 Sprite::Sprite()
 	: m_Position(Vector2f(0, 0))
 {
@@ -30,14 +32,18 @@ void Sprite::Update(float deltaTime)
 {
 	if (m_Lerping)
 	{
+		Vector2f p = Lerp(m_LerpStart, m_LerpingTarget, m_LerpTimer);
+		m_LerpTimer += deltaTime;
+		
+		SetPosition(p);
+	
 		// check if we are close to the target
-		if (SqrMagnitude({ m_LerpingTarget.x - m_Position.x, m_LerpingTarget.y - m_Position.y }) < m_LerpTerminationThreshold)
+		if (m_LerpTimer >= 1)
 		{
 			m_Lerping = false;
 			SetCentrePosition(m_LerpingTarget);
 		}
-		// otherwise just keep on lerping closer
-		else SetCentrePosition(Lerp(m_Position, m_LerpingTarget, deltaTime));
+		
 	}
 }
 
@@ -55,6 +61,9 @@ void Sprite::SetCentrePosition(Vector2f pos)
 
 void Sprite::LerpToPosition(Vector2f pos)
 {
-	m_Lerping = true;
 	m_LerpingTarget = pos;
+	m_LerpStart = m_Position;
+
+	m_Lerping = true;
+	m_LerpTimer = 0;
 }

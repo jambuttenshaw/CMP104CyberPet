@@ -1,5 +1,7 @@
 #include "CyberPet.h"
 
+#include "Sprites/VisualEffectSprites.h"
+
 CyberPet::CyberPet(Vector2f initalPos)
 	: Sprite(), m_InitialPosition(initalPos)
 {
@@ -35,6 +37,8 @@ void CyberPet::Update(float deltaTime)
 {
     Sprite::Update(deltaTime);
 
+    for (Sprite* s : m_VisualEffectsSprites) s->Update(deltaTime);
+
     if (m_State != State::Neutral)
     {
         m_ReturnToNeutralTimer -= deltaTime;
@@ -46,6 +50,7 @@ void CyberPet::Update(float deltaTime)
                 SetCentrePosition(m_InitialPosition);
             }
 
+            // delete any visual effects sprites that are kicking about
             for (Sprite* s : m_VisualEffectsSprites) delete s;
             m_VisualEffectsSprites.clear();
 
@@ -110,13 +115,18 @@ void CyberPet::Update(float deltaTime)
 
     // this formula means that happiness decreases as hunger or sleepiness increases and increases with fun, 
     // and if hunger OR sleepiness reach their maximum OR fun reaches a minimum then happiness is 0
-    m_Happiness = sqrt((m_MaxHunger - m_Hunger) * (m_MaxSleepiness - m_Sleepiness) * m_Fun / m_MaxHappiness);
+    m_Happiness = (float)sqrt((m_MaxHunger - m_Hunger) * (m_MaxSleepiness - m_Sleepiness) * m_Fun / m_MaxHappiness);
 }
 
 void CyberPet::SetState(State state)
 {
     m_State = state;
     m_ReturnToNeutralTimer = m_TimeUntilNeutral;
+
+    if (state == State::Eating)
+    {
+        m_VisualEffectsSprites.push_back(new Carrot({ 0, 0, }, GetPosition()));
+    }
 }
 
 std::string CyberPet::GetActivityString()

@@ -21,6 +21,7 @@ public:
 	void SetCentrePosition(Vector2f pos);
 
 	void LerpToPosition(Vector2f pos);
+	inline bool IsLerping() { return m_Lerping; }
 	
 
 	inline void SetImage(Image* image) { m_Image = image; SetDirty(); }
@@ -36,9 +37,10 @@ protected:
 private:
 	Vector2f m_Position;
 
+	Vector2f m_LerpStart = { 0, 0 };
 	Vector2f m_LerpingTarget = { 0, 0 };
+	float m_LerpTimer = 0;
 	bool m_Lerping = false;
-	float m_LerpTerminationThreshold = 1;
 
 	bool m_Dirty = false; // a flag to say whether the sprite has been modified since the last time it was drawn
 

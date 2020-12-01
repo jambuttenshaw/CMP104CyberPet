@@ -23,6 +23,7 @@ void RenderAPI::Init()
 	UpdateConsoleDimensions();
 
 	SetCursorVisibility(false);
+	SetCursorPosition({ 0, m_MaxConsoleHeight + 1 });
 }
 
 // displaying characters on the console is done using
