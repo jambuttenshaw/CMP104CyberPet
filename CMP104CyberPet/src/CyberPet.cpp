@@ -173,7 +173,7 @@ std::string CyberPet::GetHungerString()
         return "starving";
     else if (percentageHunger > 0.5f)
         return "rather hungry";
-    else if (percentageHunger > 0.25f)
+    else if (percentageHunger > 0.2f)
         return "slightly peckish";
     else
         return "well fed";
@@ -188,7 +188,7 @@ std::string CyberPet::GetSleepinessString()
         return "falling asleep";
     else if (percentageSleepiness > 0.5f)
         return "tired";
-    else if (percentageSleepiness > 0.25f)
+    else if (percentageSleepiness > 0.2f)
         return "awake";
     else
         return "wide awake";
