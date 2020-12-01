@@ -30,7 +30,15 @@ void CyberPet::Update(float deltaTime)
     {
         m_ReturnToNeutralTimer -= deltaTime;
         if (m_ReturnToNeutralTimer <= 0)
+        {
+            // stop the previous states visual effects
+            if (m_State == State::Playing)
+            {
+                SetCentrePosition({ 32, 8 });
+            }
+
             m_State = State::Neutral;
+        }
     }
 
 
@@ -72,6 +80,14 @@ void CyberPet::Update(float deltaTime)
         m_Fun += m_PlayingSpeed * deltaTime;
         if (m_Fun > m_MaxFun)
             m_Fun = m_MaxFun;
+
+        // visual effects:
+        // the pet should move about in a figure of 8
+        float t = (m_TimeUntilNeutral - m_ReturnToNeutralTimer) * m_PlayMoveSpeed;
+        SetCentrePosition({
+                32 + (4 * m_PlayMoveAmplitude * (float)sin(t)),
+                8 + (m_PlayMoveAmplitude * (float)sin(t) * (float)cos(t))
+            });
     }
     else
     {
@@ -100,6 +116,8 @@ std::string CyberPet::GetActivityString()
     case State::Sleeping:       return "sleeping"; break;
     case State::Playing:        return "playing"; break;
     }
+
+    return "doing something unknown";
 }
 
 std::string CyberPet::GetHungerString()

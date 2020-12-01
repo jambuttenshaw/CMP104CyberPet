@@ -114,7 +114,7 @@ GameManager::GameManager()
 		quitButton->SetPressFunction([this]() { this->Quit(); });
 		screen->AddButon(quitButton);
 
-		m_PetActivityText = new GUIText("The pet is currently neutral.", { 32,16 }, true);
+		m_PetActivityText = new GUIText("The pet is currently neutral.", { 32,17 }, true);
 		screen->AddText(m_PetActivityText);
 
 		m_PetFeelingsLabel = new GUIText("The pet is currently feeling:", { 64, 14 });

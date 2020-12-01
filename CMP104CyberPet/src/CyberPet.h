@@ -66,6 +66,11 @@ private:
 	float m_Fun = m_MaxFun;
 	float m_Happiness = 0;
 
+
+	// parameters for the visual effects
+	float m_PlayMoveSpeed = 12.57f / m_TimeUntilNeutral; // pet should travel an angular displacement of 4pi while playing
+	float m_PlayMoveAmplitude = 4;
+
 	
 	// using 0.017f will take 1 minute to each max hunger and sleepiness, and happiness to reach a minimum
 	float m_HungerPerSecond = 0.017f;

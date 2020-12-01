@@ -37,6 +37,7 @@ private:
 	// cyber pet is only defined once we have chosen a pet
 	// so we need to be careful not to reference it if is still nullptr
 	CyberPet* m_CyberPet = nullptr;
+	Vector2f m_PetPosition = { 32, 8 };
 
 	// for selecing the pet
 	Sprite* m_Pets[7];
