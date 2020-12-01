@@ -2,6 +2,8 @@
 
 #include "Sprites/VisualEffectSprites.h"
 
+#include <iostream>
+
 CyberPet::CyberPet(Vector2f initalPos)
 	: Sprite(), m_InitialPosition(initalPos)
 {
@@ -12,10 +14,7 @@ CyberPet::CyberPet(Vector2f initalPos)
    / _/'-----'\_ \   
 ___\\ \\     // //___
 >____)/_\---/_\(____<)"));
-
-    SetCentrePosition(initalPos);
-
-    std::vector<Sprite*> m_VisualEffectsSprites(0);
+    Init();
 }
 
 CyberPet::CyberPet(Vector2f initalPos, Sprite* pet)
@@ -23,9 +22,20 @@ CyberPet::CyberPet(Vector2f initalPos, Sprite* pet)
 {
     // copy the image from the pet
     SetImage(new Image(*pet->GetImage()));
-    SetCentrePosition(initalPos);
+    Init();
+}
+
+void CyberPet::Init()
+{
+    SetCentrePosition(m_InitialPosition);
 
     std::vector<Sprite*> m_VisualEffectsSprites(0);
+
+    m_FoodDestination =
+    {
+        (m_InitialPosition.x - GetImage()->GetWidth() * 0.5f) - 2,
+        m_InitialPosition.y,
+    };
 }
 
 CyberPet::~CyberPet()
@@ -55,6 +65,20 @@ void CyberPet::Update(float deltaTime)
             m_VisualEffectsSprites.clear();
 
             m_State = State::Neutral;
+        }
+
+        if (m_State == State::Eating)
+        {
+            for (Sprite* s : m_VisualEffectsSprites)
+            {
+                if (!s->IsLerping())
+                {
+                    // if the current state is eating,
+                    // then the only visual effect sprites that can exist must be carrots
+                    // so we are safe to call this dynamic cast on the sprite pointer to access the reset function
+                    dynamic_cast<Carrot*>(s)->Reset(m_FoodSpawnLocation, m_FoodDestination);
+                }
+            }
         }
     }
 
@@ -125,7 +149,7 @@ void CyberPet::SetState(State state)
 
     if (state == State::Eating)
     {
-        m_VisualEffectsSprites.push_back(new Carrot({ 0, 0, }, GetPosition()));
+        m_VisualEffectsSprites.push_back(new Carrot(m_FoodSpawnLocation, m_FoodDestination));
     }
 }
 

@@ -50,6 +50,9 @@ public:
 	inline std::vector<Sprite*> GetVisualEffectSprites() { return m_VisualEffectsSprites; }
 
 private:
+	void Init();
+
+private:
 	Vector2f m_InitialPosition = { 0, 0 };
 
 	std::string m_Name;
@@ -75,6 +78,9 @@ private:
 	// parameters for the visual effects
 	float m_PlayMoveSpeed = 12.57f / m_TimeUntilNeutral; // pet should travel an angular displacement of 4pi while playing
 	float m_PlayMoveAmplitude = 4;
+
+	Vector2f m_FoodSpawnLocation = { 0, 0 };
+	Vector2f m_FoodDestination = { 0, 0 };
 
 	// container for visual effects spawned
 	std::vector<Sprite*> m_VisualEffectsSprites;

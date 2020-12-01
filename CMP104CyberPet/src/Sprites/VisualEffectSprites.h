@@ -19,5 +19,11 @@ public:
 	{
 	}
 
+	inline void Reset(Vector2f startPos, Vector2f endPos)
+	{
+		SetCentrePosition(startPos);
+		LerpToPosition(endPos);
+	}
+
 	inline void Update(float deltaTime) override { Sprite::Update(deltaTime); };
 };
