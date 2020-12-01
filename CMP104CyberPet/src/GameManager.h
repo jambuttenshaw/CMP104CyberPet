@@ -65,6 +65,8 @@ private:
 	GUIText* m_FunBar;
 	GUIText* m_HappinessBar;
 
+	GUIText* m_PetRanAwayText;
+
 	bool m_Quit = false;
 
 };

@@ -130,6 +130,22 @@ GameManager::GameManager()
 	}
 
 
+	// SCREEN 4 - GAME OVER
+	{
+		auto screen = new GUIScreen();
+
+		auto quitButton = new Button("Quit");
+		quitButton->SetPosition({ 8, 18 });
+		quitButton->SetPressFunction([this]() { this->Quit(); });
+		screen->AddButon(quitButton);
+
+		m_PetRanAwayText = new GUIText("Your pet has ran away.", { 32,17 }, true);
+		screen->AddText(m_PetRanAwayText);
+
+		AddGUIScreen(screen);
+	}
+
+
 	// add instructions text
 	m_TextSprites.push_back(new GUIText("Use arrow keys to scroll through buttons.", { 32, 23 }, true));
 	m_TextSprites.push_back(new GUIText("Use enter to select button.", { 32, 24 }, true));
@@ -213,11 +229,15 @@ void GameManager::Update(float deltaTime)
 
 			m_RunningAwayTimer += deltaTime;
 			
-			m_PetActivityText->ReplaceString(m_CyberPet->GetName() + " will run away in " + std::to_string(m_RunningAwayThreshold - (int)m_RunningAwayTimer) + " seconds.");
+			m_PetActivityText->ReplaceString(m_CyberPet->GetName() + " will run away in " + std::to_string((int)(m_RunningAwayThreshold - (int)m_RunningAwayTimer)) + " seconds.");
 
 			if (m_RunningAwayTimer > m_RunningAwayThreshold)
 			{
 				// time to run away
+				// switch to the game over screen
+				m_PetRanAwayText->ReplaceString(m_CyberPet->GetName() + " ran away.");
+				m_PetRanAwayText->SetCentrePosition({ 32, 17 });
+				LoadGUIScreen(3);
 			}
 		}
 		else
@@ -345,12 +365,9 @@ std::vector<Sprite*> GameManager::GetSprites()
 	
 	if (m_CurrentScreen == 0)
 		sprites.push_back(m_Pets[m_CurrentPet]);
-	else
+	else if (m_CurrentScreen < 3)
 	{
-		for (Sprite* s : m_CyberPet->GetVisualEffectSprites())
-		{
-			sprites.push_back(s);
-		}
+		for (Sprite* s : m_CyberPet->GetVisualEffectSprites()) sprites.push_back(s);
 		sprites.push_back(m_CyberPet);
 	}
 
