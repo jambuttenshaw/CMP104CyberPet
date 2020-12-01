@@ -13,8 +13,8 @@ public:
 	};
 
 public:
-	CyberPet();
-	CyberPet(Sprite* pet);
+	CyberPet(Vector2f initalPos);
+	CyberPet(Vector2f initalPos, Sprite* pet);
 	~CyberPet();
 
 	void Update(float deltaTime) override;
@@ -46,6 +46,7 @@ public:
 	std::string GetSleepinessString();
 
 private:
+	Vector2f m_InitialPosition = { 0, 0 };
 
 	std::string m_Name;
 	int m_MaxNameLength = 24;

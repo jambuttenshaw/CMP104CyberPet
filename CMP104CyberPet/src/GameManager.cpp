@@ -288,8 +288,7 @@ void GameManager::OnKeyEvent(KEY_EVENT_RECORD* e)
 void GameManager::SelectPet()
 {
 	// create a new cyber pet object
-	m_CyberPet = new CyberPet(m_Pets[m_CurrentPet]);
-	m_CyberPet->SetCentrePosition({ 32, 8 });
+	m_CyberPet = new CyberPet(m_PetPosition, m_Pets[m_CurrentPet]);
 
 	NextScreen();
 

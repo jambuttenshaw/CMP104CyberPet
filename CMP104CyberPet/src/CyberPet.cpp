@@ -1,7 +1,7 @@
 #include "CyberPet.h"
 
-CyberPet::CyberPet()
-	: Sprite()
+CyberPet::CyberPet(Vector2f initalPos)
+	: Sprite(), m_InitialPosition(initalPos)
 {
     // this is a default constructor that defaults to a frog
 	SetImage(new Image(21, 6, R"(       _     _       
@@ -11,12 +11,15 @@ CyberPet::CyberPet()
 ___\\ \\     // //___
 >____)/_\---/_\(____<)"));
 
+    SetCentrePosition(initalPos);
 }
 
-CyberPet::CyberPet(Sprite* pet)
+CyberPet::CyberPet(Vector2f initalPos, Sprite* pet)
+    : Sprite(), m_InitialPosition(initalPos)
 {
     // copy the image from the pet
     SetImage(new Image(*pet->GetImage()));
+    SetCentrePosition(initalPos);
 }
 
 CyberPet::~CyberPet()
@@ -34,7 +37,7 @@ void CyberPet::Update(float deltaTime)
             // stop the previous states visual effects
             if (m_State == State::Playing)
             {
-                SetCentrePosition({ 32, 8 });
+                SetCentrePosition(m_InitialPosition);
             }
 
             m_State = State::Neutral;
@@ -85,8 +88,8 @@ void CyberPet::Update(float deltaTime)
         // the pet should move about in a figure of 8
         float t = (m_TimeUntilNeutral - m_ReturnToNeutralTimer) * m_PlayMoveSpeed;
         SetCentrePosition({
-                32 + (4 * m_PlayMoveAmplitude * (float)sin(t)),
-                8 + (m_PlayMoveAmplitude * (float)sin(t) * (float)cos(t))
+                m_InitialPosition.x + (4 * m_PlayMoveAmplitude * (float)sin(t)),
+                m_InitialPosition.y + (m_PlayMoveAmplitude * (float)sin(t) * (float)cos(t))
             });
     }
     else
