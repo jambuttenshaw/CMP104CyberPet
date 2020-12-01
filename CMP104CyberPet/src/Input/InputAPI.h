@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Events.h"
-
 #include <vector>
 #include <functional>
 #include <windows.h>
