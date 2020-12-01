@@ -235,6 +235,9 @@ void GameManager::Update(float deltaTime)
 				// switch to the game over screen
 				m_PetRanAwayText->ReplaceString(m_CyberPet->GetName() + " ran away.");
 				m_PetRanAwayText->SetCentrePosition({ 32, 17 });
+
+				m_CyberPet->LerpToPosition({ -20, -10 });
+
 				LoadGUIScreen(3);
 			}
 		}
@@ -275,6 +278,10 @@ void GameManager::Update(float deltaTime)
 	else if (m_CurrentScreen == 0)
 	{
 		for (Sprite* p : m_Pets) p->Update(deltaTime);
+	}
+	else if (m_CurrentScreen == 3)
+	{
+		m_CyberPet->Update(deltaTime);
 	}
 }
 
@@ -363,7 +370,7 @@ std::vector<Sprite*> GameManager::GetSprites()
 	
 	if (m_CurrentScreen == 0)
 		sprites.push_back(m_Pets[m_CurrentPet]);
-	else if (m_CurrentScreen < 3)
+	else
 	{
 		for (Sprite* s : m_CyberPet->GetVisualEffectSprites()) sprites.push_back(s);
 		sprites.push_back(m_CyberPet);
