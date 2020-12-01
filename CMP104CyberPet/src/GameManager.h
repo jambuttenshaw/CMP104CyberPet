@@ -41,6 +41,7 @@ private:
 
 	// for selecing the pet
 	Pet* m_Pets[7];
+	std::vector<Sprite*> m_PetsToDisplay;
 	int m_CurrentPet = 0;
 
 	std::vector<GUIScreen*> m_Screens;

@@ -3,12 +3,10 @@
 #include "Input/Input.h"
 #include "Rendering/Renderer.h"
 
+#include <iostream>
 
 GameManager::GameManager()
 {
-	// initialize members
-	std::vector<GUIScreen*> m_Screens(0);
-
 	// set the event callback
 	
 	// the event callback function won't be executed within the game manager's scope,
@@ -180,7 +178,8 @@ GameManager::GameManager()
 	m_Pets[4] = new Cat;
 	m_Pets[5] = new Dog;
 	m_Pets[6] = new Dolphin;
-	
+
+	m_PetsToDisplay.push_back(m_Pets[m_CurrentPet]);
 
 	// load the first screen
 	LoadGUIScreen(0);
@@ -278,6 +277,17 @@ void GameManager::Update(float deltaTime)
 	else if (m_CurrentScreen == 0)
 	{
 		for (Pet* p : m_Pets) p->Update(deltaTime);
+		for (int i = 0; i < m_PetsToDisplay.size(); i++)
+		{
+			if (m_PetsToDisplay.size() > 1)
+			{
+				if (!m_PetsToDisplay[i]->IsLerping())
+				{
+					m_PetsToDisplay.erase(m_PetsToDisplay.begin() + i);
+				}
+			}
+		}
+
 	}
 	else if (m_CurrentScreen == 3)
 	{
@@ -341,6 +351,8 @@ void GameManager::SelectPet()
 	NextScreen();
 
 	for (Pet* p : m_Pets) delete p;
+
+	m_PetsToDisplay.clear();
 }
 
 void GameManager::NextPet()
@@ -349,8 +361,9 @@ void GameManager::NextPet()
 
 	m_CurrentPet++;
 	if (m_CurrentPet == sizeof(m_Pets) / sizeof(m_Pets[0])) m_CurrentPet = 0;
-
+	
 	m_Pets[m_CurrentPet]->MoveOnScreen();
+	m_PetsToDisplay.push_back(m_Pets[m_CurrentPet]);
 }
 
 void GameManager::AddGUIScreen(GUIScreen* screen)
@@ -370,7 +383,9 @@ std::vector<Sprite*> GameManager::GetSprites()
 	for (Sprite* s : m_TextSprites) sprites.push_back(s);
 	
 	if (m_CurrentScreen == 0)
-		sprites.push_back(m_Pets[m_CurrentPet]);
+	{
+		for (Sprite* s : m_PetsToDisplay) sprites.push_back(s);
+	}
 	else
 	{
 		for (Sprite* s : m_CyberPet->GetVisualEffectSprites()) sprites.push_back(s);
