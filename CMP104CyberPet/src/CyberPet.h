@@ -73,15 +73,15 @@ private:
 	float m_PlayMoveAmplitude = 4;
 
 	
-	// using 0.017f will take 1 minute to each max hunger and sleepiness, and happiness to reach a minimum
+	// using 0.017f will take 1 minute to reach max hunger and sleepiness, and fun and happiness to reach a minimum
 	float m_HungerPerSecond = 0.017f;
 	float m_SleepinessPerSecond = 0.017f;
-	float m_FunPerSecond = 0.008f;
+	float m_FunPerSecond = 0.017f;
 
-
+	// the speed that hunger, sleep and fun are recovered
 	float m_EatingSpeed = 0.05f;
 	float m_SleepingSpeed = 0.05f;
-	float m_PlayingSpeed = 0.025f;
+	float m_PlayingSpeed = 0.05f;
 
 };
 
