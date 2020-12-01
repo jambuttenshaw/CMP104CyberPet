@@ -49,6 +49,11 @@ private:
 
 	GUIText* m_PetName;
 	GUIText* m_PetActivityText;
+
+	GUIText* m_PetFeelingsLabel;
+	GUIText* m_PetHungerText;
+	GUIText* m_PetSleepinessText;
+
 	GUIText* m_HungerBar;
 	GUIText* m_SleepinessBar;
 	GUIText* m_FunBar;

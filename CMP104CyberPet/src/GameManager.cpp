@@ -69,6 +69,7 @@ GameManager::GameManager()
 				if (this->m_CyberPet->ValidName())
 				{
 					this->m_PetName->ReplaceString(m_CyberPet->GetName());
+					this->m_PetFeelingsLabel->ReplaceString(m_CyberPet->GetName() + " is currently feeling:");
 					this->NextScreen();
 				}
 			});
@@ -115,6 +116,15 @@ GameManager::GameManager()
 
 		m_PetActivityText = new GUIText("The pet is currently neutral.", { 32,16 }, true);
 		screen->AddText(m_PetActivityText);
+
+		m_PetFeelingsLabel = new GUIText("The pet is currently feeling:", { 64, 14 });
+		screen->AddText(m_PetFeelingsLabel);
+
+		m_PetHungerText = new GUIText(" - well fed.", { 64, 15 });
+		screen->AddText(m_PetHungerText);
+
+		m_PetSleepinessText = new GUIText(" - wide awake", { 64, 16 });
+		screen->AddText(m_PetSleepinessText);
 
 		AddGUIScreen(screen);
 	}
@@ -179,8 +189,6 @@ GameManager::~GameManager()
 	m_TextSprites.clear();
 
 	delete m_CyberPet;
-
-	// delete[] m_Pets;
 }
 
 
@@ -218,6 +226,9 @@ void GameManager::Update(float deltaTime)
 
 		m_PetActivityText->ReplaceString(m_CyberPet->GetName() + " is currently " + m_CyberPet->GetActivityString() + ".");
 		m_PetActivityText->SetCentrePosition({ 32, 16 });
+
+		m_PetHungerText->ReplaceString(" - " + m_CyberPet->GetHungerString());
+		m_PetSleepinessText->ReplaceString(" - " + m_CyberPet->GetSleepinessString());
 
 	} else if (m_CurrentScreen == 1)
 	{

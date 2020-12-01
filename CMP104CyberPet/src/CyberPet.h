@@ -40,7 +40,10 @@ public:
 	// controlling the state of the pet
 	inline State GetState() { return m_State; }
 	void SetState(State state);
+
 	std::string GetActivityString();
+	std::string GetHungerString();
+	std::string GetSleepinessString();
 
 private:
 

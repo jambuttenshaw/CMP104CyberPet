@@ -93,47 +93,45 @@ void CyberPet::SetState(State state)
 
 std::string CyberPet::GetActivityString()
 {
+    switch (m_State)
+    {
+    case State::Neutral:        return "doing nothing"; break;
+    case State::Eating:         return "eating"; break;
+    case State::Sleeping:       return "sleeping"; break;
+    case State::Playing:        return "playing"; break;
+    }
+}
+
+std::string CyberPet::GetHungerString()
+{
     // the activity string is composed of 2 parts
     // the activity that the pet is currently doing, and how the pet is currently feeling
 
     // create a string to describe how hungry the pet is
     float percentageHunger = GetNormalizedHunger();
-    std::string hungerDescription = "";
     if (percentageHunger > 0.99f)
-        hungerDescription = "dying";
+        return "dying";
     else if (percentageHunger > 0.75f)
-        hungerDescription = "starving";
+        return "starving";
     else if (percentageHunger > 0.5f)
-        hungerDescription = "rather hungry";
+        return "rather hungry";
     else if (percentageHunger > 0.25f)
-        hungerDescription = "slightly peckish";
+        return "slightly peckish";
     else
-        hungerDescription = "well fed";
+        return "well fed";
+}
 
-
-    // create a string to describe how sleepy the pet is
+std::string CyberPet::GetSleepinessString()
+{
     float percentageSleepiness = GetNormalizedSleepiness();
-    std::string sleepinessDescription = "";
     if (percentageSleepiness > 0.99f)
-        sleepinessDescription = "collapsing";
+        return "collapsing";
     else if (percentageSleepiness > 0.75f)
-        sleepinessDescription = "falling asleep";
+        return "falling asleep";
     else if (percentageSleepiness > 0.5f)
-        sleepinessDescription = "tired";
+        return "tired";
     else if (percentageSleepiness > 0.25f)
-        sleepinessDescription = "awake";
+        return "awake";
     else
-        sleepinessDescription = "wide awake";
-
-    std::string activityString = "";
-    switch (m_State)
-    {
-    case State::Neutral:        activityString = "doing nothing"; break;
-    case State::Eating:         activityString = "eating"; break;
-    case State::Sleeping:       activityString = "sleeping"; break;
-    case State::Playing:        activityString = "playing"; break;
-    }
-
-    return activityString + " and feeling " + hungerDescription + " and " + sleepinessDescription;
-
+        return "wide awake";
 }
