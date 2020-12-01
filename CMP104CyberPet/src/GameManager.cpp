@@ -113,7 +113,7 @@ GameManager::GameManager()
 		quitButton->SetPressFunction([this]() { this->Quit(); });
 		screen->AddButon(quitButton);
 
-		m_PetActivityText = new GUIText("The pet is currently neutral", { 14,16 });
+		m_PetActivityText = new GUIText("The pet is currently neutral.", { 32,16 }, true);
 		screen->AddText(m_PetActivityText);
 
 		AddGUIScreen(screen);
@@ -217,6 +217,7 @@ void GameManager::Update(float deltaTime)
 		m_HappinessBar->ReplaceString("Happiness : " + CreateProgressBar(m_CyberPet->GetNormalizedHappiness()));
 
 		m_PetActivityText->ReplaceString(m_CyberPet->GetName() + " is currently " + m_CyberPet->GetActivityString() + ".");
+		m_PetActivityText->SetCentrePosition({ 32, 16 });
 
 	} else if (m_CurrentScreen == 1)
 	{

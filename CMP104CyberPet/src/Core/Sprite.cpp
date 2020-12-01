@@ -25,3 +25,14 @@ Sprite::~Sprite()
 		delete m_Image;
 	}
 }
+
+void Sprite::SetCentrePosition(Vector2f pos)
+{
+	float posX = pos.x - ((float)m_Image->GetWidth() * 0.5f);
+	float posY = pos.y - ((float)m_Image->GetHeight() * 0.5f);
+
+	if (posX < 0) posX = 0;
+	if (posY < 0) posY = 0;
+
+	m_Position = { posX, posY };
+}
