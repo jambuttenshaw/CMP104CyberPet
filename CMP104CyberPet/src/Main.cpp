@@ -59,7 +59,7 @@ int main()
         exitLoop = gameManager->TestQuitGame();
 
 
-        Sleep(100);
+        Sleep(30);
     }
 
     // clear the screen one last time before quitting

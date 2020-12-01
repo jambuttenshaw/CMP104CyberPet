@@ -33,8 +33,7 @@ void RenderAPI::SubmitImageData(wchar_t** imageData, Vector2i dimensions, Vector
 {
 	DWORD dw;
 
-	// work out what section of the image is actually on screen
-	// the things we need to know: where to start each row, how many to draw from each row, where to start each column, how many to draw from each column
+	// windows handles if the image is outside the bounds of the console for us
 
 	for (int y = 0; y < dimensions.y; y++)
 	{
