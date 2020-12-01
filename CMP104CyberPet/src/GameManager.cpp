@@ -234,7 +234,10 @@ void GameManager::Update(float deltaTime)
 	{
 		m_Screens[1]->GetText(1)->ReplaceString("Pet name: " + m_CyberPet->GetName());
 	}
-
+	else if (m_CurrentScreen == 0)
+	{
+		for (Sprite* p : m_Pets) p->Update(deltaTime);
+	}
 }
 
 void GameManager::Draw()

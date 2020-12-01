@@ -2,7 +2,6 @@
 
 #include "../Core/Sprite.h"
 
-
 class Pet : public Sprite
 {
 public:
@@ -10,7 +9,19 @@ public:
 		: Sprite()
 	{}
 
-	void Update(float deltaTime) override { Sprite::Update(deltaTime); };
+	void Update(float deltaTime) override 
+	{
+		Sprite::Update(deltaTime); 
+
+		m_Timer = std::fmod(m_Timer + deltaTime, 6.283f);
+		SetCentrePosition({ 32, 8 + m_AnimationMagnitude * (float)sin(m_AnimationSpeed * m_Timer) });
+	};
+
+private:
+	float m_AnimationMagnitude = 2;
+	float m_AnimationSpeed = 2;
+
+	float m_Timer = 0;
 };
 
 

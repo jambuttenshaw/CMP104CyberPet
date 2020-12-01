@@ -33,7 +33,11 @@ void RenderAPI::Init()
 void RenderAPI::SubmitImageData(wchar_t** imageData, Vector2i dimensions, Vector2i position)
 {
 	DWORD dw;
-	for (int y = 0; y < ((dimensions.y + position.y) > m_MaxConsoleHeight ? m_MaxConsoleHeight - position.y : dimensions.y); y++)
+
+	// work out what section of the image is actually on screen
+	// the things we need to know: where to start each row, how many to draw from each row, where to start each column, how many to draw from each column
+
+	for (int y = 0; y < dimensions.y; y++)
 	{
 		for (int x = 0; x < dimensions.x; x++)
 		{

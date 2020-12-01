@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cmath>
+
 
 // define a 2-component vector of floats
 struct Vector2f
