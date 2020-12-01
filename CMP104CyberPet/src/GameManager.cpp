@@ -322,8 +322,11 @@ std::vector<Sprite*> GameManager::GetSprites()
 	
 	if (m_CurrentScreen == 0)
 		sprites.push_back(m_Pets[m_CurrentPet]);
-	else 
+	else
+	{
+		for (Sprite* s : m_CyberPet->GetVisualEffectSprites()) sprites.push_back(s);
 		sprites.push_back(m_CyberPet);
+	}
 
 	return sprites;
 }

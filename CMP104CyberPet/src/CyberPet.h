@@ -2,6 +2,8 @@
 
 #include "Core/Sprite.h"
 
+#include <vector>
+
 class CyberPet : public Sprite
 {
 public:
@@ -45,6 +47,8 @@ public:
 	std::string GetHungerString();
 	std::string GetSleepinessString();
 
+	inline std::vector<Sprite*> GetVisualEffectSprites() { return m_VisualEffectsSprites; }
+
 private:
 	Vector2f m_InitialPosition = { 0, 0 };
 
@@ -71,6 +75,9 @@ private:
 	// parameters for the visual effects
 	float m_PlayMoveSpeed = 12.57f / m_TimeUntilNeutral; // pet should travel an angular displacement of 4pi while playing
 	float m_PlayMoveAmplitude = 4;
+
+	// container for visual effects spawned
+	std::vector<Sprite*> m_VisualEffectsSprites;
 
 	
 	// using 0.017f will take 1 minute to reach max hunger and sleepiness, and fun and happiness to reach a minimum

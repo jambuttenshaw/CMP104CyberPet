@@ -12,6 +12,8 @@ ___\\ \\     // //___
 >____)/_\---/_\(____<)"));
 
     SetCentrePosition(initalPos);
+
+    std::vector<Sprite*> m_VisualEffectsSprites(0);
 }
 
 CyberPet::CyberPet(Vector2f initalPos, Sprite* pet)
@@ -20,6 +22,8 @@ CyberPet::CyberPet(Vector2f initalPos, Sprite* pet)
     // copy the image from the pet
     SetImage(new Image(*pet->GetImage()));
     SetCentrePosition(initalPos);
+
+    std::vector<Sprite*> m_VisualEffectsSprites(0);
 }
 
 CyberPet::~CyberPet()
@@ -39,6 +43,9 @@ void CyberPet::Update(float deltaTime)
             {
                 SetCentrePosition(m_InitialPosition);
             }
+
+            for (Sprite* s : m_VisualEffectsSprites) delete s;
+            m_VisualEffectsSprites.clear();
 
             m_State = State::Neutral;
         }
