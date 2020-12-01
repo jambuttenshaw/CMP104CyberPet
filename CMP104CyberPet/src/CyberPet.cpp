@@ -110,7 +110,7 @@ void CyberPet::Update(float deltaTime)
 
     // this formula means that happiness decreases as hunger or sleepiness increases and increases with fun, 
     // and if hunger OR sleepiness reach their maximum OR fun reaches a minimum then happiness is 0
-    m_Happiness = (m_MaxHunger - m_Hunger) * (m_MaxSleepiness - m_Sleepiness) * m_Fun / m_MaxHappiness;
+    m_Happiness = sqrt((m_MaxHunger - m_Hunger) * (m_MaxSleepiness - m_Sleepiness) * m_Fun / m_MaxHappiness);
 }
 
 void CyberPet::SetState(State state)
