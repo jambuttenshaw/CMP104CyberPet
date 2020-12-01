@@ -35,15 +35,10 @@ void RenderAPI::SubmitImageData(wchar_t** imageData, Vector2i dimensions, Vector
 
 	// work out what section of the image is actually on screen
 	// the things we need to know: where to start each row, how many to draw from each row, where to start each column, how many to draw from each column
-	int startX = (position.x < 0) ? -position.x : 0;
-	int widthX = dimensions.x - startX;
 
-	int startY = (position.y < 0) ? -position.y : 0;
-	int heightY = dimensions.y - startY;
-
-	for (int y = startY; y < heightY; y++)
+	for (int y = 0; y < dimensions.y; y++)
 	{
-		for (int x = startX; x < widthX; x++)
+		for (int x = 0; x < dimensions.x; x++)
 		{
 			WriteConsoleOutputCharacter(m_ConsoleHandle, &imageData[y][x], 1, { (short)(position.x + x), (short)(position.y + y) }, &dw);
 		}
