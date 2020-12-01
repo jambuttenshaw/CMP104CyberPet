@@ -12,16 +12,19 @@ public:
 	void Update(float deltaTime) override 
 	{
 		Sprite::Update(deltaTime); 
-
-		m_Timer = std::fmod(m_Timer + deltaTime, 6.283f);
-		SetCentrePosition({ 32, 8 + m_AnimationMagnitude * (float)sin(m_AnimationSpeed * m_Timer) });
 	};
 
-private:
-	float m_AnimationMagnitude = 2;
-	float m_AnimationSpeed = 2;
+	void MoveOnScreen()
+	{
+		SetCentrePosition({ 32, -12 });
+		LerpToPosition({ 32 - (GetImage()->GetWidth() * 0.5f), 8 - (GetImage()->GetHeight() * 0.5f) });
+	}
 
-	float m_Timer = 0;
+	void MoveOffScreen()
+	{
+		SetCentrePosition({ 32, 8 });
+		LerpToPosition({ -32 - (GetImage()->GetWidth() * 0.5f), 8 - (GetImage()->GetHeight() * 0.5f) });
+	}
 };
 
 

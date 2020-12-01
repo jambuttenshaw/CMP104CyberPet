@@ -40,7 +40,7 @@ private:
 	Vector2f m_PetPosition = { 32, 8 };
 
 	// for selecing the pet
-	Sprite* m_Pets[7];
+	Pet* m_Pets[7];
 	int m_CurrentPet = 0;
 
 	std::vector<GUIScreen*> m_Screens;

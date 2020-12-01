@@ -277,7 +277,7 @@ void GameManager::Update(float deltaTime)
 	}
 	else if (m_CurrentScreen == 0)
 	{
-		for (Sprite* p : m_Pets) p->Update(deltaTime);
+		for (Pet* p : m_Pets) p->Update(deltaTime);
 	}
 	else if (m_CurrentScreen == 3)
 	{
@@ -340,16 +340,17 @@ void GameManager::SelectPet()
 
 	NextScreen();
 
-	for (Sprite* p : m_Pets)
-	{
-		delete p;
-	}
+	for (Pet* p : m_Pets) delete p;
 }
 
 void GameManager::NextPet()
 {
+	m_Pets[m_CurrentPet]->MoveOffScreen();
+
 	m_CurrentPet++;
 	if (m_CurrentPet == sizeof(m_Pets) / sizeof(m_Pets[0])) m_CurrentPet = 0;
+
+	m_Pets[m_CurrentPet]->MoveOnScreen();
 }
 
 void GameManager::AddGUIScreen(GUIScreen* screen)

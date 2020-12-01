@@ -39,7 +39,7 @@ void Sprite::Update(float deltaTime)
 		if (m_LerpTimer >= 1)
 		{
 			m_Lerping = false;
-			SetCentrePosition(m_LerpingTarget);
+			SetPosition(m_LerpingTarget);
 		}
 	}
 }
