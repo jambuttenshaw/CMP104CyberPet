@@ -58,7 +58,6 @@ int main()
         // check to see if we need to quit the game
         exitLoop = gameManager->TestQuitGame();
 
-
         Sleep(30);
     }
 
