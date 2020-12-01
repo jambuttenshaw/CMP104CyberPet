@@ -1,7 +1,5 @@
 #include "CyberPet.h"
 
-#include "Sprites/VisualEffectSprites.h"
-
 #include <iostream>
 
 CyberPet::CyberPet(Vector2f initalPos)
@@ -29,7 +27,7 @@ void CyberPet::Init()
 {
     SetCentrePosition(m_InitialPosition);
 
-    std::vector<Sprite*> m_VisualEffectsSprites(0);
+    std::vector<VisualEffectSprite*> m_VisualEffectsSprites(0);
 
     m_FoodDestination =
     {
@@ -47,7 +45,7 @@ void CyberPet::Update(float deltaTime)
 {
     Sprite::Update(deltaTime);
 
-    for (Sprite* s : m_VisualEffectsSprites) s->Update(deltaTime);
+    for (VisualEffectSprite* s : m_VisualEffectsSprites) s->Update(deltaTime);
 
     if (m_State != State::Neutral)
     {
@@ -61,7 +59,7 @@ void CyberPet::Update(float deltaTime)
             }
 
             // delete any visual effects sprites that are kicking about
-            for (Sprite* s : m_VisualEffectsSprites) delete s;
+            for (VisualEffectSprite* s : m_VisualEffectsSprites) delete s;
             m_VisualEffectsSprites.clear();
 
             m_State = State::Neutral;
@@ -69,14 +67,14 @@ void CyberPet::Update(float deltaTime)
 
         if (m_State == State::Eating)
         {
-            for (Sprite* s : m_VisualEffectsSprites)
+            for (VisualEffectSprite* s : m_VisualEffectsSprites)
             {
                 if (!s->IsLerping())
                 {
                     // if the current state is eating,
                     // then the only visual effect sprites that can exist must be carrots
                     // so we are safe to call this dynamic cast on the sprite pointer to access the reset function
-                    dynamic_cast<Carrot*>(s)->Reset(m_FoodSpawnLocation, m_FoodDestination);
+                    s->Reset();
                 }
             }
         }
@@ -198,4 +196,11 @@ std::string CyberPet::GetSleepinessString()
         return "awake";
     else
         return "wide awake";
+}
+
+std::vector<Sprite*> CyberPet::GetVisualEffectSprites()
+{
+    std::vector<Sprite*> sprites(0);
+    for (Sprite* s : m_VisualEffectsSprites) sprites.push_back(s);
+    return sprites;
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Core/Sprite.h"
+#include "Sprites/VisualEffectSprites.h"
 
 #include <vector>
 
@@ -47,7 +48,7 @@ public:
 	std::string GetHungerString();
 	std::string GetSleepinessString();
 
-	inline std::vector<Sprite*> GetVisualEffectSprites() { return m_VisualEffectsSprites; }
+	std::vector<Sprite*> GetVisualEffectSprites();
 
 private:
 	void Init();
@@ -83,7 +84,7 @@ private:
 	Vector2f m_FoodDestination = { 0, 0 };
 
 	// container for visual effects spawned
-	std::vector<Sprite*> m_VisualEffectsSprites;
+	std::vector<VisualEffectSprite*> m_VisualEffectsSprites;
 
 	
 	// using 0.017f will take 1 minute to reach max hunger and sleepiness, and fun and happiness to reach a minimum
