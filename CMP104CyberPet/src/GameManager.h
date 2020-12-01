@@ -48,6 +48,11 @@ private:
 
 	std::vector<GUIText*> m_TextSprites;
 
+	// if the pets happiness is 0, then the owner has 15 seconds before the pet runs away
+	float m_RunningAwayThreshold = 10;
+	float m_RunningAwayTimer = 0;
+	bool m_WantingToRunAway = false;
+
 	GUIText* m_PetName;
 	GUIText* m_PetActivityText;
 

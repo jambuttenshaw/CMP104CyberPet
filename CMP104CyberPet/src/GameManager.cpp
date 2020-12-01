@@ -206,6 +206,26 @@ void GameManager::Update(float deltaTime)
 		// update the pet
 		m_CyberPet->Update(deltaTime);
 
+		// check if the pet is really unhappy and wants to run away soon
+		if (m_CyberPet->GetNormalizedHappiness() == 0)
+		{
+			m_WantingToRunAway = true;
+
+			m_RunningAwayTimer += deltaTime;
+			
+			m_PetActivityText->ReplaceString(m_CyberPet->GetName() + " will run away in " + std::to_string(m_RunningAwayThreshold - (int)m_RunningAwayTimer) + " seconds.");
+
+			if (m_RunningAwayTimer > m_RunningAwayThreshold)
+			{
+				// time to run away
+			}
+		}
+		else
+		{
+			m_WantingToRunAway = false;
+			m_RunningAwayTimer = 0;
+		}
+
 		// if the pet is not in its neutral state,
 		// then we want the buttons to be disabled
 		if (m_CyberPet->GetState() == CyberPet::State::Neutral)
@@ -224,7 +244,7 @@ void GameManager::Update(float deltaTime)
 		m_FunBar->ReplaceString("Fun       : " + CreateProgressBar(m_CyberPet->GetNormalizedFun()));
 		m_HappinessBar->ReplaceString("Happiness : " + CreateProgressBar(m_CyberPet->GetNormalizedHappiness()));
 
-		m_PetActivityText->ReplaceString(m_CyberPet->GetName() + " is currently " + m_CyberPet->GetActivityString() + ".");
+		if (!m_WantingToRunAway) m_PetActivityText->ReplaceString(m_CyberPet->GetName() + " is currently " + m_CyberPet->GetActivityString() + ".");
 		m_PetActivityText->SetCentrePosition({ 32, 16 });
 
 		m_PetHungerText->ReplaceString(" - " + m_CyberPet->GetHungerString());
