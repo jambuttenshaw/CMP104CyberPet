@@ -1,7 +1,5 @@
 #include "CyberPet.h"
 
-#include <iostream>
-
 CyberPet::CyberPet(Vector2f initalPos)
 	: Sprite(), m_InitialPosition(initalPos)
 {

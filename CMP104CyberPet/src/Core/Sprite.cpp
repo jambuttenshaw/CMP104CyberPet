@@ -1,7 +1,5 @@
 #include "Sprite.h"
 
-#include <iostream>
-
 Sprite::Sprite()
 	: m_Position(Vector2f(0, 0))
 {

@@ -1,7 +1,5 @@
 #include "Image.h"
 
-#include <iostream>
-
 Image::Image(int width, int height, wchar_t defaultFill)
 	: m_Width(width), m_Height(height)
 {

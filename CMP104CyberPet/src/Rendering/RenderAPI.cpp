@@ -3,8 +3,6 @@
 #include <vector>
 
 #include <chrono>
-#include <iostream>
-
 RenderAPI::RenderAPI()
 	: m_ConsoleDimensions(Vector2i({ 0, 0 }))
 {
@@ -13,7 +11,8 @@ RenderAPI::RenderAPI()
 
 RenderAPI::~RenderAPI()
 {
-
+	SetCursorPosition(0, 0);
+	SetCursorVisibility(true);
 }
 
 void RenderAPI::Init()

@@ -1,7 +1,5 @@
 #include "InputAPI.h"
 
-#include <iostream>
-
 InputAPI::InputAPI()
 {
 	// assign the console handle

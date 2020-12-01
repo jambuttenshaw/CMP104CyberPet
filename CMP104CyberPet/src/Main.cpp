@@ -4,8 +4,6 @@
 #include "GameManager.h"
 
 #include <chrono>
-#include <iostream>
-
 // when the console window gets resized we want to update the renderer
 // to store the new dimensions of the console
 void WindowResizeCallback(WINDOW_BUFFER_SIZE_RECORD* e)

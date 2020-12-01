@@ -3,8 +3,6 @@
 #include "Input/Input.h"
 #include "Rendering/Renderer.h"
 
-#include <iostream>
-
 
 GameManager::GameManager()
 {
