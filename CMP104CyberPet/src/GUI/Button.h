@@ -10,7 +10,7 @@ public:
 	Button(const std::string& text);
 	~Button();
 
-	void Update(float deltaTime) override {};
+	void Update(float deltaTime) override { Sprite::Update(deltaTime); };
 
 	inline void Press() { if (m_PressFunction != nullptr) m_PressFunction(); }
 

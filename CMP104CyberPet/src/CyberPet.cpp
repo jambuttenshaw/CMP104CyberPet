@@ -33,6 +33,8 @@ CyberPet::~CyberPet()
 
 void CyberPet::Update(float deltaTime)
 {
+    Sprite::Update(deltaTime);
+
     if (m_State != State::Neutral)
     {
         m_ReturnToNeutralTimer -= deltaTime;

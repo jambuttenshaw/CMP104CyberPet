@@ -13,4 +13,6 @@ public:
  \/ )"));
 		SetPosition({ 0, 0 });
 	}
+
+	inline void Update(float deltaTime) override { Sprite::Update(deltaTime); };
 };

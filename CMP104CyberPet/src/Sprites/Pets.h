@@ -10,7 +10,7 @@ public:
 		: Sprite()
 	{}
 
-	void Update(float deltaTime) override {};
+	void Update(float deltaTime) override { Sprite::Update(deltaTime); };
 };
 
 

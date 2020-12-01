@@ -27,3 +27,7 @@ struct Vector2i
 // t = 0 returns a, t = 1 returns b
 float Lerp(float a, float b, float t);
 Vector2f Lerp(Vector2f a, Vector2f b, float t);
+
+// functions for getting magnitude of vectors
+float SqrMagnitude(Vector2f v); // getting the square of the magnitude is often more performant
+float Magnitude(Vector2f v);

@@ -26,6 +26,21 @@ Sprite::~Sprite()
 	}
 }
 
+void Sprite::Update(float deltaTime)
+{
+	if (m_Lerping)
+	{
+		// check if we are close to the target
+		if (SqrMagnitude({ m_LerpingTarget.x - m_Position.x, m_LerpingTarget.y - m_Position.y }) < m_LerpTerminationThreshold)
+		{
+			m_Lerping = false;
+			SetCentrePosition(m_LerpingTarget);
+		}
+		// otherwise just keep on lerping closer
+		else SetCentrePosition(Lerp(m_Position, m_LerpingTarget, deltaTime));
+	}
+}
+
 void Sprite::SetCentrePosition(Vector2f pos)
 {
 	float posX = pos.x - ((float)m_Image->GetWidth() * 0.5f);
@@ -35,4 +50,11 @@ void Sprite::SetCentrePosition(Vector2f pos)
 	if (posY < 0) posY = 0;
 
 	m_Position = { posX, posY };
+}
+
+
+void Sprite::LerpToPosition(Vector2f pos)
+{
+	m_Lerping = true;
+	m_LerpingTarget = pos;
 }
