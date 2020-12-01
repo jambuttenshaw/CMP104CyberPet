@@ -50,3 +50,18 @@ public:
 	{
 	}
 };
+
+class SleepingZ : public VisualEffectSprite
+{
+public:
+	SleepingZ(Vector2f startPos, Vector2f endPos)
+		: VisualEffectSprite(startPos, endPos)
+	{
+		SetImage(new Image(1, 1, "Z"));
+		Reset();
+	}
+
+	~SleepingZ()
+	{
+	}
+};

@@ -34,6 +34,12 @@ void CyberPet::Init()
         (m_InitialPosition.x - GetImage()->GetWidth() * 0.5f) - 2,
         m_InitialPosition.y,
     };
+
+    m_SleepingZSpawnLocation =
+    {
+        m_InitialPosition.x,
+        m_InitialPosition.y - GetImage()->GetHeight() * 0.5f,
+    };
 }
 
 CyberPet::~CyberPet()
@@ -45,7 +51,11 @@ void CyberPet::Update(float deltaTime)
 {
     Sprite::Update(deltaTime);
 
-    for (VisualEffectSprite* s : m_VisualEffectsSprites) s->Update(deltaTime);
+    for (VisualEffectSprite* s : m_VisualEffectsSprites)
+    {
+        s->Update(deltaTime);
+        if (!s->IsLerping()) s->Reset();
+    }
 
     if (m_State != State::Neutral)
     {
@@ -63,20 +73,6 @@ void CyberPet::Update(float deltaTime)
             m_VisualEffectsSprites.clear();
 
             m_State = State::Neutral;
-        }
-
-        if (m_State == State::Eating)
-        {
-            for (VisualEffectSprite* s : m_VisualEffectsSprites)
-            {
-                if (!s->IsLerping())
-                {
-                    // if the current state is eating,
-                    // then the only visual effect sprites that can exist must be carrots
-                    // so we are safe to call this dynamic cast on the sprite pointer to access the reset function
-                    s->Reset();
-                }
-            }
         }
     }
 
@@ -146,10 +142,10 @@ void CyberPet::SetState(State state)
     m_ReturnToNeutralTimer = m_TimeUntilNeutral;
 
     if (state == State::Eating)
-    {
         m_VisualEffectsSprites.push_back(new Carrot(m_FoodSpawnLocation, m_FoodDestination));
-    }
-}
+    else if (state == State::Sleeping)
+        m_VisualEffectsSprites.push_back(new SleepingZ(m_SleepingZSpawnLocation, m_SleepingZDestination));
+}   
 
 std::string CyberPet::GetActivityString()
 {

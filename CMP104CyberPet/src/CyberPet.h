@@ -83,6 +83,9 @@ private:
 	Vector2f m_FoodSpawnLocation = { 0, 0 };
 	Vector2f m_FoodDestination = { 0, 0 };
 
+	Vector2f m_SleepingZSpawnLocation = { 0, 0 };
+	Vector2f m_SleepingZDestination = { 56, 0 };
+
 	// container for visual effects spawned
 	std::vector<VisualEffectSprite*> m_VisualEffectsSprites;
 
