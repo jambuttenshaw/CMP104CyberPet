@@ -21,7 +21,7 @@ public:
 
 private:
 	void ConstructImages();
-	inline void UpdateImage() { SetImage(m_Active ? m_ActiveImage : m_InactiveImage); SetDirty(); }
+	inline void UpdateImage() { SetImage(m_Active ? m_ActiveImage : m_InactiveImage); }
 
 private:
 	std::string m_Text;

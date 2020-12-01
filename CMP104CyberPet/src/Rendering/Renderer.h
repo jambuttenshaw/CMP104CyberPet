@@ -27,17 +27,13 @@ public:
 	inline static void Clear(wchar_t clearChar = ' ', Vector2i origin = { 0, 0 }, Vector2i dimensions = s_RenderAPI->GetConsoleDimensions()) { s_RenderAPI->Clear(origin, dimensions, clearChar); }
 	inline static void ClearAll() { s_RenderAPI->ClearAll(); }
 
-	inline static void Queue(Sprite* sprite) { sprite->SetDirty(); s_RenderQueue.push_back(sprite); }
+	inline static void Queue(Sprite* sprite) { s_RenderQueue.push_back(sprite); }
 
 	inline static void DrawAll()
 	{
 		for (Sprite* s : s_RenderQueue)
 		{
-			if (s->IsDirty())
-			{
-				SubmitImageData(s);
-				s->Clean();
-			}
+			SubmitImageData(s);
 		}
 		s_RenderQueue.clear();
 	}
