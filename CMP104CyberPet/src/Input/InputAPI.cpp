@@ -29,7 +29,8 @@ InputAPI::~InputAPI()
 int InputAPI::PollEvents()
 {
 	// ReadConsoleInput will wait until the length of the queue is greater than 0
-	// but we dont want it holding up our program waiting for the user to do something
+	// before returning from the function
+	// but we dont want it holding up our program by waiting for the user to do something
 	// so if theres no events to process we just return 0
 	if (GetEventQueueLength())
 	{
