@@ -311,7 +311,7 @@ void GameManager::Update(float deltaTime)
 
 				// then the pet should run off screen
 				// we can use sprites lerping functionality to do that
-				m_CyberPet->LerpToPosition({ -20, -10 });
+				m_CyberPet->LerpToPosition({ -28, -15 });
 
 				// then load up the game over screen
 				LoadGUIScreen(3);

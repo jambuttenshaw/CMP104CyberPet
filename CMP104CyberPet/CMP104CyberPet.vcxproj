@@ -26,14 +26,16 @@
     <ClInclude Include="src\GUI\Button.h" />
     <ClInclude Include="src\GUI\GUIScreen.h" />
     <ClInclude Include="src\GUI\GUIText.h" />
-    <ClInclude Include="src\Input\Events.h" />
     <ClInclude Include="src\Input\Input.h" />
     <ClInclude Include="src\Input\InputAPI.h" />
+    <ClInclude Include="src\Sprites\Pets.h" />
     <ClInclude Include="src\Rendering\Image.h" />
     <ClInclude Include="src\Rendering\RenderAPI.h" />
     <ClInclude Include="src\Rendering\Renderer.h" />
+    <ClInclude Include="src\Sprites\VisualEffectSprites.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Core\MathsUtility.cpp" />
     <ClCompile Include="src\Core\Sprite.cpp" />
     <ClCompile Include="src\CyberPet.cpp" />
     <ClCompile Include="src\GameManager.cpp" />
