@@ -85,7 +85,7 @@ void RenderAPI::Clear(Vector2i origin, Vector2i dimensions, wchar_t clearChar)
 	// the array is populated by the clear char
 	std::vector<wchar_t> lineChar(dimensions.x, clearChar);
 	// iterate for the number of rows to clear
-	for (int y = 0; y < dimensions.y; y++)
+	for (int y = 0; y < (dimensions.y > m_MaxConsoleHeight ? m_MaxConsoleHeight : dimensions.y); y++)
 	{
 		// then fill each row with the clear character
 		WriteConsoleOutputCharacter(m_ConsoleHandle, &lineChar[0], dimensions.x, { (short)origin.x, (short)(origin.y + y) }, &numCharsWritten);
